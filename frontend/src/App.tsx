@@ -1,15 +1,11 @@
 import Footer from "components/Footer";
+import FormForn from "components/FormForn";
 import NavBar from "components/NavBar";
+import Routes from "Routes";
 
 function App() {
   return (
-    <>
-      <NavBar />
-      <div className="container">
-        <h1 className="text-primary">Ola Mundo!</h1>
-      </div>
-      <Footer />
-    </>
+    <Routes />
   );
 }
 
