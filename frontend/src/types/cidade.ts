@@ -1,4 +1,4 @@
 export type Cidade = {
         id: number;
-        nome?:string;
+        nome:string;
 }

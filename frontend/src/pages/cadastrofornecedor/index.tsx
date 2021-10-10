@@ -18,7 +18,13 @@ type Fornecedor = {
     cidade: Cidade,
 }
 
+type TodasCidades = {
+    ids : number[];
+    nomes : string[],
+}
+
 const CadastroFornecedor = () => {
+
 
     const [values, setValues] = useState<Fornecedor>({
         nome: "",
@@ -26,13 +32,19 @@ const CadastroFornecedor = () => {
         login: "",
         senha: "",
         email: "",
-        cidade:{
-            id:1,
+        cidade: {
+            id: 0,
+            nome:"",
+
         }
     });
-    const [cidade,setCidade] = useState<Cidade>({
-        id:1,
+    const [cidade, setCidade] = useState<Cidade>({
+        id: 0,
+        nome:"",
     });
+
+    /*let [todasCidades, setTodasCidades] = useState<TodasCidades>({  meusids: [], meusnomes:[]  });*/
+
     console.log(values);
     const history = useHistory();
 
@@ -43,29 +55,34 @@ const CadastroFornecedor = () => {
         setValues({ ...values, [name]: value });
     }
 
-    /*useEffect(() => {
+    const [todasCidades, setTodasCidades] = useState<TodasCidades>({  ids:[], nomes:[] });
+
+    useEffect(() => {
         axios.get(`http://localhost:8080/cidades`)
         .then(response => {
 
-            const datac = response.data as Cidade[];
-            const idcidades = datac.map(x => x.id);
-            const nomecidades = datac.map(x => x.nome);
+            const data = response.data as Cidade[];
+            const meusnomes = data.map(x => x.nome);
+            const meusids = data.map(x => x.id);
+            setTodasCidades({ids:meusids, nomes:meusnomes});
 
-
+            console.log(response.data);
+            console.log(todasCidades);
+            console.log("rodouu");
         });
-    }, []);*/
+    }, );
 
     function acha(event: { preventDefault: () => void; target: { name: any; value: any; }; }) {
         event.preventDefault();
-        const {name,value} = event.target;
+        const { name, value } = event.target;
         console.log({ name, value });
         console.log("adsasdsds");
-        setCidade({...cidade,[name]:value});
+        setCidade({ ...cidade, [name]: value });
         axios.get(`http://localhost:8080/cidades/${value}`)
             .then((response) => {
                 const data = response.data as Cidade;
-                console.log({data});
-                setValues({...values,[name]:data});
+                console.log({ data });
+                setValues({ ...values, [name]: data });
             });
     }
     function onSubmit(event: { preventDefault: () => void; }) {
@@ -80,7 +97,8 @@ const CadastroFornecedor = () => {
     return (
         <>
             <NavBar />
-            <div className="container">
+
+            <div className="container" >
                 <div className="jumbotron d-grid col-6 mx-auto">
                     <h1 className="display-4">Cadastre sua empresa</h1><br />
                 </div>
@@ -124,9 +142,10 @@ const CadastroFornecedor = () => {
                             <div className="promotion-form__group">
                                 <label htmlFor="cidade">Cidade:</label>
                                 <select name="cidade" className="form-select" aria-label="Default select example" onChange={acha}>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option>Selecione</option>
+                                    {todasCidades.ids.map(x => (
+                                        <option key={"categoria"+x} value={x}>{todasCidades.nomes[x-1]}</option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
