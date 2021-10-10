@@ -11,8 +11,9 @@ const Home = () => {
                     <h1 className="display-4">Facebuy</h1>
                     <p className="lead">Sistema de Gestão de Compras</p>
                     <hr />
-                    <p>Esta aplicação consiste em exibir um dashboard a partir de dados fornecidos por um back end construído com Spring Boot.</p>
+                    <p>Este é o seu sistema para gerir da melhor maneira as suas compras e para atingir cada vez mais clientes</p>
                     <Link className="btn btn-success btn-lg" to ="/cadastrofornecedor"> Cadastrar Fornecedor</Link>
+                    <Link className="btn btn-success btn-lg mx-5" to ="/cadastroproduto"> Cadastrar Produto</Link>
                 </div>
             </div>
             <Footer />
