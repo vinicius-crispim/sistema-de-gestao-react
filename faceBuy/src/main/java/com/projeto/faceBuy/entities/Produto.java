@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,18 +35,23 @@ public class Produto implements Serializable {
     @OneToMany(mappedBy = "id.produto")
     private List<CotacaoCompraItem> cotacaocompraitens = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+    
     @OneToMany(mappedBy = "id.produto")
     private List<OrdemCompraItem> ordemcompraitem = new ArrayList<>();
     
     @OneToMany(mappedBy = "id.produto")
     private List<NotaFiscalItem> notafiscalitem = new ArrayList<>();
     
-    public Produto(Long id, String nome, String descrição, Integer quantidademin, Integer estoque,Double preço) {
+    public Produto(Long id, String nome, Categoria categoria, String descrição, Integer quantidademin, Integer estoque,Double preço) {
         this.id = id;
         this.nome = nome;
         this.descrição = descrição;
         this.quantidademin = quantidademin;
         this.estoque = estoque;
+        this.categoria =categoria;
     }
     
     public Produto() {}
@@ -102,6 +109,14 @@ public class Produto implements Serializable {
 		return notafiscalitem;
 	}
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
 	@Override
     public String toString() {
         return "{" +
@@ -114,7 +129,7 @@ public class Produto implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(descrição, id, estoque, nome, quantidademin);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -126,9 +141,7 @@ public class Produto implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		return Objects.equals(descrição, other.descrição) && Objects.equals(id, other.id)
-				&& Objects.equals(estoque, other.estoque) && Objects.equals(nome, other.nome)
-				&& Objects.equals(quantidademin, other.quantidademin);
+		return Objects.equals(id, other.id);
 	}
     
 

@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 type Produto = {
     nome: string,
-    descricao: string,
+    descrição: string,
     quantidademin: number,
     estoque: number,
     marca: string,
@@ -29,7 +29,7 @@ const CadastroProduto = () => {
 
     const [values, setValues] = useState<Produto>({
         nome: "",
-        descricao: "",
+        descrição: "",
         quantidademin: 0,
         estoque: 0,
         marca: "",
@@ -79,7 +79,7 @@ const CadastroProduto = () => {
             console.log(todasCategorias);
             console.log("rodouu");
         });
-    }, );
+    },[] );
 
     function acha(event: { preventDefault: () => void; target: { name: any; value: any; }; }) {
         event.preventDefault();
@@ -112,8 +112,8 @@ const CadastroProduto = () => {
                         </div>
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="descricao">Descrição:</label>
-                                <input className="form-control" type="text" id="descricao" name="descricao" onChange={onChange} required />
+                                <label htmlFor="descrição">Descrição:</label>
+                                <input className="form-control" type="text" id="descrição" name="descrição" onChange={onChange} required />
                             </div>
                         </div>
                     </div>
