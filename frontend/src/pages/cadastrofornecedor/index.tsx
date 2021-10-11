@@ -4,6 +4,7 @@ import NavBar from "components/NavBar";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Cidade } from "types/cidade";
+import { BASE_URL } from "utils/request";
 /*
 type Cidade = {
     id: number;
@@ -58,7 +59,7 @@ const CadastroFornecedor = () => {
     const [todasCidades, setTodasCidades] = useState<TodasCidades>({  ids:[], nomes:[] });
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/cidades`)
+        axios.get(`${BASE_URL}/cidades`)
         .then(response => {
 
             const data = response.data as Cidade[];
@@ -70,7 +71,8 @@ const CadastroFornecedor = () => {
             console.log(todasCidades);
             console.log("rodouu");
         });
-    }, );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     function acha(event: { preventDefault: () => void; target: { name: any; value: any; }; }) {
         event.preventDefault();
@@ -78,7 +80,7 @@ const CadastroFornecedor = () => {
         console.log({ name, value });
         console.log("adsasdsds");
         setCidade({ ...cidade, [name]: value });
-        axios.get(`http://localhost:8080/cidades/${value}`)
+        axios.get(`${BASE_URL}/cidades/${value}`)
             .then((response) => {
                 const data = response.data as Cidade;
                 console.log({ data });
@@ -88,7 +90,7 @@ const CadastroFornecedor = () => {
     function onSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
 
-        axios.post("http://localhost:8080/fornecedores", values)
+        axios.post(`${BASE_URL}/fornecedores`, values)
             .then((response) => {
                 history.push('/');
             });

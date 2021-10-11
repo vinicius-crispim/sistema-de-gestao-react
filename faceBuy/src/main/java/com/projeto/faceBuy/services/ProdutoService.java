@@ -6,10 +6,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.projeto.faceBuy.entities.Produto;
@@ -22,9 +25,12 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository repository;
 
-	public List<Produto> findAll() {
-		return repository.findAll();
-	}
+	@Transactional(readOnly = true)//garante que toda a operaÃ§Ã£o com banco seja resolvida aqui e ReadOnly nao faz lock no banco pois Ã© so select, nao muda nd no banco
+	public Page<Produto> findAll(Pageable pageable) {
+		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
+		Page<Produto> result = repository.findAll(pageable);
+		return result;	
+		}
 
 	public Produto findById(Long id) {
 		Optional<Produto> op = repository.findById(id);

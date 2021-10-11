@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import logoNAVBAR from 'assets/img/logoNAVBAR.png'
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (
@@ -12,7 +13,7 @@ const NavBar = () => {
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                         <a className="me-3 py-2 text-dark text-decoration-none" href="#">Produtos</a>
-                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/estoque">Estoque</Link>
                         <a className="me-3 py-2 text-dark text-decoration-none" href="#">Support</a>
                         <a className="py-2 text-dark text-decoration-none" href="#">Pricing</a>
                     </nav>

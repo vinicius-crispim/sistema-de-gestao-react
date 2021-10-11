@@ -3,21 +3,9 @@ import Footer from "components/Footer";
 import NavBar from "components/NavBar";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Categoria, Produto } from "types/produto";
+import { BASE_URL } from "utils/request";
 
-type Produto = {
-    nome: string,
-    descrição: string,
-    quantidademin: number,
-    estoque: number,
-    marca: string,
-    categoria: Categoria,
-
-}
-
-type Categoria = {
-    id: number,
-    nome: string,
-}
 
 type TodasCategoria = {
     ids: number[],
@@ -28,6 +16,7 @@ type TodasCategoria = {
 const CadastroProduto = () => {
 
     const [values, setValues] = useState<Produto>({
+        id:0,
         nome: "",
         descrição: "",
         quantidademin: 0,
@@ -58,7 +47,7 @@ const CadastroProduto = () => {
     function onSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
 
-        axios.post("http://localhost:8080/produtos", values)
+        axios.post(`${BASE_URL}/produtos`, values)
             .then((response) => {
                 history.push('/');
             });
@@ -67,7 +56,7 @@ const CadastroProduto = () => {
     const [todasCategorias, setTodasCategorias] = useState<TodasCategoria>({  ids:[], nomes:[] });
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/categorias`)
+        axios.get(`${BASE_URL}/categorias`)
         .then(response => {
 
             const data = response.data as Categoria[];
@@ -79,7 +68,8 @@ const CadastroProduto = () => {
             console.log(todasCategorias);
             console.log("rodouu");
         });
-    },[] );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
 
     function acha(event: { preventDefault: () => void; target: { name: any; value: any; }; }) {
         event.preventDefault();
@@ -87,7 +77,7 @@ const CadastroProduto = () => {
         console.log({ name, value });
         console.log("adsasdsds");
         setCategoria({ ...categoria, [name]: value });
-        axios.get(`http://localhost:8080/categorias/${value}`)
+        axios.get(`${BASE_URL}/categorias/${value}`)
             .then((response) => {
                 const data = response.data as Categoria;
                 console.log({ data });
@@ -102,7 +92,7 @@ const CadastroProduto = () => {
                 <div className="jumbotron d-grid col-6 mx-auto">
                     <h1 className="display-4">Cadastre um Produto</h1><br />
                 </div>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} >
                     <div className="row py-3">
                         <div className="col">
                             <div className="promotion-form__group">
@@ -140,7 +130,7 @@ const CadastroProduto = () => {
                         </div>
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="categoria">Categoria:</label>
+                                <label htmlFor="categoria" >Categoria:</label>
                                 <select name="categoria" className="form-select" aria-label="Default select example" onChange={acha}>
                                     <option>Selecione</option>
                                     {todasCategorias.ids.map(x => (

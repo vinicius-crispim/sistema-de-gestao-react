@@ -14,6 +14,7 @@ const Home = () => {
                     <p>Este é o seu sistema para gerir da melhor maneira as suas compras e para atingir cada vez mais clientes</p>
                     <Link className="btn btn-success btn-lg" to ="/cadastrofornecedor"> Cadastrar Fornecedor</Link>
                     <Link className="btn btn-success btn-lg mx-5" to ="/cadastroproduto"> Cadastrar Produto</Link>
+                    <Link className="btn btn-success btn-lg mx-5" to ="/estoque"> Estoque</Link>
                 </div>
             </div>
             <Footer />
