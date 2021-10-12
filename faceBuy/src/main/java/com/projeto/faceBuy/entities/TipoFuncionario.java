@@ -26,15 +26,15 @@ public class TipoFuncionario implements Serializable {
 
 	private String tipo;
 
-	@OneToMany(mappedBy = "tipo")
+	@OneToMany(mappedBy = "tipofuncionario")
 	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
 	public TipoFuncionario() {
 	}
 
-	public TipoFuncionario(Long id, String tipo) {
+	public TipoFuncionario(Long id, String tiponome) {
 		this.id = id;
-		this.tipo = tipo;
+		this.tipo = tiponome;
 	}
 
 	public Long getId() {
@@ -49,8 +49,8 @@ public class TipoFuncionario implements Serializable {
 		return this.tipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipo(String tiponome) {
+		this.tipo = tiponome;
 	}
 	@JsonIgnore
 	public List<Funcionario> getFuncionarios() {

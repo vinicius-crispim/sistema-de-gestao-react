@@ -1,7 +1,7 @@
 import axios from "axios";
 import Pagination from "components/Pagination";
 import { useEffect, useState } from "react";
-import { Produto, ProdutoPage } from "types/produto";
+import {ProdutoPage } from "types/produto";
 import { BASE_URL } from "utils/request";
 
 

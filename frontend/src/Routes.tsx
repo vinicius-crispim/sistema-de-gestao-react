@@ -1,5 +1,5 @@
-import EstoqueTable from "components/EstoqueTable";
 import CadastroFornecedor from "pages/cadastrofornecedor";
+import CadastrarFuncionario from "pages/cadastrofuncionario";
 import CadastroProduto from "pages/cadastroproduto";
 import Estoque from "pages/estoque";
 import Home from "pages/home";
@@ -20,6 +20,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/estoque">
                     <Estoque/>
+                </Route>
+                <Route path="/cadastrofuncionario">
+                    <CadastrarFuncionario/>
                 </Route>
             </Switch>
         </BrowserRouter>
