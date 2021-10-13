@@ -1,4 +1,5 @@
 export type Funcionario = {
+    id?:number,
     nome: string,
     senha: string,
     email: string,

@@ -3,6 +3,7 @@ import CadastrarFuncionario from "pages/cadastrofuncionario";
 import CadastroProduto from "pages/cadastroproduto";
 import Estoque from "pages/estoque";
 import Home from "pages/home";
+import Login from "pages/login";
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 const Routes = () => {
@@ -23,6 +24,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/cadastrofuncionario">
                     <CadastrarFuncionario/>
+                </Route>
+                <Route path="/login">
+                    <Login/>
                 </Route>
             </Switch>
         </BrowserRouter>

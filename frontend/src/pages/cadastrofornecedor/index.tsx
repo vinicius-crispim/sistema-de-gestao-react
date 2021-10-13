@@ -101,11 +101,11 @@ const CadastroFornecedor = () => {
             <NavBar />
 
             <div className="container" >
-                <div className="jumbotron d-grid col-6 mx-auto">
+                <div className="jumbotron d-grid px-5 col-9 mx-auto">
                     <h1 className="display-4">Cadastre sua empresa</h1><br />
                 </div>
                 <form onSubmit={onSubmit}>
-                    <div className="row py-3">
+                    <div className="row py-2">
                         <div className="col">
                             <div className="promotion-form__group">
                                 <label htmlFor="nome">Nome:</label>

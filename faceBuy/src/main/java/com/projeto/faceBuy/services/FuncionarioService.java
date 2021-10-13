@@ -43,7 +43,8 @@ public class FuncionarioService {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-
+	
+	
 	// getOne apenas pega o objeto monitorado e depois mexe no banco, o findBy pega
 	// no banco
 	public Funcionario updateFuncionario(Long id, Funcionario funcionario) {

@@ -35,11 +35,11 @@ const EstoqueTable = () => {
                 <table className="table table-striped table-md">
                     <thead>
                         <tr>
-                            <th className="text-center">Nome</th>
-                            <th className="text-center">Categoria</th>
-                            <th className="text-center">Quantidade em Estoque</th>
-                            <th className="text-center">Quantidade Mínimia</th>
-                            <th className="text-center">Descrição</th>
+                            <th className="text-center text-primary">Nome</th>
+                            <th className="text-center text-primary">Categoria</th>
+                            <th className="text-center text-primary">Quantidade em Estoque</th>
+                            <th className="text-center text-primary">Quantidade Mínimia</th>
+                            <th className="text-center text-primary">Descrição</th>
                         </tr>
                     </thead>
                     <tbody>

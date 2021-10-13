@@ -7,8 +7,8 @@ const Estoque = () =>{
         <>
         <NavBar />
         <div className="container">
-          <h1 className="text-primary py-3 text-center">Verifique os produtos que temos em estoque, em ordem decrescente do quanto temos em estoque</h1>
-          <div className="row px-3">
+          <h2 className=" text-center col-12">Verifique o que temos em estoque, em ordem decrescente do quanto temos</h2>
+          <div className="row py-1 px-3">
             <div className="col-xxl-6">
               <h5 className="text-center text-secondary">Estoque</h5>
               <EstoqueTable />

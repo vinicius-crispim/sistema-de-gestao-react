@@ -37,7 +37,7 @@ public class FornecedorResource {
 		Fornecedor u = service.findById(id);
 		return ResponseEntity.ok().body(u);
 	}
-	
+
 	//Post para inserir no banco
 	//RequestBody para informar que o objeto vai chegar no modo Json
 	@PostMapping

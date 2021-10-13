@@ -89,11 +89,11 @@ const CadastroProduto = () => {
         <>
             <NavBar />
             <div className="container" >
-                <div className="jumbotron d-grid col-6 mx-auto">
+                <div className="jumbotron d-grid col-9 mx-auto px-5">
                     <h1 className="display-4">Cadastre um Produto</h1><br />
                 </div>
                 <form onSubmit={onSubmit} >
-                    <div className="row py-3">
+                    <div className="row py-2">
                         <div className="col">
                             <div className="promotion-form__group">
                                 <label htmlFor="nome">Nome:</label>
@@ -110,13 +110,13 @@ const CadastroProduto = () => {
                     <div className="row py-3">
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="quantidademin">Quantidade Minima::</label>
+                                <label htmlFor="quantidademin">Quantidade Minima:</label>
                                 <input className="form-control" type="number" id="quantidademin" name="quantidademin" onChange={onChange} required />
                             </div>
                         </div>
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="estoque">Estoque::</label>
+                                <label htmlFor="estoque">Estoque:</label>
                                 <input className="form-control" type="number" id="estoque" name="estoque" onChange={onChange} required />
                             </div>
                         </div>

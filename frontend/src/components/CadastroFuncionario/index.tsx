@@ -1,15 +1,8 @@
 import axios from "axios";
-import Footer from "components/Footer";
-import NavBar from "components/NavBar";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { Cidade } from "types/cidade";
 import { Funcionario, TipoFuncionario } from "types/funcionario";
 import { BASE_URL } from "utils/request";
-/*
-type Cidade = {
-    id: number;
-}*/
 
 
 type Todostipos = {
@@ -91,11 +84,11 @@ const CadastrarFuncionario = () => {
     return (
         <>
             <div className="container" >
-                <div className="jumbotron d-grid col-6 mx-auto">
+                <div className="jumbotron d-grid col-9 mx-auto px-2">
                     <h1 className="display-4">Cadastre um Funcionario</h1><br />
                 </div>
                 <form onSubmit={onSubmit}>
-                    <div className="row py-3">
+                    <div className="row py-2">
                         <div className="col">
                             <div className="promotion-form__group">
                                 <label htmlFor="nome">Nome:</label>
@@ -112,7 +105,7 @@ const CadastrarFuncionario = () => {
                     <div className="row py-3">
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="senha">Senha:</label>
+                                <label className="text-size-lg" htmlFor="senha">Senha:</label>
                                 <input className="form-control" type="text" id="senha" name="senha" onChange={onChange} required />
                             </div>
                         </div>

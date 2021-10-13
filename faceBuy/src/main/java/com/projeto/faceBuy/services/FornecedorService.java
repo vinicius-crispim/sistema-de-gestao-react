@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import com.projeto.faceBuy.entities.Fornecedor;
 import com.projeto.faceBuy.repositories.FornecedorRepository;
@@ -22,10 +24,12 @@ public class FornecedorService {
 	@Autowired
 	private FornecedorRepository repository;
 
+	@Transactional(readOnly = true)
 	public List<Fornecedor> findAll() {
 		return repository.findAll();
 	}
 
+	@Transactional(readOnly = true)
 	public Fornecedor findById(Long id) {
 		Optional<Fornecedor> op = repository.findById(id);
 		return op.orElseThrow(() -> new ResourceNotFoundException(id));
