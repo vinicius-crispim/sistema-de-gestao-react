@@ -18,7 +18,7 @@ const EstoqueTable = () => {
     });
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/produtos?page=${activePage}&size=10&sort=estoque,desc`)
+        axios.get(`${BASE_URL}/produtos?page=${activePage}&size=3&sort=estoque,desc`)
             .then(response => {
                 setPage(response.data);
             })

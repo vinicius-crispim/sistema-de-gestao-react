@@ -14,6 +14,7 @@ const CadastrarFuncionario = () => {
 
 
     const [values, setValues] = useState<Funcionario>({
+        id:0,
         nome: "",
         login: "",
         senha: "",

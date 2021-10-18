@@ -1,11 +1,11 @@
 import Footer from "components/Footer";
 import LoginUser from "components/Login";
-import NavBar from "components/NavBar";
+import NavBarLogin from "components/NavBar/indexlogin";
 
 const Login = () => {
     return (
         <>
-            <NavBar />
+            <NavBarLogin/>
             <div >
                <LoginUser/>
             </div>

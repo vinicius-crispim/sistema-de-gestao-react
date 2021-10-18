@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { Funcionario } from "types/funcionario";
 import { BASE_URL } from "utils/request";
 import logoNAVBAR from 'assets/img/logoNAVBAR.png'
+import { Link } from "react-router-dom";
 
 type LoginType = {
     loginteste: string,
@@ -11,9 +12,10 @@ type LoginType = {
 }
 
 type Validador = {
-    meuslogins:string[],
-    minhassenhas:string[],
+    meuslogins: string[],
+    minhassenhas: string[],
 }
+
 
 const LoginUser = () => {
 
@@ -24,7 +26,7 @@ const LoginUser = () => {
 
     const [validador, setValidador] = useState<Validador>({
         meuslogins: [],
-        minhassenhas:[],
+        minhassenhas: [],
     })
 
     const [values, setValues] = useState<Funcionario>({
@@ -57,9 +59,8 @@ const LoginUser = () => {
             .then(response => {
 
                 const data = response.data as Funcionario[];
-                const myl= data.map(x => x.login);
-                const mys= data.map(x => x.senha);
-
+                const myl = data.map(x => x.login);
+                const mys = data.map(x => x.senha);
                 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 setValidador({ meuslogins: myl, minhassenhas: mys });
 
@@ -70,40 +71,62 @@ const LoginUser = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const [quantia, setQuantia] = useState(0);
 
+
+    let valida = 0;
     function onSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
+
         console.log(validador.meuslogins.length);
         console.log(logintype);
         for (let index = 0; index < validador.meuslogins.length; index++) {
             console.log(validador);
             if (logintype.loginteste === validador.meuslogins[index] && logintype.senhateste === validador.minhassenhas[index]) {
                 console.log("DEUUU")
-                console.log( validador.meuslogins[index])
-                console.log( validador.minhassenhas[index])
+                console.log(validador.meuslogins[index])
+                console.log(validador.minhassenhas[index])
                 console.log(logintype);
-                history.push("/");
-            } else {
-                console.log("NAOOO DEUUU")
-                console.log( validador.meuslogins[index])
-                console.log( validador.minhassenhas[index])
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                valida = index + 1;
+            }
+            else {
+                console.log(validador.meuslogins[index])
+                console.log(validador.minhassenhas[index])
                 console.log(logintype);
             }
 
         }
-        console.log(quantia);
+        autentica(valida);
     }
+
+
+    function autentica(num: number) {
+        axios.get(`${BASE_URL}/funcionarios/${valida}`).then(response => {
+
+            const temp = response.data as Funcionario;
+            console.log(temp);
+            setValues(temp)
+            console.log(values)
+            history.push("/home", values);
+            console.log("aaaaaaaa");
+            console.log(temp);
+            localStorage.setItem("user", JSON.stringify(temp));
+
+        });
+    }
+
 
     return (
         <>
             <div className="container text-center" >
-                <div className="jumbotron d-grid col-6 mx-auto">
-                    <h1 className="display-4">Entre no sistema</h1><br />
+                <img className="mb-4" src={logoNAVBAR} alt="" width="220" />
+                <div className="jumbotron d-grid col-8 mx-auto">
+                    <h1 className=" display-5">Seja Bem-Vindo</h1>
                 </div>
                 <form onSubmit={onSubmit}>
-                    <img className="mb-4" src={logoNAVBAR} alt="" width="220" />
-                    <h1 className="h3 mb-3 fw-normal">Insira as informações</h1>
+                    <div className="jumbotron d-grid col-8 mx-auto">
+                        <h3 className=" mb-1 mt-2">Insira as informações</h3>
+                    </div>
                     <div className="row py-3">
                         <div className="col">
                             <div className="promotion-form__group">
@@ -119,6 +142,11 @@ const LoginUser = () => {
                                 <input placeholder="Senha" className="form-control-lg" type="password" id="senhateste" name="senhateste" onChange={onChange} required />
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <h6 className="text-secondary">Caso não tenha conta </h6>
+                        <Link className="my-2 text-decoration-none" to="/cadastrofuncionario">Clique aqui para cadastrar-se como funcionario</Link> <br />
+                        <Link className="my-2 text-decoration-none" to="/cadastrofornecedor"> Clique aqui para cadastrar-se como fornecedor</Link>
                     </div>
                     <div className="d-grid gap-3 col-2 mx-auto">
                         <button type="submit" className="px-9 btn btn-success btn-lg my-4">Entrar</button>
