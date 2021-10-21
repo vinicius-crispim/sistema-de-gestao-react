@@ -69,7 +69,6 @@ public class FornecedorService {
 		obj.setEmail(fornecedor.getEmail());
 		obj.setLogin(fornecedor.getLogin());
 		obj.setSenha(fornecedor.getSenha());
-		obj.getCotacaocompra().addAll(fornecedor.getCotacaocompra().stream().collect(Collectors.toList()));
 		obj.getFornecedorcotacaocompraitem().addAll(fornecedor.getFornecedorcotacaocompraitem().stream().collect(Collectors.toList()));
 		obj.getNotasfiscais().addAll(fornecedor.getNotasfiscais().stream().collect(Collectors.toList()));
 		obj.getOrdenscompra().addAll(fornecedor.getOrdenscompra().stream().collect(Collectors.toList()));

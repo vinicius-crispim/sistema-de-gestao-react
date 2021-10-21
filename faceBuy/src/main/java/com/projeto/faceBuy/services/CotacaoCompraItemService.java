@@ -11,7 +11,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.projeto.faceBuy.entities.CotacaoCompraItem;
-import com.projeto.faceBuy.entities.pk.CotacaoCompraItemPK;
 import com.projeto.faceBuy.repositories.CotacaoCompraItemRepository;
 import com.projeto.faceBuy.services.exceptions.DatabaseException;
 import com.projeto.faceBuy.services.exceptions.ResourceNotFoundException;
@@ -25,7 +24,7 @@ public class CotacaoCompraItemService {
 		return repository.findAll();
 	}
 
-	public CotacaoCompraItem findById(CotacaoCompraItemPK id) {
+	public CotacaoCompraItem findById(Long id) {
 		Optional<CotacaoCompraItem> op = repository.findById(id);
 		return op.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
@@ -34,7 +33,7 @@ public class CotacaoCompraItemService {
 		return repository.save(cotacaoCompraItem);
 	}
 
-	public void deleteCotacaoCompraItem(CotacaoCompraItemPK id) {
+	public void deleteCotacaoCompraItem(Long id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
@@ -46,7 +45,7 @@ public class CotacaoCompraItemService {
 
 	// getOne apenas pega o objeto monitorado e depois mexe no banco, o findBy pega
 	// no banco
-	public CotacaoCompraItem updateCotacaoCompraItem(CotacaoCompraItemPK id, CotacaoCompraItem cotacaoCompraItem) {
+	public CotacaoCompraItem updateCotacaoCompraItem(Long id, CotacaoCompraItem cotacaoCompraItem) {
 		try {
 			CotacaoCompraItem obj = repository.getOne(id);
 			updateData(obj, cotacaoCompraItem);
@@ -57,9 +56,6 @@ public class CotacaoCompraItemService {
 	}
 
 	private void updateData(CotacaoCompraItem obj, CotacaoCompraItem cotacaoCompraItem) {
-		obj.setCotacaoCompra(cotacaoCompraItem.getCotacaoCompra());
-		obj.setFuncionario(cotacaoCompraItem.getFuncionario());
-		obj.setMarca(cotacaoCompraItem.getMarca());
 		obj.setProduto(cotacaoCompraItem.getProduto());
 		obj.setQuantidade(cotacaoCompraItem.getQuantidade());
 	}

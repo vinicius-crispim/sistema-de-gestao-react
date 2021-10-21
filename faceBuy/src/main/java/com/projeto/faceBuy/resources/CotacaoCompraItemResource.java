@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.faceBuy.entities.CotacaoCompraItem;
-import com.projeto.faceBuy.entities.pk.CotacaoCompraItemPK;
 import com.projeto.faceBuy.services.CotacaoCompraItemService;
 
 @RestController
-@RequestMapping(value = "/cotacoes/itens")
+@RequestMapping(value = "/cotacaoitens")
 public class CotacaoCompraItemResource {
 	@Autowired
 	private CotacaoCompraItemService service;
@@ -33,7 +32,7 @@ public class CotacaoCompraItemResource {
 	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
-	public ResponseEntity<CotacaoCompraItem> findById(@PathVariable CotacaoCompraItemPK id){
+	public ResponseEntity<CotacaoCompraItem> findById(@PathVariable Long id){
 		CotacaoCompraItem u = service.findById(id);
 		return ResponseEntity.ok().body(u);
 	}
@@ -46,20 +45,20 @@ public class CotacaoCompraItemResource {
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}")
-				.buildAndExpand(cotacaoCompraItem.getCotacaoCompra().getId())
+				.buildAndExpand(cotacaoCompraItem.getId())
 				.toUri();
 		
 		return ResponseEntity.created(uri).body(cotacaoCompraItem);
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deleteCotacaoCompra(@PathVariable CotacaoCompraItemPK id){
+	public ResponseEntity<Void> deleteCotacaoCompra(@PathVariable Long id){
 		service.deleteCotacaoCompraItem(id);		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CotacaoCompraItem> updateCotacaoCompra(@PathVariable CotacaoCompraItemPK id, @RequestBody CotacaoCompraItem cotacaoCompra){
+	public ResponseEntity<CotacaoCompraItem> updateCotacaoCompra(@PathVariable Long id, @RequestBody CotacaoCompraItem cotacaoCompra){
 		cotacaoCompra = service.updateCotacaoCompraItem(id, cotacaoCompra);
 		return ResponseEntity.ok().body(cotacaoCompra);
 	}

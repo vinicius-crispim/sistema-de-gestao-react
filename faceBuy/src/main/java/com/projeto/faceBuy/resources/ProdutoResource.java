@@ -1,5 +1,6 @@
 package com.projeto.faceBuy.resources;
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,12 +32,20 @@ public class ProdutoResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@GetMapping(value="/noPage")
+	public ResponseEntity<List<Produto>> findAllNoPage(){
+
+		List<Produto> list = service.findAllNoPage();
+		return ResponseEntity.ok().body(list);
+	}
+	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Produto> findById(@PathVariable Long id){
 		Produto u = service.findById(id);
 		return ResponseEntity.ok().body(u);
 	}
+	
 	
 	//Post para inserir no banco
 	//RequestBody para informar que o objeto vai chegar no modo Json

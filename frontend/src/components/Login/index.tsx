@@ -5,6 +5,17 @@ import { Funcionario } from "types/funcionario";
 import { BASE_URL } from "utils/request";
 import logoNAVBAR from 'assets/img/logoNAVBAR.png'
 import { Link } from "react-router-dom";
+import { Cidade } from "types/cidade";
+
+type Fornecedor = {
+    id:0,
+    nome: string,
+    cnpj: string,
+    email: string,
+    login: string,
+    senha: string,
+    cidade: Cidade,
+}
 
 type LoginType = {
     loginteste: string,
@@ -16,7 +27,6 @@ type Validador = {
     minhassenhas: string[],
 }
 
-
 const LoginUser = () => {
 
     const [logintype, setLoginType] = useState<LoginType>({
@@ -25,6 +35,10 @@ const LoginUser = () => {
     })
 
     const [validador, setValidador] = useState<Validador>({
+        meuslogins: [],
+        minhassenhas: [],
+    })
+    const [validador2, setValidador2] = useState<Validador>({
         meuslogins: [],
         minhassenhas: [],
     })
@@ -39,6 +53,18 @@ const LoginUser = () => {
         tipo: {
             id: 0,
             tipo: "",
+        },
+    });
+    const [valuesForn, setValuesFor] = useState<Fornecedor>({
+        id:0,
+        nome: "",
+        cnpj: "",
+        email: "",
+        login: "",
+        senha: "",
+        cidade: {
+            id:0,
+            nome:""
         },
     });
 
@@ -63,7 +89,25 @@ const LoginUser = () => {
                 const mys = data.map(x => x.senha);
                 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 setValidador({ meuslogins: myl, minhassenhas: mys });
+                console.log("Funcionario");
+                console.log(response.data);
+                console.log(validador);
+                console.log("rodouu");
+            });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
+    useEffect(() => {
+        axios.get(`${BASE_URL}/fornecedores`)
+            .then(response => {
+
+                const data2 = response.data as Fornecedor[];
+                const myl2 = data2.map(x => x.login);
+                const mys2 = data2.map(x => x.senha);
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                setValidador2({ meuslogins: myl2, minhassenhas: mys2 });
+
+                console.log("FORNECEDOR");
                 console.log(response.data);
                 console.log(validador);
                 console.log("rodouu");
@@ -88,6 +132,7 @@ const LoginUser = () => {
                 console.log(logintype);
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 valida = index + 1;
+                autenticauser(valida);
             }
             else {
                 console.log(validador.meuslogins[index])
@@ -96,22 +141,58 @@ const LoginUser = () => {
             }
 
         }
-        autentica(valida);
+        for (let index = 0; index < validador2.meuslogins.length; index++) {
+            console.log(validador);
+            if (logintype.loginteste === validador2.meuslogins[index] && logintype.senhateste === validador2.minhassenhas[index]) {
+                console.log("DEUUU")
+                console.log(validador2.meuslogins[index])
+                console.log(validador2.minhassenhas[index])
+                console.log(logintype);
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                valida = index + 1;
+                autentica(valida);
+            }
+            else {
+                console.log(validador.meuslogins[index])
+                console.log(validador.minhassenhas[index])
+                console.log(logintype);
+            }
+
+        }
+        
     }
 
 
-    function autentica(num: number) {
+    function autenticauser(num: number) {
         axios.get(`${BASE_URL}/funcionarios/${valida}`).then(response => {
 
             const temp = response.data as Funcionario;
             console.log(temp);
             setValues(temp)
             console.log(values)
-            history.push("/home", values);
-            console.log("aaaaaaaa");
+            console.log("logou user");
             console.log(temp);
-            localStorage.setItem("user", JSON.stringify(temp));
+            localStorage.setItem('user', JSON.stringify(temp));
+            let bemvindo = JSON.parse(localStorage.getItem('user') || '{}');
+            alert(`BEM VINDO ${bemvindo.nome}`);
+            history.push("/home");
 
+        });
+    }
+    function autentica(num: number) {
+        axios.get(`${BASE_URL}/fornecedores/${valida}`).then(response => {
+
+            const temp = response.data as Fornecedor;
+            console.log(temp);
+            setValuesFor(temp)
+            console.log(valuesForn)
+            
+            console.log("logou fornecedor");
+            console.log(temp);
+            localStorage.setItem("fornecedor", JSON.stringify(temp));
+            let bemvindo = JSON.parse(localStorage.getItem('fornecedor') || '{}');
+            alert(`BEM VINDO ${bemvindo.nome}`);
+            history.push("/homefornecedor");
         });
     }
 

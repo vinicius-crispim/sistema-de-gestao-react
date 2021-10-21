@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_cotacaocompra")
 public class CotacaoCompra implements Serializable {
@@ -24,12 +26,12 @@ public class CotacaoCompra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "id.cotacaocompra")
+	@OneToMany(mappedBy = "cotacaocompra")
 	private List<CotacaoCompraItem> cotacaocompraitens = new ArrayList<>();
 
 	@ManyToOne
-	@JoinColumn(name = "fornecedor_id")
-	private Fornecedor fornecedor;
+	@JoinColumn(name = "funcionario_id")
+	private Funcionario funcionario;
 
 	public CotacaoCompra() {
 	}
@@ -46,21 +48,21 @@ public class CotacaoCompra implements Serializable {
 		this.id = id;
 	}
 
-	public Fornecedor getFornecedor() {
-		return fornecedor;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	public void setFornecedor(Fornecedor fornecedor) {
-		this.fornecedor = fornecedor;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
-
+	@JsonIgnore
 	public List<CotacaoCompraItem> getCotacaocompraitem() {
 		return cotacaocompraitens;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cotacaocompraitens, fornecedor, id);
+		return Objects.hash(cotacaocompraitens, funcionario, id);
 	}
 
 	@Override
@@ -73,7 +75,7 @@ public class CotacaoCompra implements Serializable {
 			return false;
 		CotacaoCompra other = (CotacaoCompra) obj;
 		return Objects.equals(cotacaocompraitens, other.cotacaocompraitens)
-				&& Objects.equals(fornecedor, other.fornecedor) && Objects.equals(id, other.id);
+				&& Objects.equals(funcionario, other.funcionario) && Objects.equals(id, other.id);
 	}
 
 }

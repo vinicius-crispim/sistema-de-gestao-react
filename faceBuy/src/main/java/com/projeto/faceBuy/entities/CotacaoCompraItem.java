@@ -3,12 +3,15 @@ package com.projeto.faceBuy.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.projeto.faceBuy.entities.pk.CotacaoCompraItemPK;
 
 @Entity
 @Table(name = "tb_cotacaocompraitem")
@@ -16,22 +19,27 @@ public class CotacaoCompraItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private CotacaoCompraItemPK id = new CotacaoCompraItemPK();
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	private Integer quantidade;
-
-	private String marca;
+	@ManyToOne
+    @JoinColumn(name = "produto_id")
+	private Produto produto;
+	
+	@ManyToOne
+    @JoinColumn(name = "cotacaocompra_id")
+	private CotacaoCompra cotacaocompra;
 
 	public CotacaoCompraItem() {
 	}
 
-	public CotacaoCompraItem(Integer quantidade, String marca, Produto produto, CotacaoCompra cotacaocompra, Funcionario funcionario) {
+	public CotacaoCompraItem(Long id, Integer quantidade, Produto produto, CotacaoCompra cotacaocompra) {
 		this.quantidade = quantidade;
-		this.marca = marca;
-		id.setCotacaocompra(cotacaocompra);
-		id.setFuncionario(funcionario);
-		id.setProduto(produto);
+		this.id = id;
+		this.cotacaocompra = cotacaocompra;
+		this.produto = produto;
 	}
 
 	public Integer getQuantidade() {
@@ -42,39 +50,32 @@ public class CotacaoCompraItem implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	public String getMarca() {
-		return marca;
+	public Long getId() {
+		return id;
 	}
 
-	public void setMarca(String marca) {
-		this.marca = marca;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public CotacaoCompra getCotacaocompra() {
+		return cotacaocompra;
+	}
+
+	public void setCotacaocompra(CotacaoCompra cotacaocompra) {
+		this.cotacaocompra = cotacaocompra;
 	}
 
 	public Produto getProduto() {
-		return id.getProduto();
+		return produto;
 	}
 
 	public void setProduto(Produto produto) {
-		id.setProduto(produto);
+		this.produto = produto;
 	}
 
 	
-	public Funcionario getFuncionario() {
-		return id.getFuncionario();
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		id.setFuncionario(funcionario);
-	}
 	
-	@JsonIgnore
-	public CotacaoCompra getCotacaoCompra() {
-		return id.getCotacaocompra();
-	}
-
-	public void setCotacaoCompra(CotacaoCompra cotacaoCompra) {
-		id.setCotacaocompra(cotacaoCompra);
-	}
 	
 	@Override
 	public int hashCode() {

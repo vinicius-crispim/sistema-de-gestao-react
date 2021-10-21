@@ -31,7 +31,14 @@ public class ProdutoService {
 		Page<Produto> result = repository.findAll(pageable);
 		return result;	
 		}
-
+	
+	public List<Produto> findAllNoPage() {
+		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
+		List<Produto> result = repository.findAll();
+		return result;
+		}
+	
+	@Transactional(readOnly = true)//garante que toda a operaÃ§Ã£o com banco seja resolvida aqui e ReadOnly nao faz lock no banco pois Ã© so select, nao muda nd no banco
 	public Produto findById(Long id) {
 		Optional<Produto> op = repository.findById(id);
 		return op.orElseThrow(() -> new ResourceNotFoundException(id));

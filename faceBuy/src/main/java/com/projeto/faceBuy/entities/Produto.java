@@ -32,7 +32,7 @@ public class Produto implements Serializable {
     private Integer quantidademin;
     private Integer estoque;
     
-    @OneToMany(mappedBy = "id.produto")
+    @OneToMany(mappedBy = "produto")
     private List<CotacaoCompraItem> cotacaocompraitens = new ArrayList<>();
 
     @ManyToOne

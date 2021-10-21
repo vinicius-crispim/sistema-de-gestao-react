@@ -37,10 +37,10 @@ public class Funcionario implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tipofuncionario_id")
     private TipoFuncionario tipofuncionario;
-
-	@OneToMany(mappedBy = "id.funcionario")
-	private List<CotacaoCompraItem> cotacaocompraitens = new ArrayList<>();
 	
+    @OneToMany(mappedBy = "funcionario")
+	private List<CotacaoCompra> cotacaocompra = new ArrayList<CotacaoCompra>();
+    
     public Funcionario() {}
     
     public Funcionario(Long id, String nome, String senha, String email, String telefone, TipoFuncionario tipo, String login) {
@@ -101,10 +101,6 @@ public class Funcionario implements Serializable {
 	public void setTipo(TipoFuncionario tipo) {
 		this.tipofuncionario = tipo;
 	}
-	@JsonIgnore
-	public List<CotacaoCompraItem> getCotacaocompraitens() {
-		return cotacaocompraitens;
-	}
 
 	public String getLogin() {
 		return login;
@@ -113,10 +109,23 @@ public class Funcionario implements Serializable {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
+	@JsonIgnore
+	public TipoFuncionario getTipofuncionario() {
+		return tipofuncionario;
+	}
+
+	public void setTipofuncionario(TipoFuncionario tipofuncionario) {
+		this.tipofuncionario = tipofuncionario;
+	}
+
+	@JsonIgnore
+	public List<CotacaoCompra> getCotacaocompra() {
+		return cotacaocompra;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(cotacaocompraitens, email, tipofuncionario, id, login, nome, senha, telefone);
+		return Objects.hash(email, tipofuncionario, id, login, nome, senha, telefone);
 	}
 
 	@Override
@@ -128,7 +137,7 @@ public class Funcionario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Funcionario other = (Funcionario) obj;
-		return Objects.equals(cotacaocompraitens, other.cotacaocompraitens) && Objects.equals(email, other.email)
+		return  Objects.equals(email, other.email)
 				&& Objects.equals(tipofuncionario, other.tipofuncionario) && Objects.equals(id, other.id)
 				&& Objects.equals(login, other.login) && Objects.equals(nome, other.nome)
 				&& Objects.equals(senha, other.senha) && Objects.equals(telefone, other.telefone);

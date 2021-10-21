@@ -58,8 +58,6 @@ public class CotacaoCompraService {
 	}
 
 	private void updateData(CotacaoCompra obj, CotacaoCompra cotacaoCompra) {
-
-		obj.setFornecedor(cotacaoCompra.getFornecedor());
 		obj.getCotacaocompraitem().addAll(cotacaoCompra.getCotacaocompraitem().stream().collect(Collectors.toList()));
 	}
 
