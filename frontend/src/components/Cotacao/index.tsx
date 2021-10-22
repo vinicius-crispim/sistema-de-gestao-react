@@ -357,12 +357,15 @@ const CotacaoFeita = () => {
                     console.log("COTACAO ITEM CRIADA");
                     console.log(cotacaocompra);
                 });
+            
+        }
+        if (aux === 1) {
             axios.get(`${BASE_URL}/cotacoes`).then((response) => {
                 const data = response.data as CotacaoCompra[];
-                ids = data.length+1;
-                console.log(ids);
+                ids = data.length;
+                console.log(`ID:${ids}`);
                 cotacaocompra.id = ids;
-            })
+            })      
         }
         itensTodos.itenstodos.push(cotacaocompraitem)
         
@@ -372,7 +375,7 @@ const CotacaoFeita = () => {
     function onSubmitFIM(event: { preventDefault: () => void; }) {
         event.preventDefault();
         for (let index = 0; index < itensTodos.itenstodos.length; index++) {
-            axios.post(`${BASE_URL}/cotacaoitens`, cotacaocompraitem)
+            axios.post(`${BASE_URL}/cotacaoitens`, itensTodos.itenstodos[index])
                 .then((response) => {
                     console.log("COTACAO ITEM CRIADA");
                     console.log(cotacaocompraitem);

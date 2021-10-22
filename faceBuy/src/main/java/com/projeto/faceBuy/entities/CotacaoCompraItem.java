@@ -57,7 +57,7 @@ public class CotacaoCompraItem implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public CotacaoCompra getCotacaocompra() {
 		return cotacaocompra;
 	}
