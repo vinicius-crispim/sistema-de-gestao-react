@@ -289,12 +289,12 @@ const CotacaoFeita = () => {
     let ids: number;
     const [cotacaocompra, setCotacao] = useState<CotacaoCompra>({ funcionario: user, id: 0 });
     const [cotacaocompraitem, setCotacaoCompraItem] = useState<CotacaoItem>({ 
+        id:0,
         cotacaocompra: cotacaocompra, 
         produto: {
             id: 0,
             descrição: "",
             estoque: 0,
-            marca: "",
             nome: "",
             quantidademin: 0,
             categoria: {
@@ -310,7 +310,7 @@ const CotacaoFeita = () => {
     useEffect(() => {
         axios.get(`${BASE_URL}/produtos/noPage`)
             .then(response => {
-
+                
                 const data = response.data as Produto[];
                 const meusids = data.map(x => x.id);
                 const meusnomes = data.map(x => x.nome);
@@ -367,8 +367,8 @@ const CotacaoFeita = () => {
                 cotacaocompra.id = ids;
             })      
         }
-        itensTodos.itenstodos.push(cotacaocompraitem)
         
+        itensTodos.itenstodos.push(cotacaocompraitem)
         console.log(itensTodos.itenstodos);
 
     }
@@ -381,15 +381,14 @@ const CotacaoFeita = () => {
                     console.log(cotacaocompraitem);
                 });
         }
+        window.location.reload();
     }
 
     return (
         <>
-            <NavBar />
-
-            <div className="container" >
-                <div className="jumbotron d-grid col-4 mx-auto">
-                    <h1 className="display-4">Cotacao</h1><br />
+            
+                <div className="jumbotron d-grid col-11 mx-auto">
+                    <h1 className="display-4">Insira as informações do pedido</h1><br />
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="row py-2">
@@ -410,43 +409,35 @@ const CotacaoFeita = () => {
                         </div>
                     </div>
                     <div className="d-grid gap-3 col-2 mx-auto">
-                        <button type="submit" className="btn btn-success btn-lg my-4">Adicionar</button>
+                        <button type="submit" className="btn btn-success btn-lg my-4" >Adicionar</button>
                     </div>
                 </form>
                 <hr />
-                <table className="table">
+                <div className="table-responsive">
+                <table className="table table-striped table-md">
                     <thead>
                         <tr>
-                            <th scope="col">Produto</th>
-                            <th scope="col">Marca</th>
-                            <th scope="col">Quantidade</th>
+                            <th className="text-center text-primary">Nome</th>
+                            <th className="text-center text-primary">Categoria</th>
+                            <th className="text-center text-primary">Quantidade</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Caneta</td>
-                            <td>Big</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td>Impressora</td>
-                            <td>HP</td>
-                            <td>13</td>
-                        </tr>
-                        <tr>
-                            <td>Teclado</td>
-                            <td>Hyperx</td>
-                            <td>28</td>
-                        </tr>
+                        {itensTodos.itenstodos.map(x => (
+                            <tr key={x.produto.id}>
+                                <td className="text-center">{x.produto.nome}</td>
+                                <td className="text-center">{x.produto.categoria.nome}</td>
+                                <td className="text-center">{x.quantidade}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
+            </div>
                 <form onSubmit={onSubmitFIM}>
                     <div className="d-grid gap-3 col-2 mx-auto">
                         <button type="submit" className="btn btn-success btn-xx my-4">Enviar cotação</button>
                     </div>
                 </form>
-            </div>
-            <Footer />
         </>
     );
 }

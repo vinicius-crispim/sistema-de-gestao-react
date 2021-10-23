@@ -4,7 +4,6 @@ export type Produto = {
     descrição: string,
     quantidademin: number,
     estoque: number,
-    marca: string,
     categoria: Categoria,
 
 }

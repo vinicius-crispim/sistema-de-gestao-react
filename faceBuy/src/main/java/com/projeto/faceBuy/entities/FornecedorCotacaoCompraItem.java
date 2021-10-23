@@ -27,13 +27,17 @@ public class FornecedorCotacaoCompraItem implements Serializable {
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
 	
+	@ManyToOne
+	@JoinColumn(name = "cotacaocompraitem_id")
+	private CotacaoCompraItem cotacaocompraitem;
 	
 	public FornecedorCotacaoCompraItem() {}
 	
-	public FornecedorCotacaoCompraItem(Long id, Double preco, Fornecedor fornecedor) {
+	public FornecedorCotacaoCompraItem(Long id, Double preco, Fornecedor fornecedor, CotacaoCompraItem cotacaocompraitem) {
 		this.id = id;
 		this.preco = preco;
 		this.fornecedor = fornecedor;
+		this.cotacaocompraitem = cotacaocompraitem;
 	}
 
 	public Long getId() {
@@ -60,6 +64,14 @@ public class FornecedorCotacaoCompraItem implements Serializable {
 		this.fornecedor = fornecedor;
 	}
 
+
+	public CotacaoCompraItem getCotacaocompraitem() {
+		return cotacaocompraitem;
+	}
+
+	public void setCotacaocompraitem(CotacaoCompraItem cotacaocompraitem) {
+		this.cotacaocompraitem = cotacaocompraitem;
+	}
 
 	@Override
 	public int hashCode() {

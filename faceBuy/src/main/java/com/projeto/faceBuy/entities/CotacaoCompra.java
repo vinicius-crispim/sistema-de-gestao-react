@@ -57,7 +57,11 @@ public class CotacaoCompra implements Serializable {
 	}
 	@JsonIgnore
 	public List<CotacaoCompraItem> getCotacaocompraitem() {
-		return cotacaocompraitens;
+		List<CotacaoCompraItem> lista = new ArrayList<CotacaoCompraItem>();
+		for(CotacaoCompraItem x : cotacaocompraitens) {
+			lista.add(x);
+		}
+		return lista;
 	}
 
 	@Override

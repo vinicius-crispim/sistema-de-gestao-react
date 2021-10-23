@@ -4,20 +4,14 @@ import NavBar from "components/NavBar";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Cidade } from "types/cidade";
+import { Fornecedor } from "types/fornecedor";
 import { BASE_URL } from "utils/request";
 /*
 type Cidade = {
     id: number;
 }*/
 
-type Fornecedor = {
-    nome: string,
-    cnpj: string,
-    email: string,
-    login: string,
-    senha: string,
-    cidade: Cidade,
-}
+
 
 type TodasCidades = {
     ids : number[];

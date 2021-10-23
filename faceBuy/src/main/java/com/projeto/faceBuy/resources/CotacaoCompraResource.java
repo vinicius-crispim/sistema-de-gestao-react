@@ -2,6 +2,7 @@ package com.projeto.faceBuy.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.faceBuy.entities.CotacaoCompra;
+import com.projeto.faceBuy.entities.WrapperCotacaoCompra;
 import com.projeto.faceBuy.services.CotacaoCompraService;
 
 @RestController
@@ -25,10 +27,12 @@ public class CotacaoCompraResource {
 	private CotacaoCompraService service;
 
 	@GetMapping
-	public ResponseEntity<List<CotacaoCompra>> findAll(){
+	public ResponseEntity<List<WrapperCotacaoCompra>> findAll(){
 
 		List<CotacaoCompra> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		List<WrapperCotacaoCompra> listDTO = list.stream().map(x -> new WrapperCotacaoCompra(x)).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	//caso inserir uma barra e um id, ele faz esta busca

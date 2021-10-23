@@ -52,7 +52,6 @@ const EstoqueTable = () => {
                                 <td className="text-center">{x.descrição}</td>
                             </tr>
                         ))}
-
                     </tbody>
                 </table>
                 <Pagination page={page} onPageChange={changePage}/>   

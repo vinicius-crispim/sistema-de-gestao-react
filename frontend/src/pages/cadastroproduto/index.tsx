@@ -21,7 +21,6 @@ const CadastroProduto = () => {
         descrição: "",
         quantidademin: 0,
         estoque: 0,
-        marca: "",
         categoria: {
             id: 0,
             nome: "",

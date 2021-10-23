@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.projeto.faceBuy.entities.Estado;
 import com.projeto.faceBuy.services.EstadoService;
 
@@ -43,7 +46,7 @@ public class EstadoResource {
 	@PostMapping
 	public ResponseEntity<Estado> saveEstado(@RequestBody Estado estado){
 		estado = service.saveEstado(estado);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}")
 				.buildAndExpand(estado.getId())

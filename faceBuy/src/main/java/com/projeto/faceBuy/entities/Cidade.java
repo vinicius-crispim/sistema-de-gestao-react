@@ -63,7 +63,7 @@ public class Cidade implements Serializable {
 	public List<Fornecedor> getFornecedores() {
 		return fornecedores;
 	}
-
+	
 	public Estado getEstado() {
 		return estado;
 	}

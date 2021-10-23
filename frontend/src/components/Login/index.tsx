@@ -172,10 +172,13 @@ const LoginUser = () => {
             console.log(values)
             console.log("logou user");
             console.log(temp);
+            localStorage.removeItem("user");
             localStorage.setItem('user', JSON.stringify(temp));
+            
             let bemvindo = JSON.parse(localStorage.getItem('user') || '{}');
             alert(`BEM VINDO ${bemvindo.nome}`);
             history.push("/home");
+            window.location.reload();
 
         });
     }
@@ -186,13 +189,14 @@ const LoginUser = () => {
             console.log(temp);
             setValuesFor(temp)
             console.log(valuesForn)
-            
+            localStorage.removeItem("fornecedor");
             console.log("logou fornecedor");
             console.log(temp);
             localStorage.setItem("fornecedor", JSON.stringify(temp));
             let bemvindo = JSON.parse(localStorage.getItem('fornecedor') || '{}');
             alert(`BEM VINDO ${bemvindo.nome}`);
             history.push("/homefornecedor");
+            window.location.reload();
         });
     }
 

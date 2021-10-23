@@ -14,6 +14,7 @@ import com.projeto.faceBuy.entities.CotacaoCompra;
 import com.projeto.faceBuy.entities.CotacaoCompraItem;
 import com.projeto.faceBuy.entities.Estado;
 import com.projeto.faceBuy.entities.Fornecedor;
+import com.projeto.faceBuy.entities.FornecedorCotacaoCompraItem;
 import com.projeto.faceBuy.entities.Funcionario;
 import com.projeto.faceBuy.entities.NotaFiscal;
 import com.projeto.faceBuy.entities.NotaFiscalItem;
@@ -26,6 +27,7 @@ import com.projeto.faceBuy.repositories.CidadeRepository;
 import com.projeto.faceBuy.repositories.CotacaoCompraItemRepository;
 import com.projeto.faceBuy.repositories.CotacaoCompraRepository;
 import com.projeto.faceBuy.repositories.EstadoRepository;
+import com.projeto.faceBuy.repositories.FornecedorCotacaoCompraItemRepository;
 import com.projeto.faceBuy.repositories.FornecedorRepository;
 import com.projeto.faceBuy.repositories.FuncionarioRepository;
 import com.projeto.faceBuy.repositories.NotaFiscalItemRepository;
@@ -67,6 +69,8 @@ public class TestConfig implements  CommandLineRunner{
     private CotacaoCompraItemRepository cotaitensrepository;
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private FornecedorCotacaoCompraItemRepository fornecedorCotacaoRepository;
     
     @Override
 	public void run(String... args) throws Exception {
@@ -222,6 +226,11 @@ public class TestConfig implements  CommandLineRunner{
         ocitemrepository.save(ordemcompraitens2);
         NotaFiscalItem notafiscalitem2 = new NotaFiscalItem(2,2210.0,p2,nf2);
         nfitemrepository.save(notafiscalitem2);
+        FornecedorCotacaoCompraItem forncotacao = new FornecedorCotacaoCompraItem();
+        forncotacao.setCotacaocompraitem(cotaitens);
+        forncotacao.setPreco(100.0);
+        forncotacao.setFornecedor(f);
+        fornecedorCotacaoRepository.save(forncotacao);
 //        func.setNome("Davi Lima");
 //        funcionariorepository.save(func);
 //        fornecedorrepository.delete(f3);

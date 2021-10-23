@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 let user = JSON.parse(localStorage.getItem('user') || '{}');
 
 const Home = () => {
+
     return (
         <>
             <NavBar />
+            
             <div className="container">
                 <div className="jumbotron">
                     <h1 className="display-4">Facebuy</h1>
