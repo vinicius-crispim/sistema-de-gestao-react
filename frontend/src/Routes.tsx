@@ -10,6 +10,7 @@ import HomeFornecedor from "pages/home/index forn";
 import Login from "pages/login";
 import NotaFiscalteste from "pages/notafiscal";
 import RespostaTela from "pages/respostafornecedor";
+import VerificaPedidoTela from "pages/verificapedido";
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 const Routes = () => {
@@ -50,7 +51,7 @@ const Routes = () => {
                     <NotaFiscalteste />
                 </Route>
                 <Route path="/verificarpedidos">
-                    <VerificaPedido />
+                    <VerificaPedidoTela />
                 </Route>
                 <Route path="/resposta">
                     <RespostaTela />

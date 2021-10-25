@@ -26,7 +26,10 @@ type TodosItens = {
     descricao: String[];
 }
 
-
+type Mostra = {
+    idCotacao: number;
+    nomes: string[][];
+}
 
 const VerificaPedido = () => {
     const [cotacoes, setCotacoes] = useState<CotacaoItem>({
@@ -46,18 +49,18 @@ const VerificaPedido = () => {
         quantidade: 200
     })
     const history = useHistory();
-    const [id,setID]= useState<0>();
+    const [id, setID] = useState<0>();
 
     const [cotacoestodas, setCotacoesTodas] = useState<TodosItens>({ ids: [], descricao: [], quantidadepedida: [], nomepro: [] });
-    let ajuda = 0;
+    const [mostranomes, setMostraNomes] = useState<Mostra>({ nomes: [], idCotacao: 0 });
     function onSubmit(event: any) {
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        const { name, value }=event.target
+        const { name, value } = event.target
         console.log({ name, value });
         setID(value);
         console.log(value);
-        axios.get(`${BASE_URL}/cotacaoitens/${value}`).then(response =>{
-            const data = response.data as CotacaoItem;
+        axios.get(`${BASE_URL}/cotacoes/${value}`).then(response => {
+            const data = response.data as CotacaoTeste;
             localStorage.removeItem('respostafornecedor');
             localStorage.setItem('respostafornecedor', JSON.stringify(data));
             history.push("/resposta");
@@ -84,7 +87,7 @@ const VerificaPedido = () => {
     }*/
 
     const [todas, setTodasCotacao] = useState<Todas>({ cotacoes: [] })
-
+    let das;
     const [cotacao, setCotacao] = useState<CotacaoTeste>({
         item: [], id: 0, funcionario: {
             id: 0,
@@ -101,52 +104,40 @@ const VerificaPedido = () => {
     });
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/cotacaoitens`)
+        axios.get(`${BASE_URL}/cotacoes`)
             .then(response => {
 
-                const data = response.data as CotacaoItem[];
+                const data = response.data as CotacaoTeste[];
                 const meusids = data.map(x => x.id);
-                const meusnomes = data.map(x => x.produto.nome);
-                const minhasmarcas = data.map(x => x.produto.descrição);
-                const minhasquant = data.map(x => x.quantidade);
-                setCotacoesTodas({ ids: meusids, descricao: minhasmarcas, nomepro: meusnomes, quantidadepedida: minhasquant });
+                const meusnomes = data.map(x => x.funcionario.nome);
+                const minhasmarcas = data.map(x => x.item);
+                setTodasCotacao({ cotacoes: data })
+                // setCotacoesTodas({ ids: meusids, descricao: minhasmarcas, nomepro: meusnomes, quantidadepedida: minhasquant });
                 console.log(data);
             });
 
-        /*.then(response => {
-            const data = response.data as CotacaoTeste[];
-            console.log(data);
-            setTodasCotacao({ cotacoes: data });
-        });
-
-        const ids = todas.cotacoes.map(x=>x.id);
-        const nomes = todas.cotacoes.map(x=>x.item.map(y=>y.produto.nome));
-        const quant = todas.cotacoes.map(x=>x.item.map(p=>p.quantidade));*/
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div className="table-responsive">
+            <h3 className="text-center display-4">Pedidos Pendentes</h3>
+
             <table className="table table-striped table-md">
                 <thead>
                     <tr>
                         <th className="text-center text-primary"></th>
-                        <th className="text-center text-primary">Nome</th>
-                        <th className="text-center text-primary">Descrição</th>
-                        <th className="text-center text-primary">Quantidade Pedida </th>
-                        <th className="text-center text-primary"></th>
-
+                        <th className="text-center text-primary">Autor</th>
+                        <th className="text-center text-primary">Email</th>
+                        <th className="text-center text-primary">Número do Pedido</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {cotacoestodas.ids.map(x => (
-                        <tr key={cotacoestodas.ids[x - 1]}>
-                            <td className="text-center"><button type="submit" value={cotacoestodas.ids[x - 1]} onClick={onSubmit} className="btn btn-success btn-sm">Ver Pedido</button></td>
-                            <td className="text-center">{cotacoestodas.nomepro[x - 1]}</td>
-                            <td className="text-center">{cotacoestodas.descricao[x - 1]}</td>
-                            <td className="text-center">{cotacoestodas.quantidadepedida[x - 1]}</td>
-                            <td className="text-center">{ ajuda =cotacoestodas.ids[x - 1]}</td>
+                    {todas.cotacoes.map(x =>(
+                        <tr key={x.id}>
+                            <td className="text-center"><button type="submit" value={todas.cotacoes[x.id - 1].id} onClick={onSubmit} className="btn btn-success btn-sm">Ver Pedido</button></td>
+                            <td className="text-center">{todas.cotacoes[x.id - 1].funcionario.nome}</td>
+                            <td className="text-center">{todas.cotacoes[x.id - 1].funcionario.email}</td>
+                            <td className="text-center">{todas.cotacoes[x.id - 1].id}</td>
                         </tr>
                     ))}
                 </tbody>

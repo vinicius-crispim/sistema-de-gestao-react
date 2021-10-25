@@ -172,6 +172,7 @@ const LoginUser = () => {
             console.log(values)
             console.log("logou user");
             console.log(temp);
+            localStorage.removeItem("fornecedor");
             localStorage.removeItem("user");
             localStorage.setItem('user', JSON.stringify(temp));
             
@@ -188,7 +189,8 @@ const LoginUser = () => {
             const temp = response.data as Fornecedor;
             console.log(temp);
             setValuesFor(temp)
-            console.log(valuesForn)
+            console.log(valuesForn);
+            localStorage.removeItem("user");
             localStorage.removeItem("fornecedor");
             console.log("logou fornecedor");
             console.log(temp);

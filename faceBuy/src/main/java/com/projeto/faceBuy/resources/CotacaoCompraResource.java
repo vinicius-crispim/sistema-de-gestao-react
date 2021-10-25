@@ -37,9 +37,10 @@ public class CotacaoCompraResource {
 	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
-	public ResponseEntity<CotacaoCompra> findById(@PathVariable Long id){
+	public ResponseEntity<WrapperCotacaoCompra> findById(@PathVariable Long id){
 		CotacaoCompra u = service.findById(id);
-		return ResponseEntity.ok().body(u);
+		WrapperCotacaoCompra wrappercotacaocompra = new WrapperCotacaoCompra(u);
+		return ResponseEntity.ok().body(wrappercotacaocompra);
 	}
 	
 	//Post para inserir no banco

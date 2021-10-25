@@ -288,9 +288,9 @@ const CotacaoFeita = () => {
     const [aux, setAux] = useState(1);*/
     let ids: number;
     const [cotacaocompra, setCotacao] = useState<CotacaoCompra>({ funcionario: user, id: 0 });
-    const [cotacaocompraitem, setCotacaoCompraItem] = useState<CotacaoItem>({ 
-        id:0,
-        cotacaocompra: cotacaocompra, 
+    const [cotacaocompraitem, setCotacaoCompraItem] = useState<CotacaoItem>({
+        id: 0,
+        cotacaocompra: cotacaocompra,
         produto: {
             id: 0,
             descrição: "",
@@ -302,7 +302,8 @@ const CotacaoFeita = () => {
                 nome: "",
             },
         },
-        quantidade: 200 });
+        quantidade: 200
+    });
     const [itensTodos, setItensTodos] = useState<TodosItens>({ itenstodos: [] })
     const [todosProdutos, setTodosProdutos] = useState<TodosProdutos>({ ids: [], nomes: [] });
     let aux = 0;
@@ -310,7 +311,7 @@ const CotacaoFeita = () => {
     useEffect(() => {
         axios.get(`${BASE_URL}/produtos/noPage`)
             .then(response => {
-                
+
                 const data = response.data as Produto[];
                 const meusids = data.map(x => x.id);
                 const meusnomes = data.map(x => x.nome);
@@ -342,7 +343,7 @@ const CotacaoFeita = () => {
                 setCotacaoCompraItem({ ...cotacaocompraitem, produto: data });
                 console.log(cotacaocompraitem)
             });
-        
+
 
     }
 
@@ -351,29 +352,28 @@ const CotacaoFeita = () => {
         console.log(cotacaocompra);
         console.log(cotacaocompraitem);
         aux = aux + 1;
-        if (aux === 1) {
-            axios.post(`${BASE_URL}/cotacoes`, cotacaocompra)
-                .then((response) => {
-                    console.log("COTACAO ITEM CRIADA");
-                    console.log(cotacaocompra);
-                });
-            
-        }
+
+
         if (aux === 1) {
             axios.get(`${BASE_URL}/cotacoes`).then((response) => {
                 const data = response.data as CotacaoCompra[];
-                ids = data.length;
+                ids = data.length+1;
                 console.log(`ID:${ids}`);
                 cotacaocompra.id = ids;
-            })      
+            })
         }
-        
+        setCotacaoCompraItem({...cotacaocompraitem,})
         itensTodos.itenstodos.push(cotacaocompraitem)
         console.log(itensTodos.itenstodos);
 
     }
     function onSubmitFIM(event: { preventDefault: () => void; }) {
         event.preventDefault();
+        axios.post(`${BASE_URL}/cotacoes`, cotacaocompra)
+                .then((response) => {
+                    console.log("COTACAO ITEM CRIADA");
+                    console.log(cotacaocompra);
+                });
         for (let index = 0; index < itensTodos.itenstodos.length; index++) {
             axios.post(`${BASE_URL}/cotacaoitens`, itensTodos.itenstodos[index])
                 .then((response) => {
@@ -381,39 +381,38 @@ const CotacaoFeita = () => {
                     console.log(cotacaocompraitem);
                 });
         }
-        window.location.reload();
     }
 
     return (
         <>
-            
-                <div className="jumbotron d-grid col-11 mx-auto">
-                    <h1 className="display-4">Insira as informações do pedido</h1><br />
-                </div>
-                <form onSubmit={onSubmit}>
-                    <div className="row py-2">
-                        <div className="col">
-                            <div className="promotion-form__group">
-                                <label htmlFor="quantidade">Quantidade:</label>
-                                <input className="form-control" type="number" id="quantidade" name="quantidade" onChange={onChange} />
-                            </div>
+
+            <div className="jumbotron d-grid col-11 mx-auto">
+                <h1 className="display-4">Insira as informações do pedido</h1><br />
+            </div>
+            <form onSubmit={onSubmit}>
+                <div className="row py-2">
+                    <div className="col">
+                        <div className="promotion-form__group">
+                            <label htmlFor="quantidade">Quantidade:</label>
+                            <input className="form-control" type="number" id="quantidade" name="quantidade" onChange={onChange} />
                         </div>
-                        <div className="col">
+                    </div>
+                    <div className="col">
                         <label htmlFor="produto">Produto:</label>
-                            <select name="produto" className="form-select" aria-label="Default select example" onChange={acha}>
-                                <option>Selecione</option>
-                                {todosProdutos.ids.map(x => (
-                                    <option key={"produto" + x} value={x}>{todosProdutos.nomes[x - 1]}</option>
-                                ))}
-                            </select>
-                        </div>
+                        <select name="produto" className="form-select" aria-label="Default select example" onChange={acha}>
+                            <option>Selecione</option>
+                            {todosProdutos.ids.map(x => (
+                                <option key={"produto" + x} value={x}>{todosProdutos.nomes[x - 1]}</option>
+                            ))}
+                        </select>
                     </div>
-                    <div className="d-grid gap-3 col-2 mx-auto">
-                        <button type="submit" className="btn btn-success btn-lg my-4" >Adicionar</button>
-                    </div>
-                </form>
-                <hr />
-                <div className="table-responsive">
+                </div>
+                <div className="d-grid gap-3 col-2 mx-auto">
+                    <button type="submit" className="btn btn-success btn-lg my-4" >Adicionar</button>
+                </div>
+            </form>
+            <hr />
+            <div className="table-responsive">
                 <table className="table table-striped table-md">
                     <thead>
                         <tr>
@@ -433,11 +432,11 @@ const CotacaoFeita = () => {
                     </tbody>
                 </table>
             </div>
-                <form onSubmit={onSubmitFIM}>
-                    <div className="d-grid gap-3 col-2 mx-auto">
-                        <button type="submit" className="btn btn-success btn-xx my-4">Enviar cotação</button>
-                    </div>
-                </form>
+            <form onSubmit={onSubmitFIM}>
+                <div className="d-grid gap-3 col-2 mx-auto">
+                    <button type="submit" className="btn btn-success btn-xx my-4">Enviar cotação</button>
+                </div>
+            </form>
         </>
     );
 }
