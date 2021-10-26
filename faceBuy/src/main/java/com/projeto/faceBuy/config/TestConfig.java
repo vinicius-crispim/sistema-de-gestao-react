@@ -14,6 +14,7 @@ import com.projeto.faceBuy.entities.CotacaoCompra;
 import com.projeto.faceBuy.entities.CotacaoCompraItem;
 import com.projeto.faceBuy.entities.Estado;
 import com.projeto.faceBuy.entities.Fornecedor;
+import com.projeto.faceBuy.entities.FornecedorCotacaoCompra;
 import com.projeto.faceBuy.entities.FornecedorCotacaoCompraItem;
 import com.projeto.faceBuy.entities.Funcionario;
 import com.projeto.faceBuy.entities.NotaFiscal;
@@ -28,6 +29,7 @@ import com.projeto.faceBuy.repositories.CotacaoCompraItemRepository;
 import com.projeto.faceBuy.repositories.CotacaoCompraRepository;
 import com.projeto.faceBuy.repositories.EstadoRepository;
 import com.projeto.faceBuy.repositories.FornecedorCotacaoCompraItemRepository;
+import com.projeto.faceBuy.repositories.FornecedorCotacaoCompraRepository;
 import com.projeto.faceBuy.repositories.FornecedorRepository;
 import com.projeto.faceBuy.repositories.FuncionarioRepository;
 import com.projeto.faceBuy.repositories.NotaFiscalItemRepository;
@@ -71,7 +73,8 @@ public class TestConfig implements  CommandLineRunner{
     private CategoriaRepository categoriaRepository;
     @Autowired
     private FornecedorCotacaoCompraItemRepository fornecedorCotacaoRepository;
-    
+    @Autowired
+    private FornecedorCotacaoCompraRepository fornecedorCotacaoCompraRepository; 
     @Override
 	public void run(String... args) throws Exception {
     	Categoria cate1 = new Categoria();
@@ -207,7 +210,10 @@ public class TestConfig implements  CommandLineRunner{
         funcionariorepository.saveAll(Arrays.asList(func,func2));
         CotacaoCompra coco = new CotacaoCompra();
         coco.setFuncionario(func);
+        CotacaoCompra coco2 = new CotacaoCompra();
+        coco2.setFuncionario(func2);
         cotacomrepository.save(coco);
+        cotacomrepository.save(coco2);
         CotacaoCompraItem cotaitens =  new CotacaoCompraItem();
         cotaitens.setCotacaocompra(coco);
         cotaitens.setProduto(p5);
@@ -216,8 +222,21 @@ public class TestConfig implements  CommandLineRunner{
         cotaitens2.setCotacaocompra(coco);
         cotaitens2.setProduto(p2);
         cotaitens2.setQuantidade(50);
-        cotaitensrepository.saveAll(Arrays.asList(cotaitens,cotaitens2));
-        coco.getCotacaocompraitem().add(cotaitens);       
+        CotacaoCompraItem cotaitens3 =  new CotacaoCompraItem();
+        cotaitens3.setCotacaocompra(coco2);
+        cotaitens3.setProduto(p2);
+        cotaitens3.setQuantidade(45);
+        cotaitensrepository.saveAll(Arrays.asList(cotaitens,cotaitens2,cotaitens3));
+        coco.getCotacaocompraitem().add(cotaitens);   
+        FornecedorCotacaoCompra fornecedorcotacao = new FornecedorCotacaoCompra();
+        fornecedorcotacao.setFornecedor(f);
+        fornecedorcotacao.setCotacaocompra(coco);
+        fornecedorcotacao.setStatus("Respondido");
+        FornecedorCotacaoCompra fornecedorcotacao2 = new FornecedorCotacaoCompra();
+        fornecedorcotacao2.setFornecedor(f2);
+        fornecedorcotacao2.setCotacaocompra(coco);
+        fornecedorcotacao2.setStatus("Pendente");
+        fornecedorCotacaoCompraRepository.saveAll(Arrays.asList(fornecedorcotacao,fornecedorcotacao2));
         OrdemCompraItem ordemcompraitens = new OrdemCompraItem(4,4500.0,p,oc);
         ocitemrepository.save(ordemcompraitens);
         NotaFiscalItem notafiscalitem = new NotaFiscalItem(4,4500.0,p,nf);
@@ -230,7 +249,16 @@ public class TestConfig implements  CommandLineRunner{
         forncotacao.setCotacaocompraitem(cotaitens);
         forncotacao.setPreco(100.0);
         forncotacao.setFornecedor(f);
-        fornecedorCotacaoRepository.save(forncotacao);
+        forncotacao.setStatus("Respondido");
+        FornecedorCotacaoCompraItem forncotacao2 = new FornecedorCotacaoCompraItem();
+        forncotacao2.setCotacaocompraitem(cotaitens2);
+        forncotacao2.setPreco(30.0);
+        forncotacao2.setFornecedor(f);
+        forncotacao2.setStatus("Respondido");
+        FornecedorCotacaoCompraItem forncotacao3 = new FornecedorCotacaoCompraItem();
+        forncotacao3.setCotacaocompraitem(cotaitens3);
+        forncotacao3.setStatus("Pendente");
+        fornecedorCotacaoRepository.saveAll(Arrays.asList(forncotacao,forncotacao2,forncotacao3));
 //        func.setNome("Davi Lima");
 //        funcionariorepository.save(func);
 //        fornecedorrepository.delete(f3);

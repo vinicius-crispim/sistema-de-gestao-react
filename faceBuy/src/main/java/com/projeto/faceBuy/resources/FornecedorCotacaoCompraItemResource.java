@@ -24,6 +24,7 @@ public class FornecedorCotacaoCompraItemResource {
 	@Autowired
 	private FornecedorCotacaoCompraItemService service;
 
+
 	@GetMapping
 	public ResponseEntity<List<FornecedorCotacaoCompraItem>> findAll(){
 

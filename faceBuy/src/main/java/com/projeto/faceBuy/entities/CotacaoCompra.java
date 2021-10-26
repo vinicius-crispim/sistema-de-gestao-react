@@ -26,14 +26,22 @@ public class CotacaoCompra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany(mappedBy = "cotacaocompra")
-	private List<CotacaoCompraItem> cotacaocompraitens = new ArrayList<>();
-
+	
 	@ManyToOne
 	@JoinColumn(name = "funcionario_id")
 	private Funcionario funcionario;
+	
+	@OneToMany(mappedBy = "cotacaocompra")
+	private List<CotacaoCompraItem> cotacaocompraitens = new ArrayList<>();
+
+	@OneToMany(mappedBy = "cotacaocompra")
+	private List<FornecedorCotacaoCompra> fornecedorcotacaocompra = new ArrayList<>();
 
 	public CotacaoCompra() {
+	}
+
+	public CotacaoCompra(Long id, Funcionario funcionario) {
+		this.id = id;
 	}
 
 	public CotacaoCompra(Long id) {
@@ -48,13 +56,12 @@ public class CotacaoCompra implements Serializable {
 		this.id = id;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+
+	@JsonIgnore
+	public List<FornecedorCotacaoCompra> getFornecedorcotacaocompra() {
+		return fornecedorcotacaocompra;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
 	@JsonIgnore
 	public List<CotacaoCompraItem> getCotacaocompraitem() {
 		List<CotacaoCompraItem> lista = new ArrayList<CotacaoCompraItem>();
@@ -64,22 +71,14 @@ public class CotacaoCompra implements Serializable {
 		return lista;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(cotacaocompraitens, funcionario, id);
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CotacaoCompra other = (CotacaoCompra) obj;
-		return Objects.equals(cotacaocompraitens, other.cotacaocompraitens)
-				&& Objects.equals(funcionario, other.funcionario) && Objects.equals(id, other.id);
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
+
+	
 
 }

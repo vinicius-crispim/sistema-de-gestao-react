@@ -1,23 +1,27 @@
-package com.projeto.faceBuy.entities;
+package com.projeto.faceBuy.entities.DTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WrapperCotacaoCompra implements Serializable{
+import com.projeto.faceBuy.entities.CotacaoCompra;
+import com.projeto.faceBuy.entities.CotacaoCompraItem;
+import com.projeto.faceBuy.entities.Funcionario;
+
+public class CotacaoCompraDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Funcionario funcionario;
 	private List<CotacaoCompraItem> cotacaocompraitem = new ArrayList<>();
 	
-	public WrapperCotacaoCompra(CotacaoCompra cotacao) {
+	public CotacaoCompraDTO(CotacaoCompra cotacao) {
 		this.id = cotacao.getId();
 		this.funcionario = cotacao.getFuncionario();
 		this.cotacaocompraitem.addAll(cotacao.getCotacaocompraitem());
 	}
 	
-	public WrapperCotacaoCompra() {}
+	public CotacaoCompraDTO() {}
 	
 	public Long getId() {
 		return id;
@@ -34,5 +38,6 @@ public class WrapperCotacaoCompra implements Serializable{
 	public List<CotacaoCompraItem> getList() {
 		return cotacaocompraitem;
 	}
+
 
 }

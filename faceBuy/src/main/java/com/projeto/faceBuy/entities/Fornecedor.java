@@ -40,7 +40,8 @@ public class Fornecedor implements Serializable {
     
     @OneToMany(mappedBy = "fornecedor")
     private List<NotaFiscal> notasfiscais = new ArrayList<>();
-
+    @OneToMany(mappedBy = "fornecedor")
+	private List<FornecedorCotacaoCompra> fornecedorcotacaocompra = new ArrayList<>();
     @OneToMany(mappedBy = "fornecedor")
     private List<OrdemCompra> ordenscompra = new ArrayList<OrdemCompra>();
     @OneToMany(mappedBy = "fornecedor")
@@ -125,6 +126,10 @@ public class Fornecedor implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	@JsonIgnore
+	public List<FornecedorCotacaoCompra> getFornecedorcotacaocompra() {
+		return fornecedorcotacaocompra;
 	}
 
 	@Override

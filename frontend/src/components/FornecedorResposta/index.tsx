@@ -19,9 +19,10 @@ type Quantiaaux = {
 }
 
 type Mostrar = {
-    produtosids:number[];
+    quantia:number[];
     produtosnome: string[];
     produtosquantidade: number[];
+    produtosids:number[];
 }
 
 type Resposta = {
@@ -46,7 +47,7 @@ const FornecedorResposta = () => {
     })
 
     const [todositens, setTodosItens] = useState<TodosItens>({ todos: [] });
-    const [mostrar, setMostrar] = useState<Mostrar>({ produtosnome: [], produtosquantidade: [],produtosids:[] });
+    const [mostrar, setMostrar] = useState<Mostrar>({ produtosnome: [], produtosquantidade: [],quantia:[],produtosids:[] });
 
     function onChange(event: { target: { name: any; value: any; }; }) {
         const { name, value } = event.target;
@@ -66,7 +67,7 @@ const FornecedorResposta = () => {
                 setTodosItens({ ...todositens, todos: data.list });
                 console.log("COTACAO:");
                 console.log(data);
-                const ids = data.list.map(x =>x.id);
+                const ids = data.list.map(x=>x.id);
                 const a = data.list.map(x=>x.produto.nome);
                 const b = data.list.map(x => x.quantidade);
                 console.log(a);
@@ -77,7 +78,8 @@ const FornecedorResposta = () => {
                     console.log(p);
                     aux.push(p);
                 }
-                setMostrar({produtosids:aux,produtosnome:a,produtosquantidade:b})
+                setMostrar({produtosids:ids,quantia:aux,produtosnome:a,produtosquantidade:b})
+                console.log("MOSTRA");
                 console.log(mostrar);
 
             });
@@ -105,16 +107,16 @@ const FornecedorResposta = () => {
                         <h5>Email: {cotacao.funcionario.email}</h5>
                     </div>
                 </li>
-                {mostrar.produtosids.map(x=> (
+                {mostrar.quantia.map(x=> (
                 <li className="d-flex justify-content-between lh-sm list-group-item" key={x}>
                     <div className="col">
-                        <h5>Nome: {mostrar.produtosnome[x-1]}</h5>
+                        <h5 className="my-2">Nome: {mostrar.produtosnome[x-1]}</h5>
                     </div>
                     <div className="col">
-                        <h5>Quantidade: {mostrar.produtosquantidade[x-1]}</h5>
+                        <h5 className="my-2">Quantidade: {mostrar.produtosquantidade[x-1]}</h5>
                     </div>
                     <div className="col">
-                    <button type="submit" value={x-1} onClick={onSubmit} className="btn btn-success btn-sm">Responder</button>
+                    <button type="submit" value={mostrar.produtosids[x-1]} onClick={onSubmit} className="btn btn-success btn-lg">Responder</button>
                     </div>
                 </li>
                 ))}

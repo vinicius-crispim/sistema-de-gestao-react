@@ -87,6 +87,7 @@ const CadastroFornecedor = () => {
         axios.post(`${BASE_URL}/fornecedores`, values)
             .then((response) => {
                 history.push('/');
+                window.location.reload();
             });
     }
 

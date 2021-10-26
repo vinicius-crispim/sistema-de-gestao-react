@@ -355,25 +355,38 @@ const CotacaoFeita = () => {
 
 
         if (aux === 1) {
-            axios.get(`${BASE_URL}/cotacoes`).then((response) => {
+            axios.get(`${BASE_URL}/cotacoes`)
+            .then((response) => {
                 const data = response.data as CotacaoCompra[];
-                ids = data.length+1;
+                ids = data.length;
                 console.log(`ID:${ids}`);
                 cotacaocompra.id = ids;
-            })
-        }
-        setCotacaoCompraItem({...cotacaocompraitem,})
-        itensTodos.itenstodos.push(cotacaocompraitem)
-        console.log(itensTodos.itenstodos);
-
-    }
-    function onSubmitFIM(event: { preventDefault: () => void; }) {
-        event.preventDefault();
-        axios.post(`${BASE_URL}/cotacoes`, cotacaocompra)
+            });
+            axios.post(`${BASE_URL}/cotacoes`, cotacaocompra)
                 .then((response) => {
                     console.log("COTACAO ITEM CRIADA");
                     console.log(cotacaocompra);
                 });
+        }
+        setCotacaoCompraItem({...cotacaocompraitem,cotacaocompra:cotacaocompra})
+        
+        console.log(itensTodos.itenstodos);
+        let aux1=0;
+        let aux2=0;
+        for (let index = 0; index < itensTodos.itenstodos.length; index++) {
+            if (cotacaocompraitem.produto.id === itensTodos.itenstodos[index].produto.id) {
+                aux1 += 1;
+                aux2 = index
+            }    
+        }
+        if (aux1 === 1) {
+            itensTodos.itenstodos[aux2].quantidade = cotacaocompraitem.quantidade;
+        }else{
+            itensTodos.itenstodos.push(cotacaocompraitem);
+        }
+    }
+    function onSubmitFIM(event: { preventDefault: () => void; }) {
+        event.preventDefault();
         for (let index = 0; index < itensTodos.itenstodos.length; index++) {
             axios.post(`${BASE_URL}/cotacaoitens`, itensTodos.itenstodos[index])
                 .then((response) => {

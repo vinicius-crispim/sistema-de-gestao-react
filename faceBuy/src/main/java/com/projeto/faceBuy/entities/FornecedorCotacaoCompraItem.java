@@ -22,6 +22,8 @@ public class FornecedorCotacaoCompraItem implements Serializable {
 	private Long id;
 	
 	private Double preco;
+	
+	private String status;
 
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
@@ -33,9 +35,10 @@ public class FornecedorCotacaoCompraItem implements Serializable {
 	
 	public FornecedorCotacaoCompraItem() {}
 	
-	public FornecedorCotacaoCompraItem(Long id, Double preco, Fornecedor fornecedor, CotacaoCompraItem cotacaocompraitem) {
+	public FornecedorCotacaoCompraItem(Long id, String status, Double preco, Fornecedor fornecedor, CotacaoCompraItem cotacaocompraitem) {
 		this.id = id;
 		this.preco = preco;
+		this.status = status;
 		this.fornecedor = fornecedor;
 		this.cotacaocompraitem = cotacaocompraitem;
 	}
@@ -71,6 +74,13 @@ public class FornecedorCotacaoCompraItem implements Serializable {
 
 	public void setCotacaocompraitem(CotacaoCompraItem cotacaocompraitem) {
 		this.cotacaocompraitem = cotacaocompraitem;
+	}
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

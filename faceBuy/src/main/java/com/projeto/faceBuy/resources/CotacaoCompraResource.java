@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.faceBuy.entities.CotacaoCompra;
-import com.projeto.faceBuy.entities.WrapperCotacaoCompra;
+import com.projeto.faceBuy.entities.DTO.CotacaoCompraDTO;
 import com.projeto.faceBuy.services.CotacaoCompraService;
 
 @RestController
@@ -27,19 +27,19 @@ public class CotacaoCompraResource {
 	private CotacaoCompraService service;
 
 	@GetMapping
-	public ResponseEntity<List<WrapperCotacaoCompra>> findAll(){
+	public ResponseEntity<List<CotacaoCompraDTO>> findAll(){
 
 		List<CotacaoCompra> list = service.findAll();
-		List<WrapperCotacaoCompra> listDTO = list.stream().map(x -> new WrapperCotacaoCompra(x)).collect(Collectors.toList());
+		List<CotacaoCompraDTO> listDTO = list.stream().map(x -> new CotacaoCompraDTO(x)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
-	public ResponseEntity<WrapperCotacaoCompra> findById(@PathVariable Long id){
+	public ResponseEntity<CotacaoCompraDTO> findById(@PathVariable Long id){
 		CotacaoCompra u = service.findById(id);
-		WrapperCotacaoCompra wrappercotacaocompra = new WrapperCotacaoCompra(u);
+		CotacaoCompraDTO wrappercotacaocompra = new CotacaoCompraDTO(u);
 		return ResponseEntity.ok().body(wrappercotacaocompra);
 	}
 	

@@ -134,7 +134,7 @@ const VerificaPedido = () => {
                 <tbody>
                     {todas.cotacoes.map(x =>(
                         <tr key={x.id}>
-                            <td className="text-center"><button type="submit" value={todas.cotacoes[x.id - 1].id} onClick={onSubmit} className="btn btn-success btn-sm">Ver Pedido</button></td>
+                            <td className="text-center"><button type="submit" value={todas.cotacoes[x.id - 1].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver Pedido</button></td>
                             <td className="text-center">{todas.cotacoes[x.id - 1].funcionario.nome}</td>
                             <td className="text-center">{todas.cotacoes[x.id - 1].funcionario.email}</td>
                             <td className="text-center">{todas.cotacoes[x.id - 1].id}</td>
