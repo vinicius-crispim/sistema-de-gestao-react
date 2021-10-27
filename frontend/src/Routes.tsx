@@ -1,3 +1,5 @@
+import FornecedorRespondeProdutos from "components/FornecedorRepondeProduto";
+import FornecedorVisualizaProdutos from "components/FornecedorResposta";
 import OrdemCompra from "components/OrdemCompra";
 import VerificaPedido from "components/VerificaPedidos";
 import CadastroCotacao from "pages/cadastrocotacao";
@@ -5,6 +7,7 @@ import CadastroFornecedor from "pages/cadastrofornecedor";
 import CadastrarFuncionario from "pages/cadastrofuncionario";
 import CadastroProduto from "pages/cadastroproduto";
 import Estoque from "pages/estoque";
+import RespostaTelaProduto from "pages/fornecedorrespondeprodutos";
 import Home from "pages/home";
 import HomeFornecedor from "pages/home/index forn";
 import Login from "pages/login";
@@ -55,6 +58,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/resposta">
                     <RespostaTela />
+                </Route>
+                <Route path="/respostaitemcotacao">
+                    <RespostaTelaProduto />
                 </Route>
             </Switch>
         </BrowserRouter>

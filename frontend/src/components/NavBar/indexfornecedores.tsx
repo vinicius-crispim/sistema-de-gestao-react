@@ -12,10 +12,8 @@ const NavBarFornecedor = () => {
                     </a>
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <Link className="me-3 py-2 text-dark text-decoration-none" to="#">Pedidos</Link>
-                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/estoque">Seus produtos</Link>
-                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Cadastrar produto</a>
-
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificarpedidos">Pedidos</Link>
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="#">Ordens de Compra</Link>
                     </nav>
                 </div>
 

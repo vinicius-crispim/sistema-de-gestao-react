@@ -65,7 +65,6 @@ const VerificaPedido = () => {
             localStorage.setItem('respostafornecedor', JSON.stringify(data));
             history.push("/resposta");
             window.location.reload();
-            let itemcotacao = JSON.parse(localStorage.getItem('respostafornecedor') || '{}');
             console.log(JSON.parse(localStorage.getItem('respostafornecedor') || '{}'));
         });
 

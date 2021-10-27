@@ -1,4 +1,5 @@
 import Footer from "components/Footer";
+import FornecedorVisualizaProdutos from "components/FornecedorResposta";
 import FornecedorResposta from "components/FornecedorResposta";
 import NavBar from "components/NavBar";
 
@@ -9,7 +10,7 @@ const RespostaTela = () => {
             <NavBar />
 
             <div className="container">
-                <FornecedorResposta />
+                <FornecedorVisualizaProdutos />
             </div>
             <Footer />
         </>

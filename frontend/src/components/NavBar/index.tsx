@@ -12,9 +12,9 @@ const NavBar = () => {
                     </a>
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Produtos</a>
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/cotacoes">Fazer Pedido</Link>
                         <Link className="me-3 py-2 text-dark text-decoration-none" to="/estoque">Estoque</Link>
-                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Pedidos</a>
+                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Respostas de Fornecedores</a>
 
                     </nav>
                 </div>
