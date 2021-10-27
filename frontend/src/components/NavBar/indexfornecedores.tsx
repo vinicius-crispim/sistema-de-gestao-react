@@ -7,7 +7,7 @@ const NavBarFornecedor = () => {
         <div className="container py-3">
             <header>
                 <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-                    <a href="/home" className="d-flex align-items-center text-dark text-decoration-none">
+                    <a href="/homefornecedor" className="d-flex align-items-center text-dark text-decoration-none">
                         <span className="fs-4"><img src={logoNAVBAR} alt="Facebuy" width="120" /></span>
                     </a>
 

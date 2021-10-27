@@ -159,7 +159,9 @@ const LoginUser = () => {
             }
 
         }
-        
+        if (valida === 0) {
+            alert("Login ou senha incorretos");
+        }
     }
 
 
