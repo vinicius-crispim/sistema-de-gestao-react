@@ -25,7 +25,6 @@ public class ProdutoService {
 	@Autowired
 	private ProdutoRepository repository;
 
-	@Transactional(readOnly = true)//garante que toda a operaÃ§Ã£o com banco seja resolvida aqui e ReadOnly nao faz lock no banco pois Ã© so select, nao muda nd no banco
 	public Page<Produto> findAll(Pageable pageable) {
 		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
 		Page<Produto> result = repository.findAll(pageable);
@@ -45,6 +44,7 @@ public class ProdutoService {
 	}
 
 	public Produto saveProduto(Produto produto) {
+		produto.setStatus("Valido");
 		return repository.save(produto);
 	}
 

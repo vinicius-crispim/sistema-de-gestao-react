@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { CotacaoItem } from 'types/cotacao';
-import { Fornecedor } from 'types/fornecedor';
 import { Funcionario } from 'types/funcionario';
 import { BASE_URL } from 'utils/request';
 
@@ -82,6 +81,7 @@ const FornecedorVisualizaProdutos = () => {
             localStorage.removeItem("cotacaocompraitem");
             localStorage.setItem('cotacaocompraitem', JSON.stringify(data));
             history.push("/respostaitemcotacao");
+            window.location.reload();
           })
     }
 
@@ -100,7 +100,7 @@ const FornecedorVisualizaProdutos = () => {
                 {mostrar.quantia.map(x=> (
                 <li className="d-flex justify-content-between lh-sm list-group-item" key={x}>
                     <div className="col">
-                        <h5 className="my-2">Nome: {mostrar.produtosnome[x-1]}</h5>
+                        <h5 className="my-2">Produto: {mostrar.produtosnome[x-1]}</h5>
                     </div>
                     <div className="col">
                         <h5 className="my-2">Quantidade: {mostrar.produtosquantidade[x-1]}</h5>

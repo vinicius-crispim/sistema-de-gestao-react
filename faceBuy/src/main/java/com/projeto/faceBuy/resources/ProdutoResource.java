@@ -29,6 +29,7 @@ public class ProdutoResource {
 	public ResponseEntity<Page<Produto>> findAll(Pageable pageable){
 
 		Page<Produto> list = service.findAll(pageable);
+		
 		return ResponseEntity.ok().body(list);
 	}
 	

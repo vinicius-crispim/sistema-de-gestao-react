@@ -23,4 +23,5 @@ export type ProdutoPage ={
     size?: number;
     number: number;
     empty?: boolean;
+    status?:String;
 }

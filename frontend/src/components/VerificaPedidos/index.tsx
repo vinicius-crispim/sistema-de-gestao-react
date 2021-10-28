@@ -11,6 +11,7 @@ type CotacaoTeste = {
     id: number;
     funcionario: Funcionario;
     item: CotacaoItem[];
+    data?:String;
 }
 
 type Todas = {
@@ -127,7 +128,7 @@ const VerificaPedido = () => {
                         <th className="text-center text-primary"></th>
                         <th className="text-center text-primary">Autor</th>
                         <th className="text-center text-primary">Email</th>
-                        <th className="text-center text-primary">Número do Pedido</th>
+                        <th className="text-center text-primary">Data</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -136,7 +137,7 @@ const VerificaPedido = () => {
                             <td className="text-center"><button type="submit" value={todas.cotacoes[x.id - 1].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver Pedido</button></td>
                             <td className="text-center">{todas.cotacoes[x.id - 1].funcionario.nome}</td>
                             <td className="text-center">{todas.cotacoes[x.id - 1].funcionario.email}</td>
-                            <td className="text-center">{todas.cotacoes[x.id - 1].id}</td>
+                            <td className="text-center">{todas.cotacoes[x.id - 1].data}</td>
                         </tr>
                     ))}
                 </tbody>

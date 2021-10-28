@@ -2,6 +2,7 @@ package com.projeto.faceBuy.config;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -75,6 +76,10 @@ public class TestConfig implements  CommandLineRunner{
     private FornecedorCotacaoCompraItemRepository fornecedorCotacaoRepository;
     @Autowired
     private FornecedorCotacaoCompraRepository fornecedorCotacaoCompraRepository; 
+    
+    SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+
+    
     @Override
 	public void run(String... args) throws Exception {
     	Categoria cate1 = new Categoria();
@@ -90,30 +95,35 @@ public class TestConfig implements  CommandLineRunner{
         p.setQuantidademin(5);
         p.setEstoque(13);
         p.setCategoria(cate1);
+        p.setStatus("Valido");
         Produto p2 = new Produto();
         p2.setNome("Agenda");
         p2.setDescrição("Agenda para os funcionários marcarem seus compromissos");
         p2.setQuantidademin(11);
         p2.setEstoque(35);
         p2.setCategoria(cate2);
+        p2.setStatus("Valido");
         Produto p3 = new Produto();
         p3.setNome("Post-it");
         p3.setDescrição("Post-it para marcar compromissos e colar em locais para lembrar");
         p3.setQuantidademin(20);
         p3.setEstoque(52);
         p3.setCategoria(cate2);
+        p3.setStatus("Valido");
         Produto p4 = new Produto();
         p4.setNome("Calendário");
         p4.setDescrição("Calendário para visualizar as datas");
         p4.setQuantidademin(8);
         p4.setEstoque(11);
         p4.setCategoria(cate3);
+        p4.setStatus("Invalido");
         Produto p5 = new Produto();
         p5.setNome("Teclado");
         p5.setDescrição("Teclado para funcionários utilizarem em suas mesas");
         p5.setQuantidademin(4);
         p5.setEstoque(9);
         p5.setCategoria(cate1);
+        p5.setStatus("Valido");
         produtorepository.saveAll(Arrays.asList(p,p2,p3,p4,p5));
         TipoFuncionario tipo = new TipoFuncionario();
         tipo.setTipo("Funcionario");
@@ -209,9 +219,13 @@ public class TestConfig implements  CommandLineRunner{
         func2.setTipo(tipo2);
         funcionariorepository.saveAll(Arrays.asList(func,func2));
         CotacaoCompra coco = new CotacaoCompra();
+        String datateste2 = "27/10/2021";
         coco.setFuncionario(func);
+        coco.setData(dt.parse(datateste2));
         CotacaoCompra coco2 = new CotacaoCompra();
+        String datateste = "26/10/2021";
         coco2.setFuncionario(func2);
+        coco2.setData(dt.parse(datateste));
         cotacomrepository.save(coco);
         cotacomrepository.save(coco2);
         CotacaoCompraItem cotaitens =  new CotacaoCompraItem();

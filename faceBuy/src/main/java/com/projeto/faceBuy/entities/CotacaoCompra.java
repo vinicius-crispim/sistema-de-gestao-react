@@ -1,9 +1,10 @@
 package com.projeto.faceBuy.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ public class CotacaoCompra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	private Date data;
 	
 	@ManyToOne
 	@JoinColumn(name = "funcionario_id")
@@ -38,6 +40,15 @@ public class CotacaoCompra implements Serializable {
 	private List<FornecedorCotacaoCompra> fornecedorcotacaocompra = new ArrayList<>();
 
 	public CotacaoCompra() {
+	}
+
+	public CotacaoCompra(Long id, Date data, Funcionario funcionario, List<CotacaoCompraItem> cotacaocompraitens,
+			List<FornecedorCotacaoCompra> fornecedorcotacaocompra) {
+		this.id = id;
+		this.data = data;
+		this.funcionario = funcionario;
+		this.cotacaocompraitens = cotacaocompraitens;
+		this.fornecedorcotacaocompra = fornecedorcotacaocompra;
 	}
 
 	public CotacaoCompra(Long id, Funcionario funcionario) {
@@ -78,6 +89,16 @@ public class CotacaoCompra implements Serializable {
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	
 
 	
 

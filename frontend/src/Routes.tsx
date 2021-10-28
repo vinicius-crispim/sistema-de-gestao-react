@@ -14,6 +14,7 @@ import Login from "pages/login";
 import NotaFiscalteste from "pages/notafiscal";
 import RespostaTela from "pages/respostafornecedor";
 import VerificaPedidoTela from "pages/verificapedido";
+import VisualizarProdutoTela from "pages/VisualizarProdutoTela";
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
 const Routes = () => {
@@ -61,6 +62,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/respostaitemcotacao">
                     <RespostaTelaProduto />
+                </Route>
+                <Route path="/visualizarproduto">
+                    <VisualizarProdutoTela />
                 </Route>
             </Switch>
         </BrowserRouter>

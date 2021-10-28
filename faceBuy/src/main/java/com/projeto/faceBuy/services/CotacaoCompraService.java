@@ -1,6 +1,7 @@
 package com.projeto.faceBuy.services;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ public class CotacaoCompraService {
 	}
 
 	public CotacaoCompra saveCotacaoCompra(CotacaoCompra cotacaoCompra) {
+		cotacaoCompra.setData(new Date());
 		return repository.save(cotacaoCompra);
 	}
 

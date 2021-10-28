@@ -32,6 +32,8 @@ public class Produto implements Serializable {
     private Integer quantidademin;
     private Integer estoque;
     
+    private String status;
+    
     @OneToMany(mappedBy = "produto")
     private List<CotacaoCompraItem> cotacaocompraitens = new ArrayList<>();
 
@@ -45,13 +47,14 @@ public class Produto implements Serializable {
     @OneToMany(mappedBy = "id.produto")
     private List<NotaFiscalItem> notafiscalitem = new ArrayList<>();
     
-    public Produto(Long id, String nome, Categoria categoria, String descrição, Integer quantidademin, Integer estoque,Double preço) {
+    public Produto(Long id, String nome, Categoria categoria, String descrição, Integer quantidademin, Integer estoque,Double preço,String status) {
         this.id = id;
         this.nome = nome;
         this.descrição = descrição;
         this.quantidademin = quantidademin;
         this.estoque = estoque;
         this.categoria =categoria;
+        this.status =status;
     }
     
     public Produto() {}
@@ -115,6 +118,14 @@ public class Produto implements Serializable {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
