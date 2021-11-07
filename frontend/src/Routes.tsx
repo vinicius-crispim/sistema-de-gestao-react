@@ -13,6 +13,7 @@ import Login from "pages/login";
 import NotaFiscalteste from "pages/notafiscal";
 import RespostaTela from "pages/respostafornecedor";
 import VerificaPedidoTela from "pages/verificapedido";
+import VerificaRespostasTela from "pages/verificarespostas";
 import VisualizarProdutoTela from "pages/VisualizarProdutoTela";
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
@@ -64,6 +65,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/visualizarproduto">
                     <VisualizarProdutoTela />
+                </Route>
+                <Route path="/verificarrespostas">
+                    <VerificaRespostasTela />
                 </Route>
             </Switch>
         </BrowserRouter>

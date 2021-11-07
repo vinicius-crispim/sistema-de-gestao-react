@@ -40,9 +40,10 @@ public class FornecedorCotacaoCompraResource {
 	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
-	public ResponseEntity<FornecedorCotacaoCompra> findById(@PathVariable Long id){
+	public ResponseEntity<FornecedorCotacaoCompraDTO> findById(@PathVariable Long id){
 		FornecedorCotacaoCompra u = service.findById(id);
-		return ResponseEntity.ok().body(u);
+		FornecedorCotacaoCompraDTO udto  = new FornecedorCotacaoCompraDTO(u);
+		return ResponseEntity.ok().body(udto);
 	}
 	SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 	

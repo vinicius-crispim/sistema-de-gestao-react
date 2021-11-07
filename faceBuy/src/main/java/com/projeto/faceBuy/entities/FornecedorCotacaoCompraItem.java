@@ -104,13 +104,6 @@ public class FornecedorCotacaoCompraItem implements Serializable {
 		this.fornecedorcotacaocompra = fornecedorcotacaocompra;
 	}
 
-	public FornecedorCotacaoCompra getFornecedorcotacaocompra() {
-		return fornecedorcotacaocompra;
-	}
-
-	public void setFornecedorcotacaocompra(FornecedorCotacaoCompra fornecedorcotacaocompra) {
-		this.fornecedorcotacaocompra = fornecedorcotacaocompra;
-	}
 
 	@Override
 	public int hashCode() {

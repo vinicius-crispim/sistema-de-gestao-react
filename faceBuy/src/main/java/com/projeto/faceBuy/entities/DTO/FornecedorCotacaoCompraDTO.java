@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projeto.faceBuy.entities.Fornecedor;
 import com.projeto.faceBuy.entities.FornecedorCotacaoCompra;
 import com.projeto.faceBuy.entities.FornecedorCotacaoCompraItem;
 import com.projeto.faceBuy.entities.Funcionario;
@@ -14,7 +16,7 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String data;
-	private Funcionario funcionario;
+	private Fornecedor fornecedor;
 	private List<FornecedorCotacaoCompraItem> fornecedorcotacaocompraitem = new ArrayList<>();
 
 	SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
@@ -24,7 +26,7 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 
 	public FornecedorCotacaoCompraDTO(FornecedorCotacaoCompra teste) {
 		this.id = teste.getId();
-		this.funcionario = teste.getCotacaocompra().getFuncionario();
+		this.fornecedor = teste.getFornecedor();
 		this.fornecedorcotacaocompraitem.addAll(teste.getFornecedorcotacaocompraitem());
 		this.data = teste.getCotacaocompra().getData();
 	}
@@ -45,16 +47,16 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 		this.id = id;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-
 	public List<FornecedorCotacaoCompraItem> getFornecedorcotacaocompraitem() {
 		return fornecedorcotacaocompraitem;
+	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
 	}
 
 }
