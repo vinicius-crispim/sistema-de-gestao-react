@@ -27,8 +27,9 @@ public class CotacaoCompra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Date data;
+	private String data;
 	
+	private String status;
 	@ManyToOne
 	@JoinColumn(name = "funcionario_id")
 	private Funcionario funcionario;
@@ -42,14 +43,14 @@ public class CotacaoCompra implements Serializable {
 	public CotacaoCompra() {
 	}
 
-	public CotacaoCompra(Long id, Date data, Funcionario funcionario, List<CotacaoCompraItem> cotacaocompraitens,
-			List<FornecedorCotacaoCompra> fornecedorcotacaocompra) {
+	public CotacaoCompra(Long id, String data, String status, Funcionario funcionario) {
 		this.id = id;
 		this.data = data;
+		this.status = status;
 		this.funcionario = funcionario;
-		this.cotacaocompraitens = cotacaocompraitens;
-		this.fornecedorcotacaocompra = fornecedorcotacaocompra;
 	}
+
+
 
 	public CotacaoCompra(Long id, Funcionario funcionario) {
 		this.id = id;
@@ -90,15 +91,21 @@ public class CotacaoCompra implements Serializable {
 		this.funcionario = funcionario;
 	}
 
-	public Date getData() {
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
-
-	
 
 	
 

@@ -13,12 +13,12 @@ public class FornecedorCotacaoCompraItemDTO implements Serializable{
 	private Long id;
 	private Fornecedor fornecedor;
 	private String status;
-	private CotacaoCompraItem cotacaocompra;
+	private CotacaoCompraDTO cotacaocompra;
 	
 	public FornecedorCotacaoCompraItemDTO(FornecedorCotacaoCompraItem fornecedorCotacaoCompraItemDTO) {
 		this.id = fornecedorCotacaoCompraItemDTO.getId();
 		this.fornecedor = fornecedorCotacaoCompraItemDTO.getFornecedor();
-		this.cotacaocompra = fornecedorCotacaoCompraItemDTO.getCotacaocompraitem();
+		
 		this.status = "Pendente";
 	}
 	
@@ -47,14 +47,6 @@ public class FornecedorCotacaoCompraItemDTO implements Serializable{
 		this.fornecedor = fornecedor;
 	}
 
-	public CotacaoCompraItem getCotacaocompra() {
-		return cotacaocompra;
-	}
-
-	public void setCotacaocompra(CotacaoCompraItem cotacaocompra) {
-		this.cotacaocompra = cotacaocompra;
-	}
-	
 
 	
 }

@@ -118,7 +118,7 @@ const AlteraProduto = () => {
                         <div className="col">
                             <div className="promotion-form__group">
                                 <label htmlFor="estoque">Estoque:</label>
-                                <input className="form-control" type="number" id="estoque" name="estoque" onChange={onChange} required />
+                                <input className="form-control" type="number" id="estoque" name="estoque" onChange={onChange}  />
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ const AlteraProduto = () => {
                         <div className="col">
                             <div className="promotion-form__group">
                                 <label htmlFor="descrição">Descrição:</label>
-                                <input className="form-control" type="text" id="descrição" name="descrição" onChange={onChange} required />
+                                <input className="form-control" type="text" id="descrição" name="descrição" onChange={onChange} />
                             </div>
                         </div>
                     </div>

@@ -25,7 +25,7 @@ public class CotacaoCompraDTO implements Serializable{
 		this.id = cotacao.getId();
 		this.funcionario = cotacao.getFuncionario();
 		this.cotacaocompraitem.addAll(cotacao.getCotacaocompraitem());
-		this.data = dt.format(cotacao.getData());
+		this.data = cotacao.getData();
 	}
 	
 	public String getData() {
@@ -51,7 +51,11 @@ public class CotacaoCompraDTO implements Serializable{
 		this.funcionario = funcionario;
 	}
 	public List<CotacaoCompraItem> getList() {
-		return cotacaocompraitem;
+		List<CotacaoCompraItem> lista = new ArrayList<CotacaoCompraItem>();
+		for(CotacaoCompraItem x : cotacaocompraitem) {
+			lista.add(x);
+		}
+		return lista;
 	}
 
 

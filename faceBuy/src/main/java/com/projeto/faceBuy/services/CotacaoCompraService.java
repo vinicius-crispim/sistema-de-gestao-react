@@ -1,6 +1,9 @@
 package com.projeto.faceBuy.services;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +26,17 @@ public class CotacaoCompraService {
 	@Autowired
 	private CotacaoCompraRepository repository;
 
+	SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+	
 	public List<CotacaoCompra> findAll() {
-		return repository.findAll();
+		List<CotacaoCompra> list = repository.findAll();
+		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
+		for (CotacaoCompra cotacaoCompra : list) {
+			if(cotacaoCompra.getStatus() == "Pendente") {
+				listalimpa.add(cotacaoCompra);
+			}
+		}
+		return listalimpa;
 	}
 
 	public CotacaoCompra findById(Long id) {
@@ -33,7 +45,11 @@ public class CotacaoCompraService {
 	}
 
 	public CotacaoCompra saveCotacaoCompra(CotacaoCompra cotacaoCompra) {
-		cotacaoCompra.setData(new Date());
+		Date dataAtual = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String dataFormatada = dateFormat.format(dataAtual);
+        cotacaoCompra.setData(dataFormatada);
+		cotacaoCompra.setStatus("Pendente");
 		return repository.save(cotacaoCompra);
 	}
 

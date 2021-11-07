@@ -47,7 +47,7 @@ const CadastroProduto = () => {
         
         axios.post(`${BASE_URL}/produtos`, values)
             .then((response) => {
-                history.push('/home');
+                history.push('/estoque');
             });
     }
 

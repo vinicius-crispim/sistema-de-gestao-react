@@ -12,7 +12,7 @@ export type CotacaoItem = {
 export type CotacaoCompra = {
     id:number;
     funcionario: Funcionario;
-    data?:String;
+    data?:Date;
 }
 
 export type MostraItens = {
@@ -25,5 +25,5 @@ export type FornecedorCotacaoCompra ={
     id:number;
     status:String;
     fornecedor:Fornecedor
-    cotacacompra:CotacaoCompra;
+    cotacaocompra:CotacaoCompra;
 }

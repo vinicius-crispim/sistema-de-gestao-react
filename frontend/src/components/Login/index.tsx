@@ -209,7 +209,7 @@ const LoginUser = () => {
         <>
             <div className="container text-center" >
                 <img className="mb-4" src={logoNAVBAR} alt="" width="220" />
-                <div className="jumbotron d-grid col-8 mx-auto">
+                <div className="jumbotron d-grid col-5 mx-auto">
                     <h1 className=" display-5">Seja Bem-Vindo</h1>
                 </div>
                 <form onSubmit={onSubmit}>
@@ -234,7 +234,7 @@ const LoginUser = () => {
                     </div>
                     <div>
                         <h6 className="text-secondary">Caso não tenha conta </h6>
-                        <Link className="my-2 text-decoration-none" to="/cadastrofuncionario">Clique aqui para cadastrar-se como funcionario</Link> <br />
+                        <Link className="my-2 text-decoration-none" to="/cadastrofuncionario">Clique aqui para cadastrar-se como funcionário</Link> <br />
                         <Link className="my-2 text-decoration-none" to="/cadastrofornecedor"> Clique aqui para cadastrar-se como fornecedor</Link>
                     </div>
                     <div className="d-grid gap-3 col-2 mx-auto">

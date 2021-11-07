@@ -3,8 +3,8 @@ package com.projeto.faceBuy.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,29 +16,32 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name = "tb_fornecedorcotacaocompra")
 public class FornecedorCotacaoCompra implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String status;
-    
-    @ManyToOne
-    @JoinColumn(name = "fornecedor_id")
-    private Fornecedor fornecedor;
-    
-    @ManyToOne
-    @JoinColumn(name = "cotacaocompra_id")
-    private CotacaoCompra cotacaocompra;
 
-    public FornecedorCotacaoCompra() {
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String status;
+
+	@ManyToOne
+	@JoinColumn(name = "fornecedor_id")
+	private Fornecedor fornecedor;
+
+	@ManyToOne
+	@JoinColumn(name = "cotacaocompra_id")
+	private CotacaoCompra cotacaocompra;
+
+    @OneToMany(mappedBy = "fornecedorcotacaocompra")
+	private List<FornecedorCotacaoCompraItem> fornecedorcotacaocompraitem = new ArrayList<FornecedorCotacaoCompraItem>();
+    
+
+	public FornecedorCotacaoCompra() {
+	}
 
 	public FornecedorCotacaoCompra(Long id, Fornecedor fornecedor, CotacaoCompra cotacaocompra, String status) {
 		this.id = id;
@@ -78,6 +81,9 @@ public class FornecedorCotacaoCompra implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-    
-    
+	@JsonIgnore
+	public List<FornecedorCotacaoCompraItem> getFornecedorcotacaocompraitem() {
+		return fornecedorcotacaocompraitem;
+	}
+
 }

@@ -11,14 +11,17 @@ type CotacaoTeste = {
     id: number;
     funcionario: Funcionario;
     item: CotacaoItem[];
-    data?:String;
+    data?: String;
 }
 
 type Todas = {
-    cotacoes: CotacaoTeste[]
+    cotacoes: CotacaoTeste[];
+    quantidade:number[];
 }
 
 let fornecedor = JSON.parse(localStorage.getItem('fornecedor') || '{}');
+let todascotacoes = JSON.parse(localStorage.getItem('cotacoes') || '{}');
+
 
 type TodosItens = {
     ids: number[];
@@ -35,7 +38,7 @@ type Mostra = {
 const VerificaPedido = () => {
     const [cotacoes, setCotacoes] = useState<CotacaoItem>({
         id: 0,
-        cotacaocompra: { funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" } }, id: 0 },
+        cotacaocompra: {funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" } }, id: 0 },
         produto: {
             id: 0,
             descrição: "",
@@ -85,8 +88,8 @@ const VerificaPedido = () => {
 
         });
     }*/
-
-    const [todas, setTodasCotacao] = useState<Todas>({ cotacoes: [] })
+let teste:number;
+    const [todas, setTodasCotacao] = useState<Todas>(todascotacoes)
     let das;
     const [cotacao, setCotacao] = useState<CotacaoTeste>({
         item: [], id: 0, funcionario: {
@@ -102,22 +105,8 @@ const VerificaPedido = () => {
             },
         }
     });
-
-    useEffect(() => {
-        axios.get(`${BASE_URL}/cotacoes`)
-            .then(response => {
-
-                const data = response.data as CotacaoTeste[];
-                const meusids = data.map(x => x.id);
-                const meusnomes = data.map(x => x.funcionario.nome);
-                const minhasmarcas = data.map(x => x.item);
-                setTodasCotacao({ cotacoes: data })
-                // setCotacoesTodas({ ids: meusids, descricao: minhasmarcas, nomepro: meusnomes, quantidadepedida: minhasquant });
-                console.log(data);
-            });
-
-    }, []);
-
+    console.log("AA")
+console.log(todas);
     return (
         <div className="table-responsive">
             <h3 className="text-center display-4">Pedidos Pendentes</h3>
@@ -132,12 +121,13 @@ const VerificaPedido = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {todas.cotacoes.map(x =>(
-                        <tr key={x.id}>
-                            <td className="text-center"><button type="submit" value={todas.cotacoes[x.id - 1].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver Pedido</button></td>
-                            <td className="text-center">{todas.cotacoes[x.id - 1].funcionario.nome}</td>
-                            <td className="text-center">{todas.cotacoes[x.id - 1].funcionario.email}</td>
-                            <td className="text-center">{todas.cotacoes[x.id - 1].data}</td>
+                    {todas.quantidade.map(x => (
+                        <tr key={todas.cotacoes[x].id}>
+                            <td className="text-center"><button type="submit" value={todas.cotacoes[x].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver Pedido</button></td>
+                            <td className="text-center">{todas.cotacoes[x].funcionario.nome}</td>
+                            <td className="text-center">{todas.cotacoes[x].funcionario.email}</td>
+                            <td className="text-center">{todas.cotacoes[x].data}</td>
+                            
                         </tr>
                     ))}
                 </tbody>

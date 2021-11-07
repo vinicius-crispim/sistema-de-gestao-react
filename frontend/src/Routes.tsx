@@ -1,4 +1,3 @@
-import FornecedorRespondeProdutos from "components/FornecedorRepondeProduto";
 import FornecedorVisualizaProdutos from "components/FornecedorResposta";
 import OrdemCompra from "components/OrdemCompra";
 import VerificaPedido from "components/VerificaPedidos";

@@ -357,13 +357,13 @@ const CotacaoFeita = () => {
             .then((response) => {
 
                 const data = response.data as CotacaoCompra[];
-                ids = data.length + 1;
+                ids = data.length + 2;
                 console.log(`ID:${ids}`);
                 cotacaocompra.id = ids;
-            });
+        });
 
         setCotacaoCompraItem({ ...cotacaocompraitem, cotacaocompra: cotacaocompra })
-
+        cotacaocompraitem.cotacaocompra = cotacaocompra;
         console.log(itensTodos.itenstodos);
         let aux1 = 0;
         let aux2 = 0;
@@ -394,15 +394,15 @@ const CotacaoFeita = () => {
                         });
                 }
             });
+        alert("Cotação enviada com sucesso");
         window.location.reload();
-
     }
 
     return (
         <>
 
-            <div className="jumbotron d-grid col-11 mx-auto">
-                <h1 className="display-4">Insira as informações do pedido</h1><br />
+            <div className="jumbotron d-grid col-7 mx-auto">
+                <h1 className="display-4">Faça uma Cotação</h1><br />
             </div>
             <form onSubmit={onSubmit}>
                 <div className="row py-2">

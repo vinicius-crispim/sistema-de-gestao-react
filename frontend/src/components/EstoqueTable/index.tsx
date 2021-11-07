@@ -1,11 +1,10 @@
 import axios from "axios";
 import Pagination from "components/Pagination";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { ProdutoPage } from "types/produto";
 import { BASE_URL } from "utils/request";
 import { Produto } from '../../types/produto';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 
 const EstoqueTable = () => {
@@ -21,7 +20,7 @@ const EstoqueTable = () => {
     });
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/produtos?page=${activePage}&size=3&sort=estoque,desc`)
+        axios.get(`${BASE_URL}/produtos?page=${activePage}&size=5&sort=estoque,desc`)
             .then(response => {
 
                 setPage(response.data);
@@ -49,19 +48,24 @@ const EstoqueTable = () => {
             window.location.reload();
         })
     }
+    function onSubmitAdd(event: any) {
+        event.preventDefault();
+        history.push("/cadastroproduto")
+    }
 
     return (
         <>
 
             <div className="table-responsive">
-                <table className="table table-striped table-md">
+                <table className="table table table-light table-md table-hover align-middle caption-top">
+                    <caption className="text-primary">Lista de Produtos</caption>
                     <thead>
                         <tr>
-                            <th className="text-center text-primary">Nome</th>
-                            <th className="text-center text-primary">Categoria</th>
-                            <th className="text-center text-primary">Quantidade em Estoque</th>
-                            <th className="text-center text-primary">Quantidade Mínimia</th>
-                            <th className="text-center text-primary">Descrição</th>
+                            <th className="text-center font-weight-bold">Nome</th>
+                            <th className="text-center font-weight-bold">Categoria</th>
+                            <th className="text-center font-weight-bold">Quantidade em Estoque</th>
+                            <th className="text-center font-weight-bold">Quantidade Mínimia</th>
+                            <th className="text-center font-weight-bold">Descrição</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -73,12 +77,16 @@ const EstoqueTable = () => {
                                 <td className="text-center">{x.estoque}</td>
                                 <td className="text-center">{x.quantidademin}</td>
                                 <td className="text-center">{x.descrição}</td>
-                                <td className="text-center"><button type="submit" value={x.id} onClick={onSubmit} className="btn btn-success btn-lg">Visualizar</button></td>
+                                <td className="text-center"><button type="submit" value={x.id} onClick={onSubmit} className="btn btn-success btn-lg">Editar</button></td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
                 <Pagination page={page} onPageChange={changePage} />
+            </div>
+            <div className="text-center my-3" >
+                <p className="lead">Adicione um novo produto</p>
+                <button type="submit" onClick={onSubmitAdd} className="btn btn-success btn-lg mx-5 px-5">Adicionar</button>
             </div>
         </>
     );
