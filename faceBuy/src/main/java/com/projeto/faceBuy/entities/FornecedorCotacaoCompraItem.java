@@ -95,12 +95,11 @@ public class FornecedorCotacaoCompraItem implements Serializable {
 		this.precoitem = precoitem;
 	}
 
-	@JsonIgnore
-	public FornecedorCotacaoCompra getCotacaocompra() {
+	public FornecedorCotacaoCompra getFornecedorCotacaocompra() {
 		return fornecedorcotacaocompra;
 	}
 
-	public void setCotacaocompra(FornecedorCotacaoCompra fornecedorcotacaocompra) {
+	public void setFornecedorCotacaocompra(FornecedorCotacaoCompra fornecedorcotacaocompra) {
 		this.fornecedorcotacaocompra = fornecedorcotacaocompra;
 	}
 

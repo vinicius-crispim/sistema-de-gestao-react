@@ -38,6 +38,7 @@ const Home = () => {
                 console.log(bemvindo);
                 history.push("/verificarrespostas");
                 window.location.reload();
+
                 console.log(todas);
             });
     }

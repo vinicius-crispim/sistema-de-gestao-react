@@ -35,6 +35,13 @@ public class CotacaoCompraResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	@GetMapping(value="/autentica/{id}")
+	public ResponseEntity<List<CotacaoCompra>> findAllAutentica(@PathVariable Long id){
+
+		List<CotacaoCompra> list = service.findAllAutentica(id);
+		return ResponseEntity.ok().body(list);
+	}
+	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
 	public ResponseEntity<CotacaoCompraDTO> findById(@PathVariable Long id){

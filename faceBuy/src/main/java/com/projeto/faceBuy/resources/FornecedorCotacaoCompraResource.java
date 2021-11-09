@@ -38,6 +38,7 @@ public class FornecedorCotacaoCompraResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
 	public ResponseEntity<FornecedorCotacaoCompraDTO> findById(@PathVariable Long id){

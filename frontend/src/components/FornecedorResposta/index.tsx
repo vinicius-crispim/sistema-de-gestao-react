@@ -39,7 +39,7 @@ type Resposta = {
     fornecedor: Fornecedor;
     cotacaocompraitem: CotacaoItem;
     precoitem: number;
-    fornecedorcotacaocompra: FornecedorCotacaoCompra;
+    fornecedorCotacaocompra: FornecedorCotacaoCompra;
 }
 
 const FornecedorVisualizaProdutos = () => {
@@ -87,7 +87,7 @@ const FornecedorVisualizaProdutos = () => {
     const [cotacaocompraitem, setCotacaoCompraItem] = useState<CotacaoItem>({ id: 0, cotacaocompra: cotacao, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
     const history = useHistory();
 
-    const [resposta, setResposta] = useState<Resposta>({ fornecedorcotacaocompra: { cotacaocompra: cotacao, fornecedor: fornecedorstorage, status: "Pendente", id: 0 }, fornecedor: fornecedorstorage, cotacaocompraitem: { quantidade: 0, cotacaocompra: cotacao, id: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, nome: "", quantidademin: 0, id: 0 } }, preco: 0, precoitem: 0 });
+    const [resposta, setResposta] = useState<Resposta>({ fornecedorCotacaocompra: { cotacaocompra: cotacao, fornecedor: fornecedorstorage, status: "Pendente", id: 0 }, fornecedor: fornecedorstorage, cotacaocompraitem: { quantidade: 0, cotacaocompra: cotacao, id: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, nome: "", quantidademin: 0, id: 0 } }, preco: 0, precoitem: 0 });
     const [todasrespostas, setTodasRespostas] = useState<TodasRespostas>({ todasrespostas: [] })
     function onChange(event: { target: { name: any; value: any; }; }) {
         const { name, value } = event.target;
@@ -125,7 +125,7 @@ const FornecedorVisualizaProdutos = () => {
                 let id = data.length;
                 fornecedorcotacaocompra.id = id;
                 console.log(id)
-                resposta.fornecedorcotacaocompra = fornecedorcotacaocompra;
+                resposta.fornecedorCotacaocompra = fornecedorcotacaocompra;
                 console.log(resposta)
                 axios.post(`${BASE_URL}/respostafornecedor`, resposta).then(response => {
                     alert("RESPOSTA ENVIADA");
@@ -152,7 +152,7 @@ const FornecedorVisualizaProdutos = () => {
             console.log("COTACAOCOMPRAFOR");
             console.log(fornecedorcotacaocompra);
             console.log(cotacaocompra);
-            resposta.fornecedorcotacaocompra = fornecedorcotacaocompra;
+            resposta.fornecedorCotacaocompra = fornecedorcotacaocompra;
         });
 
 

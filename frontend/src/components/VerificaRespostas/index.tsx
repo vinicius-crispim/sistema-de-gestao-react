@@ -21,6 +21,7 @@ type Mostra = {
 }
 
 const VerificaRespostas = () => {
+    const [todas, setTodasCotacao] = useState<Todas>(todasfornecedorcotacaocompra)
 
     const [fornecedorcotacaocompra, setFornecedorCotacaoCompra] = useState<FornecedorCotacaoCompraSelect>({
         id: 0,
@@ -29,43 +30,26 @@ const VerificaRespostas = () => {
         fornecedorcotacaocompraitem: []
     })
     const history = useHistory();
-    const [id, setID] = useState<0>();
 
-    const [mostranomes, setMostraNomes] = useState<Mostra>({ nomes: [], idCotacao: 0 });
     function onSubmit(event: any) {
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         const { name, value } = event.target
         console.log({ name, value });
-        setID(value);
         console.log(value);
         axios.get(`${BASE_URL}/fornecedorcotacaocompras/${value}`).then(response => {
             const data = response.data as FornecedorCotacaoCompraSelect;
-            localStorage.removeItem('fornecedorcotacaocompra');
-            localStorage.setItem('fornecedorcotacaocompra', JSON.stringify(data));
+            localStorage.removeItem('fornecedorcotacaocompra2');
+            localStorage.setItem('fornecedorcotacaocompra2', JSON.stringify(data));
+            console.log("AAAA")
+            console.log(JSON.parse(localStorage.getItem('fornecedorcotacaocompra2') || '{}'));
+            history.push("/verificarrespostaprodutos")
             window.location.reload();
-            console.log(JSON.parse(localStorage.getItem('respostafornecedor') || '{}'));
         });
+        console.log("AA")
+        console.log(todas);
     }
 
-    useEffect(() => {
-        axios.get(`${BASE_URL}/fornecedorcotacaocompras`)
-            .then(response => {
 
-                const data = response.data as FornecedorCotacaoCompraSelect[];
-                todas.fornecedorCotacaoCompra = data;
-                for (let index = 0; index < data.length; index++) {
-                    todas.quantidade.push(index);
-
-                }
-                console.log(todas);
-            });
-    }, []);
-
-
-    const [todas, setTodasCotacao] = useState<Todas>(todasfornecedorcotacaocompra)
-
-    console.log("AA")
-    console.log(todas);
     return (
         <div className="table-responsive">
             <h3 className="text-center display-4">Verifique as respostas dos fornecedores</h3>
@@ -74,20 +58,22 @@ const VerificaRespostas = () => {
                 <caption className="">Lista de respostas</caption>
                 <thead>
                     <tr>
-                        <th className="text-center text-primary"></th>
+                        <th className="text-center text-primary">Numero</th>
                         <th className="text-center text-primary">Fornecedor</th>
                         <th className="text-center text-primary">Email</th>
                         <th className="text-center text-primary">Data</th>
+                        <th className="text-center text-primary"></th>
+
                     </tr>
                 </thead>
                 <tbody>
                     {todas.quantidade.map(x => (
                         <tr key={todas.fornecedorCotacaoCompra[x].id}>
-                            <td className="text-center"><button type="submit" value={todas.fornecedorCotacaoCompra[x].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver detalhes</button></td>
+                            <td className="text-center">{todas.fornecedorCotacaoCompra[x].id}</td>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].fornecedor.nome}</td>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].fornecedor.email}</td>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].data}</td>
-
+                            <td className="text-center"><button type="submit" value={todas.fornecedorCotacaoCompra[x].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver detalhes</button></td>
                         </tr>
                     ))}
                 </tbody>
