@@ -280,9 +280,9 @@ public class TestConfig implements CommandLineRunner {
 		cotaitensrepository.saveAll(Arrays.asList(cotaitens, cotaitens2, cotaitens3));
 		coco.getCotacaocompraitem().add(cotaitens);
 		FornecedorCotacaoCompra fornecedorcotacao = new FornecedorCotacaoCompra();
-		fornecedorcotacao.setFornecedor(f);
+		fornecedorcotacao.setFornecedor(f3);
 		fornecedorcotacao.setCotacaocompra(coco);
-		fornecedorcotacao.setStatus("Respondido");
+		fornecedorcotacao.setStatus("Pendente");
 		FornecedorCotacaoCompra fornecedorcotacao2 = new FornecedorCotacaoCompra();
 		fornecedorcotacao2.setFornecedor(f2);
 		fornecedorcotacao2.setCotacaocompra(coco);

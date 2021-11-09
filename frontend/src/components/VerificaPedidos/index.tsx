@@ -110,7 +110,7 @@ console.log(todas);
     return (
         <div className="table-responsive">
             <h3 className="text-center display-4">Pedidos Pendentes</h3>
-
+            
             <table className="table table-striped table-md">
                 <thead>
                     <tr>

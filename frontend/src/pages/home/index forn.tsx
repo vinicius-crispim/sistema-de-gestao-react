@@ -46,7 +46,7 @@ const HomeFornecedor = () => {
     const history = useHistory();
 
     function onSubmit(event: any) {
-        axios.get(`${BASE_URL}/cotacoes`)
+        axios.get(`${BASE_URL}/cotacoes/autentica/${fornecedor.id}`)
             .then(response => {
 
                 const data = response.data as CotacaoTeste[];

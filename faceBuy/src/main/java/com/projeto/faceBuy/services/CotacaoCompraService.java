@@ -51,12 +51,13 @@ public class CotacaoCompraService {
 		Fornecedor fornecedor = fornecedorop.get();
 		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
 		for (CotacaoCompra cotacoes : list) {
+			aux =0;
 			for (FornecedorCotacaoCompra forcotacoes : fornecedor.getFornecedorcotacaocompra()) {
 				if (forcotacoes.getCotacaocompra() == cotacoes) {
 					aux++;
 				}
 			}
-			if (aux > 0) {
+			if (aux == 0) {
 				listalimpa.add(cotacoes);
 			}
 		}
