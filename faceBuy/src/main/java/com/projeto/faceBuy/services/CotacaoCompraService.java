@@ -35,6 +35,11 @@ public class CotacaoCompraService {
 	
 	public List<CotacaoCompra> findAll() {
 		List<CotacaoCompra> list = repository.findAll();
+		return list;
+	}
+	
+	public List<CotacaoCompra> findAllPendente() {
+		List<CotacaoCompra> list = repository.findAll();
 		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
 		for (CotacaoCompra cotacaoCompra : list) {
 			if (cotacaoCompra.getStatus() == "Pendente") {
@@ -48,8 +53,9 @@ public class CotacaoCompraService {
 		Integer aux = 0;
 		List<CotacaoCompra> list = repository.findAll();
 		Optional<Fornecedor> fornecedorop = fornrepo.findById(id);
-		Fornecedor fornecedor = fornecedorop.get();
 		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
+		List<CotacaoCompra> list2 = new ArrayList<CotacaoCompra>();
+		Fornecedor fornecedor = fornecedorop.get();
 		for (CotacaoCompra cotacoes : list) {
 			aux =0;
 			for (FornecedorCotacaoCompra forcotacoes : fornecedor.getFornecedorcotacaocompra()) {
@@ -58,7 +64,12 @@ public class CotacaoCompraService {
 				}
 			}
 			if (aux == 0) {
-				listalimpa.add(cotacoes);
+				list2.add(cotacoes);
+			}
+		}
+		for (CotacaoCompra cotacaoCompra : list2) {
+			if (cotacaoCompra.getStatus() == "Pendente") {
+				listalimpa.add(cotacaoCompra);
 			}
 		}
 		return listalimpa;
@@ -71,13 +82,18 @@ public class CotacaoCompraService {
 
 	public CotacaoCompra saveCotacaoCompra(CotacaoCompra cotacaoCompra) {
 		Date dataAtual = new Date();
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String dataFormatada = dateFormat.format(dataAtual);
 		cotacaoCompra.setData(dataFormatada);
 		cotacaoCompra.setStatus("Pendente");
 		return repository.save(cotacaoCompra);
 	}
 
+	public CotacaoCompra finalizaCotacaoCompra(CotacaoCompra cotacaoCompra) {
+		cotacaoCompra.setStatus("Finalizada");
+		return repository.save(cotacaoCompra);
+	}
+	
 	public void deleteCotacaoCompra(Long id) {
 		try {
 			repository.deleteById(id);

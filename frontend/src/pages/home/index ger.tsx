@@ -23,15 +23,14 @@ type CotacaoTeste = {
     data?: String;
 
 }
-const Home = () => {
+const HomeGerente = () => {
 
     const [todas, setTodasCotacao] = useState<Todas>({ cotacoes: [], quantidade: [] })
-    const [todas2, setTodasCotacao2] = useState<Todas>({ cotacoes: [], quantidade: [] })
 
     const history = useHistory();
 
     function onSubmit(event: any) {
-        axios.get(`${BASE_URL}/cotacoes/pendente`)
+        axios.get(`${BASE_URL}/cotacoes`)
             .then(response => {
 
                 const data = response.data as CotacaoTeste[];
@@ -43,24 +42,6 @@ const Home = () => {
                     todas.quantidade.push(index);
 
                 }
-                localStorage.removeItem("cotacoesemandamento");
-                localStorage.setItem('cotacoesemandamento', JSON.stringify(todas));
-                
-                let bemvindo = JSON.parse(localStorage.getItem('cotacoesemandamento') || '{}');
-                console.log(bemvindo);
-                console.log(todas);
-            });
-        axios.get(`${BASE_URL}/cotacoes`)
-            .then(response => {
-                const data = response.data as CotacaoTeste[];
-                const meusids = data.map(x => x.id);
-                const meusnomes = data.map(x => x.funcionario.nome);
-                const minhasmarcas = data.map(x => x.item);
-                todas2.cotacoes = data;
-                for (let index = 0; index < data.length; index++) {
-                    todas2.quantidade.push(index);
-
-                }
                 localStorage.removeItem("cotacoes");
                 localStorage.setItem('cotacoes', JSON.stringify(todas));
                 
@@ -70,7 +51,7 @@ const Home = () => {
                 window.location.reload();
                 // setCotacoesTodas({ ids: meusids, descricao: minhasmarcas, nomepro: meusnomes, quantidadepedida: minhasquant });
 
-                console.log(todas2);
+                console.log(todas);
             });
     }
 
@@ -100,4 +81,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default HomeGerente;

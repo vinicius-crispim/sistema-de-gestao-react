@@ -25,7 +25,7 @@ type Todas = {
 }
 
 let user = JSON.parse(localStorage.getItem('user') || '{}');
-let todascotacoes = JSON.parse(localStorage.getItem('cotacoes') || '{}');
+let todascotacoes = JSON.parse(localStorage.getItem('cotacoesemandamento') || '{}');
 
 
 type TodosItens = {

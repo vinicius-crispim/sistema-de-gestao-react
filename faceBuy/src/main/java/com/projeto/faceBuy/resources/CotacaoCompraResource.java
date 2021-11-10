@@ -35,6 +35,15 @@ public class CotacaoCompraResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	@GetMapping(value="/pendente")
+	public ResponseEntity<List<CotacaoCompraDTO>> findAllPendente(){
+
+		List<CotacaoCompra> list = service.findAllPendente();
+		List<CotacaoCompraDTO> listDTO = list.stream().map(x -> new CotacaoCompraDTO(x)).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listDTO);
+	}
+	
 	@GetMapping(value="/autentica/{id}")
 	public ResponseEntity<List<CotacaoCompra>> findAllAutentica(@PathVariable Long id){
 
@@ -56,6 +65,17 @@ public class CotacaoCompraResource {
 	public ResponseEntity<CotacaoCompra> saveCotacaoCompra(@RequestBody CotacaoCompra cotacaoCompra){
 		cotacaoCompra = service.saveCotacaoCompra(cotacaoCompra);
 		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(cotacaoCompra.getId())
+				.toUri();
+		
+		return ResponseEntity.created(uri).body(cotacaoCompra);
+	}
+	
+	@PostMapping(value ="/finaliza")
+	public ResponseEntity<CotacaoCompra> finalizaCotacaoCompra(@RequestBody CotacaoCompra cotacaoCompra){
+		cotacaoCompra = service.finalizaCotacaoCompra(cotacaoCompra);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}")
 				.buildAndExpand(cotacaoCompra.getId())
