@@ -27,8 +27,8 @@ type Mostrar = {
     produtosprecoitem: number[];
     produtospreco: number[]
 }
+let user = JSON.parse(localStorage.getItem('user') || '{}');
 
-let fornecedorstorage = JSON.parse(localStorage.getItem('fornecedor') || '{}');
 let fornecedorCotacaoComprastorage = JSON.parse(localStorage.getItem('fornecedorcotacaocompra2') || '{}');
 
 

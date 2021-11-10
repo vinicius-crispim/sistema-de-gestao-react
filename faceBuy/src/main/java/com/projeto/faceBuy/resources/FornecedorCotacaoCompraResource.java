@@ -38,6 +38,15 @@ public class FornecedorCotacaoCompraResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	@GetMapping(value ="/bycotacao/{id}")
+	public ResponseEntity<List<FornecedorCotacaoCompraDTO>> findAllByCotacao(@PathVariable Long id){
+
+		List<FornecedorCotacaoCompra> list = service.findAllByCotacao(id);
+		List<FornecedorCotacaoCompraDTO> listDTO = list.stream().map(x -> new FornecedorCotacaoCompraDTO(x)).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listDTO);
+	}
+	
 	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")

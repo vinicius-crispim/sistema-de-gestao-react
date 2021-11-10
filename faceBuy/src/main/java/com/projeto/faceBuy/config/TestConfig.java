@@ -256,7 +256,7 @@ public class TestConfig implements CommandLineRunner {
 		String datateste2 = "27/10/2021";
 		coco.setFuncionario(func);
 		coco.setData(datateste2);
-		coco.setStatus("Finalizado");
+		coco.setStatus("Pendente");
 		CotacaoCompra coco2 = new CotacaoCompra();
 		String datateste = "26/10/2021";
 		coco2.setFuncionario(func2);

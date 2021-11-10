@@ -3,45 +3,59 @@ import Footer from "components/Footer";
 import NavBar from "components/NavBar";
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { FornecedorCotacaoCompraSelect } from "types/cotacao";
+import { CotacaoItem, FornecedorCotacaoCompraSelect } from "types/cotacao";
+import { Funcionario } from "types/funcionario";
 import { BASE_URL } from "utils/request";
 
 /*let vinistring = localStorage.getItem("user");*/
 let user = JSON.parse(localStorage.getItem('user') || '{}');
 
 type Todas = {
-    fornecedorCotacaoCompra: FornecedorCotacaoCompraSelect[];
+    cotacoes: CotacaoTeste[];
     quantidade: number[];
 }
 
+
+type CotacaoTeste = {
+    id: number;
+    funcionario: Funcionario;
+    item: CotacaoItem[];
+    data?: String;
+
+}
 const Home = () => {
 
-    const [todas, setTodasCotacao] = useState<Todas>({ fornecedorCotacaoCompra: [], quantidade: [] })
+    const [todas, setTodasCotacao] = useState<Todas>({ cotacoes: [], quantidade: [] })
 
     const history = useHistory();
 
     function onSubmit(event: any) {
-        axios.get(`${BASE_URL}/fornecedorcotacaocompras`)
+        axios.get(`${BASE_URL}/cotacoes`)
             .then(response => {
 
-                const data = response.data as FornecedorCotacaoCompraSelect[];
-                todas.fornecedorCotacaoCompra = data;
+                const data = response.data as CotacaoTeste[];
+                const meusids = data.map(x => x.id);
+                const meusnomes = data.map(x => x.funcionario.nome);
+                const minhasmarcas = data.map(x => x.item);
+                todas.cotacoes = data;
                 for (let index = 0; index < data.length; index++) {
                     todas.quantidade.push(index);
 
                 }
-                console.log(todas);
-                localStorage.removeItem("fornecedorcotacaocompra");
-                localStorage.setItem('fornecedorcotacaocompra', JSON.stringify(todas));
-
-                let bemvindo = JSON.parse(localStorage.getItem('fornecedorcotacaocompra') || '{}');
+                localStorage.removeItem("cotacoes");
+                localStorage.setItem('cotacoes', JSON.stringify(todas));
+                
+                let bemvindo = JSON.parse(localStorage.getItem('cotacoes') || '{}');
                 console.log(bemvindo);
-                history.push("/verificarrespostas");
+                history.push("/cotacoesemandamento");
                 window.location.reload();
+                // setCotacoesTodas({ ids: meusids, descricao: minhasmarcas, nomepro: meusnomes, quantidadepedida: minhasquant });
 
                 console.log(todas);
             });
     }
+
+
 
     return (
         <>

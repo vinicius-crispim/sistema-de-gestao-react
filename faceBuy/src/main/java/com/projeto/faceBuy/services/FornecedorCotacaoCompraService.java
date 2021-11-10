@@ -1,5 +1,6 @@
 package com.projeto.faceBuy.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,18 @@ public class FornecedorCotacaoCompraService {
 
 	public List<FornecedorCotacaoCompra> findAll() {
 		return repository.findAll();
+	}
+	
+	public List<FornecedorCotacaoCompra> findAllByCotacao(Long id) {
+		List<FornecedorCotacaoCompra> list = repository.findAll();
+		List<FornecedorCotacaoCompra> listalimpa = new ArrayList<FornecedorCotacaoCompra>();
+		for (FornecedorCotacaoCompra fornecedorCotacaoCompra : list) {
+			if (fornecedorCotacaoCompra.getCotacaocompra().getId() == id) {
+				listalimpa.add(fornecedorCotacaoCompra);
+			}
+		}
+		return listalimpa;
+		
 	}
 
 	public FornecedorCotacaoCompra findById(Long id) {

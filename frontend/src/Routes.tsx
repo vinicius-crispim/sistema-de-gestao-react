@@ -5,6 +5,7 @@ import CadastroCotacao from "pages/cadastrocotacao";
 import CadastroFornecedor from "pages/cadastrofornecedor";
 import CadastrarFuncionario from "pages/cadastrofuncionario";
 import CadastroProduto from "pages/cadastroproduto";
+import CotacoesEmAndamentoTela from "pages/cotacoesemandamento";
 import Estoque from "pages/estoque";
 import RespostaTelaProduto from "pages/fornecedorrespondeprodutos";
 import Home from "pages/home";
@@ -72,6 +73,9 @@ const Routes = () => {
                 </Route>
                 <Route path="/verificarrespostaprodutos">
                     <VerificaRespostaProdutosTela />
+                </Route>
+                <Route path="/cotacoesemandamento">
+                    <CotacoesEmAndamentoTela />
                 </Route>
             </Switch>
         </BrowserRouter>
