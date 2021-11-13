@@ -139,6 +139,7 @@ const CotacaoFeita = () => {
                 }
             });
         alert("Cotação enviada com sucesso");
+        window.location.reload();
     }
 
     return (
@@ -191,7 +192,7 @@ const CotacaoFeita = () => {
                 </table>
             </div>
             <form onSubmit={onSubmitFIM}>
-                <div className="d-grid gap-3 col-2 mx-auto">
+                <div className="d-grid gap-3 col-3 mx-auto">
                     <button type="submit" className="btn btn-success btn-xx my-4">Enviar cotação</button>
                 </div>
             </form>

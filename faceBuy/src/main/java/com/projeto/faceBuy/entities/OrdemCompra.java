@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_ordemcompra")
 public class OrdemCompra implements Serializable {
@@ -24,24 +26,32 @@ public class OrdemCompra implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private Double valor;
-	
-	private Date data;
 
+	private Double preco;
+
+	private String data;
+
+	private String status;
+	
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
 	
-	@OneToMany(mappedBy = "id.ordemcompra")
+	@ManyToOne
+	@JoinColumn(name = "funcionario_id")
+	private Funcionario funcionario;
+
+	@OneToMany(mappedBy = "ordemcompra")
 	private List<OrdemCompraItem> ordemcompraitem = new ArrayList<>();
-	
-	public OrdemCompra() {}
-	
-	public OrdemCompra(Long id, Double valor, Date data) {
+
+	public OrdemCompra() {
+	}
+
+	public OrdemCompra(Long id, Double preco, String data,String status) {
 		this.id = id;
-		this.valor = valor;
+		this.preco = preco;
 		this.data = data;
+		this.status=status;
 	}
 
 	public Long getId() {
@@ -52,12 +62,12 @@ public class OrdemCompra implements Serializable {
 		this.id = id;
 	}
 
-	public Double getValor() {
-		return valor;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setValor(Double valor) {
-		this.valor = valor;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	public Fornecedor getFornecedor() {
@@ -68,16 +78,33 @@ public class OrdemCompra implements Serializable {
 		this.fornecedor = fornecedor;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
+	@JsonIgnore
 	public List<OrdemCompraItem> getOrdemcompraitem() {
 		return ordemcompraitem;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
@@ -99,6 +126,6 @@ public class OrdemCompra implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrdemCompra [id=" + id + ", valor=" + valor + ", data=" + data + "]";
+		return "OrdemCompra [id=" + id + ", preco=" + preco + ", data=" + data + "]";
 	}
 }

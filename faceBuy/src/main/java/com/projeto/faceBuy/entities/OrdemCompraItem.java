@@ -6,6 +6,11 @@ import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,21 +22,33 @@ public class OrdemCompraItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private OrdemCompraItemPK id = new OrdemCompraItemPK();
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
+	@ManyToOne
+	@JoinColumn(name = "produto_id")
+	private Produto produto;
+	
+	@ManyToOne
+	@JoinColumn(name = "ordemcompra_id")
+	private OrdemCompra ordemcompra;
+	
 	private Integer quantidade;
 
 	private Double precoitem;
+	
+	private Double preco;
 
 	public OrdemCompraItem() {
 	}
 
-	public OrdemCompraItem(Integer quantidade, Double precoitem, Produto produto, OrdemCompra ordemcompra) {
+	public OrdemCompraItem(Integer quantidade, Double precoitem, Produto produto, OrdemCompra ordemcompra, Double preco) {
 		this.quantidade = quantidade;
 		this.precoitem = precoitem;
-		id.setOrdemcompra(ordemcompra);
-		id.setProduto(produto);
+		this.ordemcompra = ordemcompra;
+		this.produto = produto;
+		this.preco = preco;
 	}
 
 	public Integer getQuantidade() {
@@ -50,20 +67,37 @@ public class OrdemCompraItem implements Serializable {
 		this.precoitem = precoitem;
 	}
 
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Produto getProduto() {
-		return id.getProduto();
+		return produto;
 	}
-	
+
 	public void setProduto(Produto produto) {
-		id.setProduto(produto);
-	}
-	@JsonIgnore
-	public OrdemCompra getOrdemCompra() {
-		return id.getOrdemcompra();
+		this.produto = produto;
 	}
 	
-	public void setOrdemCompra(OrdemCompra ordemcompra) {
-		id.setOrdemcompra(ordemcompra);
+	public OrdemCompra getOrdemcompra() {
+		return ordemcompra;
+	}
+
+	public void setOrdemcompra(OrdemCompra ordemcompra) {
+		this.ordemcompra = ordemcompra;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	@Override

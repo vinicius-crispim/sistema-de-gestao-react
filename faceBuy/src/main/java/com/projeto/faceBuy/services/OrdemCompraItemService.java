@@ -58,7 +58,6 @@ public class OrdemCompraItemService {
 
 	private void updateData(OrdemCompraItem obj, OrdemCompraItem ordemCompraItem) {
 
-		obj.setOrdemCompra(ordemCompraItem.getOrdemCompra());
 		obj.setPrecoitem(ordemCompraItem.getPrecoitem());
 		obj.setProduto(ordemCompraItem.getProduto());
 		obj.setQuantidade(ordemCompraItem.getQuantidade());

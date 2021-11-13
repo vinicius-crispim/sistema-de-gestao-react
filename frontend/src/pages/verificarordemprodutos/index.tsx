@@ -1,19 +1,19 @@
 import Footer from "components/Footer";
-import FornecedorVisualizaProdutos from "components/FornecedorResposta";
 import NavBarFornecedor from "components/NavBar/indexfornecedores";
+import VerificaOrdemCompra from "components/VerificaOrdemCompra";
 
-const RespostaTela = () => {
+const VerificaOrdemProdutosTela = () => {
 
     return (
         <>
             <NavBarFornecedor />
 
             <div className="container">
-                <FornecedorVisualizaProdutos />
+                <VerificaOrdemCompra />
             </div>
             <Footer />
         </>
     );
 }
 
-export default RespostaTela;
+export default VerificaOrdemProdutosTela;

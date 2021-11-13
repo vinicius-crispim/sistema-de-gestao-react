@@ -1,13 +1,13 @@
 import CotacoesEmAndamento from "components/CotacoesEmAndamento";
 import Footer from "components/Footer";
-import NavBarFornecedor from "components/NavBar/indexfornecedores";
+import NavBar from "components/NavBar";
 
 
 const CotacoesEmAndamentoTela = () => {
 
     return (
         <>
-            <NavBarFornecedor />
+            <NavBar />
 
             <div className="container">
                 <CotacoesEmAndamento />

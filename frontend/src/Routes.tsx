@@ -1,21 +1,20 @@
-import FornecedorVisualizaProdutos from "components/FornecedorResposta";
 import OrdemCompra from "components/OrdemCompra";
-import VerificaPedido from "components/VerificaPedidos";
 import CadastroCotacao from "pages/cadastrocotacao";
 import CadastroFornecedor from "pages/cadastrofornecedor";
 import CadastrarFuncionario from "pages/cadastrofuncionario";
 import CadastroProduto from "pages/cadastroproduto";
 import CotacoesEmAndamentoTela from "pages/cotacoesemandamento";
 import Estoque from "pages/estoque";
-import RespostaTelaProduto from "pages/fornecedorrespondeprodutos";
 import Home from "pages/home";
 import HomeFornecedor from "pages/home/index forn";
 import Login from "pages/login";
 import NotaFiscalteste from "pages/notafiscal";
 import RespostaTela from "pages/respostafornecedor";
+import VerificaOrdemTela from "pages/verificaordem";
 import VerificaPedidoTela from "pages/verificapedido";
 import VerificaRespostaProdutosTela from "pages/verificarespostaprodutos";
 import VerificaRespostasTela from "pages/verificarespostas";
+import VerificaOrdemProdutosTela from "pages/verificarordemprodutos";
 import VisualizarProdutoTela from "pages/VisualizarProdutoTela";
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 
@@ -62,9 +61,6 @@ const Routes = () => {
                 <Route path="/resposta">
                     <RespostaTela />
                 </Route>
-                <Route path="/respostaitemcotacao">
-                    <RespostaTelaProduto />
-                </Route>
                 <Route path="/visualizarproduto">
                     <VisualizarProdutoTela />
                 </Route>
@@ -76,6 +72,12 @@ const Routes = () => {
                 </Route>
                 <Route path="/cotacoesemandamento">
                     <CotacoesEmAndamentoTela />
+                </Route>
+                <Route path="/verificaordens">
+                    <VerificaOrdemTela />
+                </Route>
+                <Route path="/verificaordemprodutos">
+                    <VerificaOrdemProdutosTela />
                 </Route>
             </Switch>
         </BrowserRouter>

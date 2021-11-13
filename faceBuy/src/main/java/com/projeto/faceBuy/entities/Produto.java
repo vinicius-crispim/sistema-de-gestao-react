@@ -41,10 +41,10 @@ public class Produto implements Serializable {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
     
-    @OneToMany(mappedBy = "id.produto")
+    @OneToMany(mappedBy = "produto")
     private List<OrdemCompraItem> ordemcompraitem = new ArrayList<>();
     
-    @OneToMany(mappedBy = "id.produto")
+    @OneToMany(mappedBy = "produto")
     private List<NotaFiscalItem> notafiscalitem = new ArrayList<>();
     
     public Produto(Long id, String nome, Categoria categoria, String descrição, Integer quantidademin, Integer estoque,Double preço,String status) {

@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_notafiscal")
 public class NotaFiscal implements Serializable {
@@ -27,22 +29,28 @@ public class NotaFiscal implements Serializable {
 	
 	private Integer num_nota;
 	
-	private Date data;
+	private String data;
 
-	private Double valorTotal;
+	private Double preco;
 
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
+	
+	@ManyToOne
+	@JoinColumn(name = "funcionario_id")
+	private Funcionario funcionario;
 
-	@OneToMany(mappedBy = "id.notafiscal")
+	@OneToMany(mappedBy = "notafiscal")
     private List<NotaFiscalItem> notafiscalitem = new ArrayList<>();
     
-	public NotaFiscal(Long id, Integer num_nota, Date data, Double valorTotal, Fornecedor fornecedor) {
+	public NotaFiscal(Long id, Integer num_nota, String data, Double valorTotal, Fornecedor fornecedor,Funcionario funcionario) {
 		this.id = id;
 		this.num_nota = num_nota;
 		this.data = data;
-		this.valorTotal = valorTotal;
+		this.preco = valorTotal;
 		this.fornecedor = fornecedor;
 	}
 	public NotaFiscal() {}
@@ -53,7 +61,7 @@ public class NotaFiscal implements Serializable {
 
 	@Override
 	public String toString() {
-		return "NotaFiscal [id=" + id + ", data=" + data + ", valorTotal=" + valorTotal + ", fornecedor=" + fornecedor
+		return "NotaFiscal [id=" + id + ", data=" + data + ", valorTotal=" + preco + ", fornecedor=" + fornecedor
 				+ ", notafiscalitem=" + notafiscalitem + "]";
 	}
 
@@ -61,20 +69,20 @@ public class NotaFiscal implements Serializable {
 		this.id = id;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
-	public Double getValorTotal() {
-		return valorTotal;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setValorTotal(Double valorTotal) {
-		this.valorTotal = valorTotal;
+	public void setPreco(Double valorTotal) {
+		this.preco = valorTotal;
 	}
 
 	public Integer getNum_nota() {
@@ -92,14 +100,20 @@ public class NotaFiscal implements Serializable {
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
-
+	@JsonIgnore
 	public List<NotaFiscalItem> getNotafiscalitem() {
 		return notafiscalitem;
 	}
 
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(data, num_nota, fornecedor, id, notafiscalitem, valorTotal);
+		return Objects.hash(data, num_nota, fornecedor, id, notafiscalitem, preco);
 	}
 
 	@Override
@@ -113,7 +127,7 @@ public class NotaFiscal implements Serializable {
 		NotaFiscal other = (NotaFiscal) obj;
 		return Objects.equals(data, other.data) && Objects.equals(fornecedor, other.fornecedor)
 				&& Objects.equals(id, other.id) && Objects.equals(notafiscalitem, other.notafiscalitem)
-				&& Objects.equals(valorTotal, other.valorTotal) && Objects.equals(num_nota, other.num_nota);
+				&& Objects.equals(preco, other.preco) && Objects.equals(num_nota, other.num_nota);
 	}
 
 }

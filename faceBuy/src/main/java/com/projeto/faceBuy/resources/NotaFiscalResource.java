@@ -2,6 +2,7 @@ package com.projeto.faceBuy.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.faceBuy.entities.NotaFiscal;
+import com.projeto.faceBuy.entities.DTO.NotaFiscalDTO;
 import com.projeto.faceBuy.services.NotaFiscalService;
 
 @RestController
@@ -25,10 +27,11 @@ public class NotaFiscalResource {
 	private NotaFiscalService service;
 
 	@GetMapping
-	public ResponseEntity<List<NotaFiscal>> findAll(){
+	public ResponseEntity<List<NotaFiscalDTO>> findAll(){
 
 		List<NotaFiscal> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		List<NotaFiscalDTO> listDTO = list.stream().map(x -> new NotaFiscalDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	//caso inserir uma barra e um id, ele faz esta busca

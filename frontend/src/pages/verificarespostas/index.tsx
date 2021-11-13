@@ -1,12 +1,12 @@
 import Footer from "components/Footer";
-import NavBarFornecedor from "components/NavBar/indexfornecedores";
+import NavBar from "components/NavBar";
 import VerificaRespostas from "components/VerificaRespostas";
 
 const VerificaRespostasTela = () => {
 
     return (
         <>
-            <NavBarFornecedor />
+            <NavBar />
 
             <div className="container">
                 <VerificaRespostas />

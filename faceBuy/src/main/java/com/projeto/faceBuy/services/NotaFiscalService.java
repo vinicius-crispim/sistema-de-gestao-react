@@ -1,6 +1,9 @@
 package com.projeto.faceBuy.services;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,10 @@ public class NotaFiscalService {
 	}
 
 	public NotaFiscal saveNotaFiscal(NotaFiscal notaFiscal) {
+		Date dataAtual = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String dataFormatada = dateFormat.format(dataAtual);
+		notaFiscal.setData(dataFormatada);
 		return repository.save(notaFiscal);
 	}
 
@@ -60,7 +67,7 @@ public class NotaFiscalService {
 
 		obj.setData(notaFiscal.getData());
 		obj.setFornecedor(notaFiscal.getFornecedor());
-		obj.setValorTotal(notaFiscal.getValorTotal());
+		obj.setPreco(notaFiscal.getPreco());
 	}
 
 }

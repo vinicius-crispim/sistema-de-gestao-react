@@ -40,6 +40,8 @@ public class Funcionario implements Serializable {
 	
     @OneToMany(mappedBy = "funcionario")
 	private List<CotacaoCompra> cotacaocompra = new ArrayList<CotacaoCompra>();
+    @OneToMany(mappedBy = "funcionario")
+	private List<CotacaoCompra> ordemcompra = new ArrayList<CotacaoCompra>();
     
     public Funcionario() {}
     
@@ -121,6 +123,10 @@ public class Funcionario implements Serializable {
 	@JsonIgnore
 	public List<CotacaoCompra> getCotacaocompra() {
 		return cotacaocompra;
+	}
+	@JsonIgnore
+	public List<CotacaoCompra> getOrdemcompra() {
+		return ordemcompra;
 	}
 
 	@Override

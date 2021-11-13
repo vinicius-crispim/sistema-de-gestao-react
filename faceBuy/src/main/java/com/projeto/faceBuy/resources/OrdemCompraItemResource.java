@@ -46,7 +46,7 @@ public class OrdemCompraItemResource {
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}")
-				.buildAndExpand(ordemcompraitem.getOrdemCompra().getId())
+				.buildAndExpand(ordemcompraitem.getId())
 				.toUri();
 		
 		return ResponseEntity.created(uri).body(ordemcompraitem);
