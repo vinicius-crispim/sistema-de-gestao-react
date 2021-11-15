@@ -4,12 +4,14 @@ import CadastroFornecedor from "pages/cadastrofornecedor";
 import CadastrarFuncionario from "pages/cadastrofuncionario";
 import CadastroProduto from "pages/cadastroproduto";
 import CotacoesEmAndamentoTela from "pages/cotacoesemandamento";
+import CotacoesFinalizadastela from "pages/cotacoesfinalizadas";
 import Estoque from "pages/estoque";
 import Home from "pages/home";
 import HomeFornecedor from "pages/home/index forn";
 import Login from "pages/login";
 import NotaFiscalteste from "pages/notafiscal";
 import RespostaTela from "pages/respostafornecedor";
+import VerificaNotaFiscalTela from "pages/verificanotafiscal";
 import VerificaOrdemTela from "pages/verificaordem";
 import VerificaPedidoTela from "pages/verificapedido";
 import VerificaRespostaProdutosTela from "pages/verificarespostaprodutos";
@@ -78,6 +80,12 @@ const Routes = () => {
                 </Route>
                 <Route path="/verificaordemprodutos">
                     <VerificaOrdemProdutosTela />
+                </Route>
+                <Route path="/notafiscal">
+                    <VerificaNotaFiscalTela />
+                </Route>
+                <Route path="/cotacoesfinalizadas">
+                    <CotacoesFinalizadastela />
                 </Route>
             </Switch>
         </BrowserRouter>

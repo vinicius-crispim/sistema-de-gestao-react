@@ -27,6 +27,10 @@ export type FornecedorCotacaoCompra = {
     status: String;
     fornecedor: Fornecedor
     cotacaocompra: CotacaoCompra;
+    precototal:number;
+    frete:number;
+    num_pedido?:number;
+    dataEntrega:String
 }
 
 export type FornecedorCotacaoCompraItem = {
@@ -42,4 +46,7 @@ export type FornecedorCotacaoCompraSelect = {
     data: String;
     fornecedor:Fornecedor;
     fornecedorcotacaocompraitem: FornecedorCotacaoCompraItem[];
+    frete:number;
+    num_pedido?:number;
+    dataentrega:String;
 }

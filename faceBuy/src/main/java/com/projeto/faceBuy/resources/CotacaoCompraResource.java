@@ -44,6 +44,15 @@ public class CotacaoCompraResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	@GetMapping(value="/finalizada")
+	public ResponseEntity<List<CotacaoCompraDTO>> findAllFinalizada(){
+		
+		List<CotacaoCompra> list = service.findAllFinalizada();
+		List<CotacaoCompraDTO> listDTO = list.stream().map(x -> new CotacaoCompraDTO(x)).collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listDTO);
+	}
+	
 	@GetMapping(value="/autentica/{id}")
 	public ResponseEntity<List<CotacaoCompra>> findAllAutentica(@PathVariable Long id){
 

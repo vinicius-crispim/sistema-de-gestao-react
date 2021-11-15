@@ -1,6 +1,9 @@
 package com.projeto.faceBuy.services;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +46,10 @@ public class FornecedorCotacaoCompraService {
 	}
 
 	public FornecedorCotacaoCompra saveFornecedorCotacaoCompra(FornecedorCotacaoCompra fornecedorCotacaoCompra) {
+		Date dataAtual = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String dataFormatada = dateFormat.format(dataAtual);
+		fornecedorCotacaoCompra.setData(dataFormatada);
 		return repository.save(fornecedorCotacaoCompra);
 	}
 

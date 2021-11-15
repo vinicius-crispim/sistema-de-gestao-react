@@ -6,6 +6,7 @@ import { CotacaoCompra, CotacaoItem, FornecedorCotacaoCompra, FornecedorCotacaoC
 import Cotacao from 'components/Cotacao';
 import { Link, useHistory } from "react-router-dom";
 import { Funcionario } from "types/funcionario";
+import { NotaFiscal } from "types/notafiscal";
 
 type Todas = {
     fornecedorCotacaoCompra: FornecedorCotacaoCompraSelect[];
@@ -27,21 +28,50 @@ const VerificaRespostas = () => {
         id: 0,
         data: "",
         fornecedor: { cidade: { id: 0, nome: "" }, cnpj: "", email: "", login: "", nome: "", senha: "" },
-        fornecedorcotacaocompraitem: []
+        fornecedorcotacaocompraitem: [], dataentrega: "", frete: 0
     })
     const history = useHistory();
-
+    let idnota = 0;
+    let temnota = 0;
     function onSubmit(event: any) {
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         const { name, value } = event.target
         console.log({ name, value });
         console.log(value);
         axios.get(`${BASE_URL}/fornecedorcotacaocompras/${value}`).then(response => {
-            const data = response.data as FornecedorCotacaoCompraSelect;
+            const data1 = response.data as FornecedorCotacaoCompraSelect;
             localStorage.removeItem('fornecedorcotacaocompra2');
-            localStorage.setItem('fornecedorcotacaocompra2', JSON.stringify(data));
+            localStorage.setItem('fornecedorcotacaocompra2', JSON.stringify(data1));
             console.log("AAAA")
             console.log(JSON.parse(localStorage.getItem('fornecedorcotacaocompra2') || '{}'));
+            axios.get(`${BASE_URL}/notaFiscais/notafiscalpedido/${data1.num_pedido}`)
+                .then(response => {
+
+                    const data = response.data as NotaFiscal[];
+                    console.log("NOTAA")
+                    console.log(data1.num_pedido)
+                    console.log(data)
+
+                    for (let index = 0; index < data.length; index++) {
+                        // eslint-disable-next-line react-hooks/exhaustive-deps
+                        idnota = data[index].id;
+                    }
+                    if (data.length !== 0) {
+                        // eslint-disable-next-line react-hooks/exhaustive-deps
+                        temnota = 1;
+                        console.log(`TemNOTA ${temnota}`)
+                    } else {
+                        temnota = 12
+                    }
+                    localStorage.removeItem('temnota');
+                    localStorage.setItem('temnota', JSON.stringify(temnota));
+                    console.log("AAAA")
+                    console.log(JSON.parse(localStorage.getItem('temnota') || '{}'));
+                    localStorage.removeItem('idnota');
+                    localStorage.setItem('idnota', JSON.stringify(idnota));
+                    console.log("AAAA")
+                    console.log(JSON.parse(localStorage.getItem('idnota') || '{}'));
+                });
             history.push("/verificarrespostaprodutos")
             window.location.reload();
         });

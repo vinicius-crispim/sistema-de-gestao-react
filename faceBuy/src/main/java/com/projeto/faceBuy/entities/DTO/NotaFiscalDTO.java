@@ -16,9 +16,11 @@ public class NotaFiscalDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Integer num_nota;
+	private Long num_pedido;
+	private Double preco;
 	private Funcionario funcionario;
 	private Fornecedor fornecedor;
-	
+	private String hora;
 	private String data;
 	private List<NotaFiscalItem> notafiscalitem = new ArrayList<>();
 	
@@ -27,11 +29,14 @@ public class NotaFiscalDTO implements Serializable{
 	
 	public NotaFiscalDTO(NotaFiscal notafiscal) {
 		this.id = notafiscal.getId();
+		this.preco = notafiscal.getPreco();
 		this.num_nota = notafiscal.getNum_nota();
 		this.funcionario = notafiscal.getFuncionario();
 		this.fornecedor = notafiscal.getFornecedor();
 		this.notafiscalitem.addAll(notafiscal.getNotafiscalitem());
 		this.data = notafiscal.getData();
+		this.hora = notafiscal.getHora();
+		this.num_pedido = notafiscal.getNum_pedido();
 	}
 	
 	public String getData() {
@@ -56,7 +61,7 @@ public class NotaFiscalDTO implements Serializable{
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-	public List<NotaFiscalItem> getList() {
+	public List<NotaFiscalItem> getNotaFiscalItem() {
 		List<NotaFiscalItem> lista = new ArrayList<NotaFiscalItem>();
 		for(NotaFiscalItem x : notafiscalitem) {
 			lista.add(x);
@@ -78,6 +83,30 @@ public class NotaFiscalDTO implements Serializable{
 
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	public Long getNum_pedido() {
+		return num_pedido;
+	}
+
+	public void setNum_pedido(Long num_pedido) {
+		this.num_pedido = num_pedido;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 

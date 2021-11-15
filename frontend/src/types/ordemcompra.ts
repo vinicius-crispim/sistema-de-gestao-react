@@ -8,6 +8,7 @@ export type OrdemCompra = {
     data?:string;
     fornecedor:Fornecedor;
     funcionario:Funcionario;
+    num_pedido?:number;
     ordemcompraitem:OrdemCompraItem[];
 }
 

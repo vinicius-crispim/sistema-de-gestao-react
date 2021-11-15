@@ -19,10 +19,6 @@ type TodosItens = {
     todos: CotacaoItem[];
 }
 
-type TodasRespostas = {
-    todasrespostas: Resposta[];
-}
-
 
 type Mostrar = {
     quantia: number[];
@@ -42,13 +38,17 @@ type Resposta = {
     fornecedorCotacaocompra: FornecedorCotacaoCompra;
 }
 
+type TodasRespostas = {
+    respostastodas: Resposta[];
+}
+
 const FornecedorVisualizaProdutos = () => {
 
     const [todositens, setTodosItens] = useState<TodosItens>({ todos: [] });
     const [mostrar, setMostrar] = useState<Mostrar>({ produtosnome: [], produtosquantidade: [], quantia: [], produtosids: [] });
 
     const [fornecedorcotacaocompra, setFornecedorCotacaoCompra] = useState<FornecedorCotacaoCompra>({
-        cotacaocompra: {
+        frete: 0, dataEntrega: "", precototal: 0, cotacaocompra: {
             funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" } }
             , id: 0
         }, fornecedor: { cidade: { id: 0, nome: "" }, cnpj: "", email: "", login: "", nome: "", senha: "" }, status: "Pendente", id: 0
@@ -87,8 +87,8 @@ const FornecedorVisualizaProdutos = () => {
     const [cotacaocompraitem, setCotacaoCompraItem] = useState<CotacaoItem>({ id: 0, cotacaocompra: cotacao, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
     const history = useHistory();
 
-    const [resposta, setResposta] = useState<Resposta>({ fornecedorCotacaocompra: { cotacaocompra: cotacao, fornecedor: fornecedorstorage, status: "Pendente", id: 0 }, fornecedor: fornecedorstorage, cotacaocompraitem: { quantidade: 0, cotacaocompra: cotacao, id: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, nome: "", quantidademin: 0, id: 0 } }, preco: 0, precoitem: 0 });
-    const [todasrespostas, setTodasRespostas] = useState<TodasRespostas>({ todasrespostas: [] })
+    const [resposta, setResposta] = useState<Resposta>({ fornecedorCotacaocompra: { dataEntrega: "", cotacaocompra: cotacao, precototal: 0, frete: 0, fornecedor: fornecedorstorage, status: "Pendente", id: 0 }, fornecedor: fornecedorstorage, cotacaocompraitem: { quantidade: 0, cotacaocompra: cotacao, id: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, nome: "", quantidademin: 0, id: 0 } }, preco: 0, precoitem: 0 });
+    const [todasrespostas, setTodasRespostas] = useState<TodasRespostas>({ respostastodas: [] })
     function onChange(event: { target: { name: any; value: any; }; }) {
         const { name, value } = event.target;
 
@@ -97,7 +97,23 @@ const FornecedorVisualizaProdutos = () => {
         console.log(resposta)
 
     }
-    let ids: number
+    function onChangeFrete(event: { target: { name: any; value: any; }; }) {
+        const { name, value } = event.target;
+
+        console.log({ name, value });
+        fornecedorcotacaocompra.frete = value;
+        console.log(resposta)
+
+    }
+    function onChangedias(event: { target: { name: any; value: any; }; }) {
+        const { name, value } = event.target;
+        let temp: String = `${value} dias úteis`
+        console.log({ name, value });
+        fornecedorcotacaocompra.dataEntrega = temp;
+
+    }
+    let total: number
+    let freteantigo: number
     function onSubmit(event: any) {
         event.preventDefault();
         const { name, value } = event.target
@@ -122,17 +138,23 @@ const FornecedorVisualizaProdutos = () => {
             console.log(resposta);
             axios.get(`${BASE_URL}/fornecedorcotacaocompras`).then(response => {
                 const data = response.data as FornecedorCotacaoCompra[];
-                let id = data.length;
+                let id = data.length + 1;
                 fornecedorcotacaocompra.id = id;
                 console.log(id)
                 resposta.fornecedorCotacaocompra = fornecedorcotacaocompra;
                 console.log(resposta)
-                axios.post(`${BASE_URL}/respostafornecedor`, resposta).then(response => {
-                    alert("RESPOSTA ENVIADA");
-                    console.log("TESTE")
-                    console.log(resposta);
-                    todasrespostas.todasrespostas.push(resposta);
-                })
+                fornecedorcotacaocompra.precototal += resposta.preco;
+                /* axios.post(`${BASE_URL}/respostafornecedor`, resposta).then(response => {
+                     alert("RESPOSTA ENVIADA");
+                     total += resposta.precoitem
+                     fornecedorcotacaocompra.precototal +=resposta.preco;
+                     console.log("TESTE")
+                     todasrespostas.respostastodas.push(resposta);
+                 })*/
+                console.log(resposta);
+                todasrespostas.respostastodas.push(resposta)
+                console.log(todasrespostas);
+
             })
 
         })
@@ -148,11 +170,19 @@ const FornecedorVisualizaProdutos = () => {
         fornecedorcotacaocompra.cotacaocompra.funcionario = cotacaotemp.funcionario;
         fornecedorcotacaocompra.cotacaocompra.id = cotacaotemp.id;
         fornecedorcotacaocompra.fornecedor = fornecedorstorage;
+        fornecedorcotacaocompra.num_pedido = Math.random() * (999999 - 100) - 100
         axios.post(`${BASE_URL}/fornecedorcotacaocompras`, fornecedorcotacaocompra).then(response => {
             console.log("COTACAOCOMPRAFOR");
             console.log(fornecedorcotacaocompra);
             console.log(cotacaocompra);
-            resposta.fornecedorCotacaocompra = fornecedorcotacaocompra;
+            for (let index = 0; index < todasrespostas.respostastodas.length; index++) {
+                todasrespostas.respostastodas[index].fornecedorCotacaocompra=fornecedorcotacaocompra
+                axios.post(`${BASE_URL}/respostafornecedor`, todasrespostas.respostastodas[index]).then(response => {
+                    console.log(todasrespostas.respostastodas[index]);
+                });
+                console.log(todasrespostas.respostastodas[index]);
+
+            }
         });
 
 
@@ -161,37 +191,63 @@ const FornecedorVisualizaProdutos = () => {
     return (
         <>
             <h3 className="text-center">Veja os detalhes do pedido:</h3>
-            <div className="card">
-                <li className="d-flex justify-content-between lh-sm list-group-item">
+            <li className="d-flex justify-content-between lh-sm list-group-item">
+                <div className="col">
+                    <h5>Autor: {cotacao.funcionario.nome}</h5>
+                </div>
+                <div className="col">
+                    <h5>Email: {cotacao.funcionario.email}</h5>
+                </div>
+            </li>
+            {mostrar.quantia.map(x => (
+                <li className="d-flex justify-content-between lh-xx list-group-item" key={x}>
                     <div className="col">
-                        <h5>Autor: {cotacao.funcionario.nome}</h5>
+                        <h5 className="my-2">Produto: {mostrar.produtosnome[x - 1]}</h5>
                     </div>
                     <div className="col">
-                        <h5>Email: {cotacao.funcionario.email}</h5>
+                        <h5 className="my-2">Quantidade: {mostrar.produtosquantidade[x - 1]}</h5>
+                    </div>
+                    <div className="col">
+                        <input placeholder="Preço de uma unidade" className="form-control-sm my-2" type="number" step="0.01" id="precoitem" name="precoitem" onChange={onChange} />
+                    </div>
+                    <div className="col">
+                        <button type="submit" value={mostrar.produtosids[x - 1]} onClick={onSubmit} className="btn btn-success btn my-2 mx-5">Responder</button>
                     </div>
                 </li>
-                {mostrar.quantia.map(x => (
-                    <li className="d-flex justify-content-between lh-xx list-group-item" key={x}>
-                        <div className="col">
-                            <h5 className="my-2">Produto: {mostrar.produtosnome[x - 1]}</h5>
-                        </div>
-                        <div className="col">
-                            <h5 className="my-2">Quantidade: {mostrar.produtosquantidade[x - 1]}</h5>
-                        </div>
-                        <div className="col">
-                            <input placeholder="Preço de uma unidade" className="form-control-sm my-2" type="number" step="0.01" id="precoitem" name="precoitem" onChange={onChange} />
-                        </div>
-                        <div className="col">
-                            <button type="submit" value={mostrar.produtosids[x - 1]} onClick={onSubmit} className="btn btn-success btn my-2 mx-5">Responder</button>
-                        </div>
-                    </li>
-                ))}
-                <form onSubmit={onSubmitFIM}>
-                    <div className="d-grid gap-3 col-2 mx-auto">
-                        <button type="submit" className="btn btn-success btn-xx my-4">Enviar</button>
-                    </div>
-                </form>
-            </div>
+            ))}
+            <li className="d-flex justify-content-between lh-xx list-group-item">
+                <div className="col">
+                    <h5>Valor total:</h5>
+                </div>
+                <div className="col">
+                </div>
+                <div className="col">
+                </div>
+                <div className="col">
+                </div>
+                <div className="col">
+                </div>
+                <div className=" col">
+                    <h5>{fornecedorcotacaocompra.precototal + resposta.preco}</h5>
+                </div>
+            </li>
+            <li className="d-flex justify-content-between lh-xx list-group-item">
+
+                <div className="col my-4 mx-4">
+                    <h5>Frete:</h5>
+                    <input placeholder="Valor do frete" className="form-control-sm my-2" type="number" step="0.01" id="frete" name="frete" onChange={onChangeFrete} />
+                </div>
+                <div className="col mx-4">
+                    <h5>Previsão de quantos dias úteis para entregar:</h5>
+                    <input placeholder="Previsão de dias pra entregar" className="form-control-sm my-2" type="number" id="dataentrega" name="dataentrega" onChange={onChangedias} />
+                </div>
+            </li>
+
+            <form onSubmit={onSubmitFIM}>
+                <div className="d-grid gap-3 col-2 mx-auto">
+                    <button type="submit" className="btn btn-success btn-xx my-4">Enviar</button>
+                </div>
+            </form>
         </>
     );
 }

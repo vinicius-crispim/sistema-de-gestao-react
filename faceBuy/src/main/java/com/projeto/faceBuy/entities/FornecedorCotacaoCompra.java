@@ -27,7 +27,12 @@ public class FornecedorCotacaoCompra implements Serializable {
 	private Long id;
 
 	private String status;
-
+	
+	private Double precototal;
+	private String data;
+	private String dataentrega;
+	private Double frete;
+	private Long num_pedido;
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
@@ -43,11 +48,15 @@ public class FornecedorCotacaoCompra implements Serializable {
 	public FornecedorCotacaoCompra() {
 	}
 
-	public FornecedorCotacaoCompra(Long id, Fornecedor fornecedor, CotacaoCompra cotacaocompra, String status) {
+	public FornecedorCotacaoCompra(Long id,Long num_pedido,String data, Fornecedor fornecedor, CotacaoCompra cotacaocompra, String status,Double precototal,String dataEntrega,Double frete) {
 		this.id = id;
 		this.fornecedor = fornecedor;
+		this.data = data;
 		this.cotacaocompra = cotacaocompra;
 		this.status = status;
+		this.dataentrega = dataEntrega;;
+		this.precototal = precototal;
+		this.frete = frete;
 	}
 
 	public Long getId() {
@@ -84,6 +93,46 @@ public class FornecedorCotacaoCompra implements Serializable {
 	@JsonIgnore
 	public List<FornecedorCotacaoCompraItem> getFornecedorcotacaocompraitem() {
 		return fornecedorcotacaocompraitem;
+	}
+
+	public Double getPrecototal() {
+		return precototal;
+	}
+
+	public void setPrecototal(Double precototal) {
+		this.precototal = precototal;
+	}
+
+	public String getDataEntrega() {
+		return dataentrega;
+	}
+
+	public void setDataEntrega(String dataEntrega) {
+		this.dataentrega = dataEntrega;
+	}
+
+	public Double getFrete() {
+		return frete;
+	}
+
+	public void setFrete(Double frete) {
+		this.frete = frete;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public Long getNum_pedido() {
+		return num_pedido;
+	}
+
+	public void setNum_pedido(Long num_pedido) {
+		this.num_pedido = num_pedido;
 	}
 
 }

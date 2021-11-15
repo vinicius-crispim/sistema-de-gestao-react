@@ -26,7 +26,6 @@ let ordemcomprastorage = JSON.parse(localStorage.getItem('ordemcompra') || '{}')
 const VerificaOrdemCompra = () => {
     const [ordemcompra, setOrdemCompra] = useState<OrdemCompra>(ordemcomprastorage);
     const [mostrar, setMostrar] = useState<Mostrar>({ produtospreco: [], produtosprecoitem: [], produtosnome: [], produtosquantidade: [], quantia: [] })
-
     let p = 0;
     let aux: any = []
     useEffect(() => {
@@ -47,17 +46,18 @@ const VerificaOrdemCompra = () => {
                 console.log("A")
                 console.log(mostrar);
             });
-
+        
 
     }, []);
     const history = useHistory()
-    const [notafiscal, setNotaFiscal] = useState<NotaFiscal>({ data: "", fornecedor: fornecedorstorage, funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" }, id: 0 }, id: 0, num_nota: 0, preco: 0 })
+    const [notafiscal, setNotaFiscal] = useState<NotaFiscal>({ notaFiscalItem:[],num_pedido:0,data: "", fornecedor: fornecedorstorage, funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" }, id: 0 }, id: 0, num_nota: 0, preco: 0 })
     const [notafiscalitem, setNotaFiscalItem] = useState<NotaFiscalItem>({ id: 0, notaFiscal: notafiscal, preco: 0, precoitem: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
     function Conclui() {
         axios.post(`${BASE_URL}/ordemcompras/finaliza`, ordemcompra).then(response => {
             notafiscal.fornecedor = ordemcompra.fornecedor;
             notafiscal.funcionario = ordemcompra.funcionario;
             notafiscal.num_nota = Math.random() * (999999 - 100) - 100;
+            notafiscal.num_pedido = ordemcompra.num_pedido;
             notafiscal.preco = ordemcompra.preco;
             axios.post(`${BASE_URL}/notaFiscais`, notafiscal).then(response => {
                 axios.get(`${BASE_URL}/notaFiscais`).then(response => {
@@ -138,8 +138,8 @@ const VerificaOrdemCompra = () => {
                     </tbody>
                     <thead>
                         <tr>
-                            <th ></th>
                             <th className="text-center align-middle">Valor Total:</th>
+                            <th ></th>
                             <th></th>
                             <th className="text-center align-middle">{ordemcompra.preco}</th>
                         </tr>

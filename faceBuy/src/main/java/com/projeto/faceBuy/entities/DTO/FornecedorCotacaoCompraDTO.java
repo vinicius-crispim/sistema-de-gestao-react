@@ -17,6 +17,10 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 	private Long id;
 	private String data;
 	private Fornecedor fornecedor;
+	private Double precototal;
+	private String dataentrega;
+	private Double frete;
+	private Long num_pedido;
 	private List<FornecedorCotacaoCompraItem> fornecedorcotacaocompraitem = new ArrayList<>();
 
 	SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
@@ -26,9 +30,13 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 
 	public FornecedorCotacaoCompraDTO(FornecedorCotacaoCompra teste) {
 		this.id = teste.getId();
+		this.num_pedido = teste.getNum_pedido();
+		this.precototal = teste.getPrecototal();
 		this.fornecedor = teste.getFornecedor();
 		this.fornecedorcotacaocompraitem.addAll(teste.getFornecedorcotacaocompraitem());
-		this.data = teste.getCotacaocompra().getData();
+		this.data = teste.getData();
+		this.dataentrega = teste.getDataEntrega();
+		this.frete = teste.getFrete();
 	}
 
 	public String getData() {
@@ -57,6 +65,38 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
+	}
+
+	public Double getPrecototal() {
+		return precototal;
+	}
+
+	public void setPrecototal(Double precototal) {
+		this.precototal = precototal;
+	}
+
+	public Double getFrete() {
+		return frete;
+	}
+
+	public void setFrete(Double frete) {
+		this.frete = frete;
+	}
+
+	public String getDataentrega() {
+		return dataentrega;
+	}
+
+	public void setDataentrega(String dataentrega) {
+		this.dataentrega = dataentrega;
+	}
+
+	public Long getNum_pedido() {
+		return num_pedido;
+	}
+
+	public void setNum_pedido(Long num_pedido) {
+		this.num_pedido = num_pedido;
 	}
 
 }

@@ -20,6 +20,7 @@ public class OrdemCompraDTO implements Serializable {
 	private Double preco;
 	private String data;
 	private String status;
+	private Long num_pedido;
 	private List<OrdemCompraItem> ordemcompraitem = new ArrayList<>();
 
 	SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
@@ -28,6 +29,7 @@ public class OrdemCompraDTO implements Serializable {
 		this.id = ordemcompra.getId();
 		this.preco = ordemcompra.getPreco();
 		this.data = ordemcompra.getData();
+		this.num_pedido = ordemcompra.getNum_pedido();
 		this.fornecedor = ordemcompra.getFornecedor();
 		this.funcionario = ordemcompra.getFuncionario();
 		this.ordemcompraitem.addAll(ordemcompra.getOrdemcompraitem());
@@ -91,6 +93,14 @@ public class OrdemCompraDTO implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Long getNum_pedido() {
+		return num_pedido;
+	}
+
+	public void setNum_pedido(Long num_pedido) {
+		this.num_pedido = num_pedido;
 	}
 
 }

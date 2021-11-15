@@ -17,7 +17,7 @@ type Resposta = {
 const FornecedorRespondeProdutos = () => {
 
     const [fornecedorcotacacaocompra, setFornecedorCotacaoCompra] = useState<FornecedorCotacaoCompra>({
-        fornecedor: fornecedorstorage,cotacaocompra:cotacao,id:0,status:"Pendente"
+        fornecedor: fornecedorstorage,cotacaocompra:cotacao,id:0,status:"Pendente",frete:0,precototal:0,dataEntrega:""
     })
 
     const [resposta, setResposta] = useState<Resposta>({ fornecedor:fornecedorstorage,cotacaocompraitem:cotacaoitem,preco:0 });

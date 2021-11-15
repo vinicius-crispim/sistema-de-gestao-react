@@ -48,6 +48,18 @@ public class CotacaoCompraService {
 		}
 		return listalimpa;
 	}
+	
+	public List<CotacaoCompra> findAllFinalizada() {
+		List<CotacaoCompra> list = repository.findAll();
+		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
+		for (CotacaoCompra cotacaoCompra : list) {
+			if (cotacaoCompra.getStatus() == "Finalizada") {
+				listalimpa.add(cotacaoCompra);
+			}
+		}
+		return listalimpa;
+	}
+
 
 	public List<CotacaoCompra> findAllAutentica(Long id) {
 		Integer aux = 0;

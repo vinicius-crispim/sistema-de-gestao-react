@@ -33,6 +33,8 @@ public class OrdemCompra implements Serializable {
 
 	private String status;
 	
+	private Long num_pedido;
+	
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
@@ -47,11 +49,12 @@ public class OrdemCompra implements Serializable {
 	public OrdemCompra() {
 	}
 
-	public OrdemCompra(Long id, Double preco, String data,String status) {
+	public OrdemCompra(Long id,Long num_pedido, Double preco, String data,String status) {
 		this.id = id;
 		this.preco = preco;
 		this.data = data;
 		this.status=status;
+		this.num_pedido = num_pedido;
 	}
 
 	public Long getId() {
@@ -105,6 +108,14 @@ public class OrdemCompra implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Long getNum_pedido() {
+		return num_pedido;
+	}
+
+	public void setNum_pedido(Long l) {
+		this.num_pedido = l;
 	}
 
 	@Override

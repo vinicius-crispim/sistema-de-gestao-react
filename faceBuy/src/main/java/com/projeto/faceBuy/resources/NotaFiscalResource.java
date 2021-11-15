@@ -36,11 +36,18 @@ public class NotaFiscalResource {
 	
 	//caso inserir uma barra e um id, ele faz esta busca
 	@GetMapping(value="/{id}")
-	public ResponseEntity<NotaFiscal> findById(@PathVariable Long id){
+	public ResponseEntity<NotaFiscalDTO> findById(@PathVariable Long id){
 		NotaFiscal u = service.findById(id);
-		return ResponseEntity.ok().body(u);
+		NotaFiscalDTO udto = new NotaFiscalDTO(u);
+		return ResponseEntity.ok().body(udto);
 	}
 	
+	@GetMapping(value="/notafiscalpedido/{id}")
+	public ResponseEntity<List<NotaFiscalDTO>> findByPedido(@PathVariable Long id){
+		List<NotaFiscalDTO> u = service.findByPedido(id);
+		//List<NotaFiscalDTO> listDTO = u.stream().map(x -> new NotaFiscalDTO(x)).collect(Collectors.toList());		
+		return ResponseEntity.ok().body(u);
+	}
 	//Post para inserir no banco
 	//RequestBody para informar que o objeto vai chegar no modo Json
 	@PostMapping

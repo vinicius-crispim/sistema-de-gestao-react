@@ -5,4 +5,5 @@ export type RespostaFornecedor = {
     cotacaoitem:CotacaoItem;
     fornecedor:Fornecedor;
     preco:number;
+
 }

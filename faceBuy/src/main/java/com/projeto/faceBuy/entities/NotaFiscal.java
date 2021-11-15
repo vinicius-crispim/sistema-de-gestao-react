@@ -33,11 +33,14 @@ public class NotaFiscal implements Serializable {
 
 	private Double preco;
 
+	private String hora;
 	
 	
 	@ManyToOne
 	@JoinColumn(name = "fornecedor_id")
 	private Fornecedor fornecedor;
+	
+	private Long num_pedido;
 	
 	@ManyToOne
 	@JoinColumn(name = "funcionario_id")
@@ -46,12 +49,14 @@ public class NotaFiscal implements Serializable {
 	@OneToMany(mappedBy = "notafiscal")
     private List<NotaFiscalItem> notafiscalitem = new ArrayList<>();
     
-	public NotaFiscal(Long id, Integer num_nota, String data, Double valorTotal, Fornecedor fornecedor,Funcionario funcionario) {
+	public NotaFiscal(Long id,Long num_pedido ,Integer num_nota, String data, Double valorTotal, Fornecedor fornecedor,Funcionario funcionario,String hora) {
 		this.id = id;
 		this.num_nota = num_nota;
 		this.data = data;
 		this.preco = valorTotal;
 		this.fornecedor = fornecedor;
+		this.hora = hora;
+		this.num_pedido = num_pedido;
 	}
 	public NotaFiscal() {}
 
@@ -110,6 +115,18 @@ public class NotaFiscal implements Serializable {
 	}
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
+	}
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+	public Long getNum_pedido() {
+		return num_pedido;
+	}
+	public void setNum_pedido(Long num_pedido) {
+		this.num_pedido = num_pedido;
 	}
 	@Override
 	public int hashCode() {

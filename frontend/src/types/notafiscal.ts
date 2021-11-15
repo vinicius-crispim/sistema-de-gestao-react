@@ -3,8 +3,11 @@ import { Funcionario } from './funcionario';
 import { Produto } from './produto';
 export type NotaFiscal = {
     id:number;
+    num_pedido?:number;
+    notaFiscalItem:NotaFiscalItem[];
     num_nota:number;
     data:string;
+    hora?:string;
     preco:number;
     fornecedor:Fornecedor;
     funcionario:Funcionario;
