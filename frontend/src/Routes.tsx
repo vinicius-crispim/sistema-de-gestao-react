@@ -1,4 +1,5 @@
-import OrdemCompra from "components/OrdemCompra";
+
+import CadastroCategoriaTela from "pages/cadastrocategoria";
 import CadastroCotacao from "pages/cadastrocotacao";
 import CadastroFornecedor from "pages/cadastrofornecedor";
 import CadastrarFuncionario from "pages/cadastrofuncionario";
@@ -6,6 +7,7 @@ import CadastroProduto from "pages/cadastroproduto";
 import CotacoesEmAndamentoTela from "pages/cotacoesemandamento";
 import CotacoesFinalizadastela from "pages/cotacoesfinalizadas";
 import Estoque from "pages/estoque";
+import GerirCotacoesTela from "pages/gerircotacoes";
 import Home from "pages/home";
 import HomeFornecedor from "pages/home/index forn";
 import Login from "pages/login";
@@ -33,11 +35,14 @@ const Routes = () => {
                 <Route path="/homefornecedor" exact>
                     <HomeFornecedor />
                 </Route>
+                <Route path="/gerircotacoes" exact>
+                    <GerirCotacoesTela />
+                </Route>
+                <Route path="/cadastrocategoria" exact>
+                    <CadastroCategoriaTela />
+                </Route>
                 <Route path="/cotacao" exact>
                     <CadastroCotacao />
-                </Route>
-                <Route path="/ordemcompra" exact>
-                    <OrdemCompra />
                 </Route>
                 <Route path="/cadastrofornecedor" exact>
                     <CadastroFornecedor />

@@ -46,11 +46,11 @@ const VerificaOrdemCompra = () => {
                 console.log("A")
                 console.log(mostrar);
             });
-        
+
 
     }, []);
     const history = useHistory()
-    const [notafiscal, setNotaFiscal] = useState<NotaFiscal>({ notaFiscalItem:[],num_pedido:0,data: "", fornecedor: fornecedorstorage, funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" }, id: 0 }, id: 0, num_nota: 0, preco: 0 })
+    const [notafiscal, setNotaFiscal] = useState<NotaFiscal>({ notaFiscalItem: [], num_pedido: 0, data: "", fornecedor: fornecedorstorage, funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" }, id: 0 }, id: 0, num_nota: 0, preco: 0 })
     const [notafiscalitem, setNotaFiscalItem] = useState<NotaFiscalItem>({ id: 0, notaFiscal: notafiscal, preco: 0, precoitem: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
     function Conclui() {
         axios.post(`${BASE_URL}/ordemcompras/finaliza`, ordemcompra).then(response => {
@@ -80,9 +80,9 @@ const VerificaOrdemCompra = () => {
             })
         }
         )
-        alert("Compra confirmada com sucesso")
-        //history.push("/homefornecedor");
-        //window.location.reload();
+        history.push("/homefornecedor");
+        alert("Nota Fiscal gerada")
+        window.location.reload();
     }
     console.log(ordemcompra)
     return (
@@ -122,8 +122,8 @@ const VerificaOrdemCompra = () => {
                         <tr>
                             <th className="text-center align-middle">Produto</th>
                             <th className="text-center align-middle">Quantidade Pedida</th>
-                            <th className="text-center align-middle">Preço por item</th>
-                            <th className="text-center align-middle">Preço</th>
+                            <th className="text-center align-middle">Preço por item (R$)</th>
+                            <th className="text-center align-middle">Preço (R$)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,7 +141,7 @@ const VerificaOrdemCompra = () => {
                             <th className="text-center align-middle">Valor Total:</th>
                             <th ></th>
                             <th></th>
-                            <th className="text-center align-middle">{ordemcompra.preco}</th>
+                            <th className="text-center align-middle"> R${ordemcompra.preco}</th>
                         </tr>
                     </thead>
                 </table>

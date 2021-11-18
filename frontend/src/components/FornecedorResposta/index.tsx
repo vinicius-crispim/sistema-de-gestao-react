@@ -183,6 +183,9 @@ const FornecedorVisualizaProdutos = () => {
                 console.log(todasrespostas.respostastodas[index]);
 
             }
+            history.push("/homefornecedor");
+            alert("Resposta enviada com sucesso")
+            window.location.reload();
         });
 
 
@@ -228,7 +231,7 @@ const FornecedorVisualizaProdutos = () => {
                 <div className="col">
                 </div>
                 <div className=" col">
-                    <h5>{fornecedorcotacaocompra.precototal + resposta.preco}</h5>
+                    <h5>R${fornecedorcotacaocompra.precototal + resposta.preco}</h5>
                 </div>
             </li>
             <li className="d-flex justify-content-between lh-xx list-group-item">

@@ -62,8 +62,8 @@ const FornecedorVisualizaProdutos = () => {
                 console.log(fornecedorCotacaoCompra);
 
             });
-        
-            
+
+
     }, []);
     const history = useHistory();
     let total: number = 0
@@ -71,7 +71,8 @@ const FornecedorVisualizaProdutos = () => {
         total += mostrar.produtospreco[index]
     }
 
-    const [ordemcompra] = useState<OrdemCompra>({num_pedido:0,
+    const [ordemcompra] = useState<OrdemCompra>({
+        num_pedido: 0,
         fornecedor: { cidade: { id: 0, nome: "" }, cnpj: "", email: "", login: "", nome: "", senha: "" }, funcionario: userstorage, preco: 0,
         ordemcompraitem: []
     });
@@ -82,7 +83,6 @@ const FornecedorVisualizaProdutos = () => {
 
         axios.post(`${BASE_URL}/cotacoes/finaliza`, fornecedorCotacaoCompra.fornecedorcotacaocompraitem[0].cotacaocompraitem.cotacaocompra).then(response => {
             console.log(fornecedorCotacaoCompra.fornecedorcotacaocompraitem[0].cotacaocompraitem.cotacaocompra)
-            alert("COTACAO FINALIZADA")
             console.log(fornecedorCotacaoCompra)
             ordemcompra.preco = total + fornecedorCotacaoCompra.frete;
             ordemcompra.fornecedor = fornecedorCotacaoCompra.fornecedor;
@@ -105,26 +105,29 @@ const FornecedorVisualizaProdutos = () => {
                             console.log("FOI");
                         })
                     }
+                    alert("Ordem de Compra enviada com sucesso!")
+                    history.push("/home");
+                    window.location.reload();
                 })
 
             })
         })
-        alert("Ordem de Compra enviada com sucesso!")
+
     }
     function Abrenota() {
         axios.get(`${BASE_URL}/notaFiscais/${idnota}`)
-        .then(response => {
+            .then(response => {
 
-            const data = response.data as NotaFiscal;
-            localStorage.removeItem("notafiscal");
-            localStorage.setItem('notafiscal', JSON.stringify(data));
-            
-            let bemvindo = JSON.parse(localStorage.getItem('notafiscal') || '{}');
-            console.log(bemvindo);
-            history.push("/notafiscal");
-            window.location.reload();
-            
-        });
+                const data = response.data as NotaFiscal;
+                localStorage.removeItem("notafiscal");
+                localStorage.setItem('notafiscal', JSON.stringify(data));
+
+                let bemvindo = JSON.parse(localStorage.getItem('notafiscal') || '{}');
+                console.log(bemvindo);
+                history.push("/notafiscal");
+                window.location.reload();
+
+            });
     }
     console.log(`TemNOTA fora ${temnota}`)
     console.log(`ID fora ${idnota}`)
@@ -159,8 +162,8 @@ const FornecedorVisualizaProdutos = () => {
                                     <th className="text-center align-middle">Produto</th>
                                     <th className="text-center align-middle">Descrição</th>
                                     <th className="text-center align-middle">Quantidade Pedida</th>
-                                    <th className="text-center align-middle">Preço por item</th>
-                                    <th className="text-center align-middle">Preço total</th>
+                                    <th className="text-center align-middle">Preço por item (R$)</th>
+                                    <th className="text-center align-middle">Preço total (R$)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -180,14 +183,14 @@ const FornecedorVisualizaProdutos = () => {
                                     <th className="text-center align-middle">Valor Total:</th>
                                     <th></th>
                                     <th></th>
-                                    <th className="text-center align-middle">{total}</th>
+                                    <th className="text-center align-middle">R${total}</th>
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
                                     <th ></th>
                                     <th></th>
-                                    <th>Frete:{fornecedorCotacaoCompra.frete}</th>
+                                    <th>Frete: R${fornecedorCotacaoCompra.frete}</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -276,7 +279,7 @@ const FornecedorVisualizaProdutos = () => {
             );
         }
     }
-    else{
+    else {
         if (user.tipo.tipo !== "Gerente") {
 
             return (

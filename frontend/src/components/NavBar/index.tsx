@@ -1,10 +1,54 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import logoNAVBAR from 'assets/img/logoNAVBAR.png'
-import { Link } from 'react-router-dom';
 
+import logoNAVBAR from 'assets/img/logoNAVBAR.png'
+import axios from 'axios';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CotacaoItem } from 'types/cotacao';
+import { Funcionario } from 'types/funcionario';
+import { BASE_URL } from 'utils/request';
+type Todas = {
+    cotacoes: CotacaoTeste[];
+    quantidade: number[];
+}
+
+
+type CotacaoTeste = {
+    id: number;
+    funcionario: Funcionario;
+    item: CotacaoItem[];
+    data?: String;
+
+}
 const NavBar = () => {
+    const [todas, setTodasCotacao] = useState<Todas>({ cotacoes: [], quantidade: [] })
+
+    function troca() {
+        axios.get(`${BASE_URL}/cotacoes`)
+        .then(response => {
+            const data = response.data as CotacaoTeste[];
+            const meusids = data.map(x => x.id);
+            const meusnomes = data.map(x => x.funcionario.nome);
+            const minhasmarcas = data.map(x => x.item);
+            todas.cotacoes = data;
+            for (let index = 0; index < data.length; index++) {
+                todas.quantidade.push(index);
+
+            }
+            localStorage.removeItem("cotacoesfiltradas");
+            localStorage.setItem('cotacoesfiltradas', JSON.stringify(todas));
+
+            let bemvindo = JSON.parse(localStorage.getItem('cotacoesfiltradas') || '{}');
+            console.log(bemvindo);
+            window.location.reload();
+            console.log("TODAS");
+            console.log(todas);
+        });
+    }
+    <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' />
     return (
-        <div className="container py-3">
+
+        <div className="container py-2">
+
             <header>
                 <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
                     <a href="/home" className="d-flex align-items-center text-dark text-decoration-none">
@@ -12,15 +56,16 @@ const NavBar = () => {
                     </a>
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/cotacoes">Fazer Pedido</Link>
-                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/estoque">Estoque</Link>
-                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Respostas de Fornecedores</a>
-
+                        <Link onClick={troca} className="me-3 py-2 text-dark text-decoration-none" to="/gerircotacoes">Gerir Cotacoes</Link>
+                        <Link  className="me-3 py-2 text-dark text-decoration-none" to="/estoque">Estoque</Link>
+                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Criar Cotação</a>
                     </nav>
+
                 </div>
 
+
             </header>
-        </div>
+        </div >
     );
 }
 

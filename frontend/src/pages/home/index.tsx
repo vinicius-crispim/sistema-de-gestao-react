@@ -1,7 +1,7 @@
 import axios from "axios";
 import Footer from "components/Footer";
 import NavBar from "components/NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { CotacaoItem, FornecedorCotacaoCompraSelect } from "types/cotacao";
 import { Funcionario } from "types/funcionario";
@@ -30,6 +30,7 @@ const Home = () => {
 
     const history = useHistory();
 
+
     function onSubmit(event: any) {
         axios.get(`${BASE_URL}/cotacoes/pendente`)
             .then(response => {
@@ -42,7 +43,7 @@ const Home = () => {
                 }
                 localStorage.removeItem("cotacoesemandamento");
                 localStorage.setItem('cotacoesemandamento', JSON.stringify(todas));
-                
+
                 let bemvindo = JSON.parse(localStorage.getItem('cotacoesemandamento') || '{}');
                 console.log(bemvindo);
                 console.log(todas);
@@ -60,7 +61,7 @@ const Home = () => {
                 }
                 localStorage.removeItem("cotacoes");
                 localStorage.setItem('cotacoes', JSON.stringify(todas2));
-                
+
                 let bemvindo = JSON.parse(localStorage.getItem('cotacoes') || '{}');
                 console.log(bemvindo);
                 history.push("/cotacoesemandamento");
@@ -83,7 +84,7 @@ const Home = () => {
                 }
                 localStorage.removeItem("cotacoesfinalizada");
                 localStorage.setItem('cotacoesfinalizada', JSON.stringify(todas));
-                
+
                 let bemvindo = JSON.parse(localStorage.getItem('cotacoesfinalizada') || '{}');
                 console.log(bemvindo);
                 console.log(todas);
@@ -101,7 +102,7 @@ const Home = () => {
                 }
                 localStorage.removeItem("cotacoes");
                 localStorage.setItem('cotacoes', JSON.stringify(todas2));
-                
+
                 let bemvindo = JSON.parse(localStorage.getItem('cotacoes') || '{}');
                 console.log(bemvindo);
                 history.push("/cotacoesfinalizadas");
@@ -120,8 +121,8 @@ const Home = () => {
 
             <div className="container">
                 <div className="jumbotron">
-                    <h1 className="display-4">Facebuy</h1>
-                    <p className="lead">Sistema de Gestão de Compras</p>
+                    <h1 className="display-4 text-center text-primary">Facebuy</h1>
+                    <p className="lead text-center">Sistema de Gestão de Compras</p>
                     <p>{user.nome}</p>
                     <hr />
                     <p>Este é o seu sistema para gerir da melhor maneira as suas compras e para atingir cada vez mais clientes</p>
