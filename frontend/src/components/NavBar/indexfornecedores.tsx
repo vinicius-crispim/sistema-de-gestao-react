@@ -1,8 +1,88 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import logoNAVBAR from 'assets/img/logoNAVBAR.png'
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { CotacaoItem } from 'types/cotacao';
+import { Funcionario } from 'types/funcionario';
+import { OrdemCompra } from 'types/ordemcompra';
+import { BASE_URL } from 'utils/request';
+let fornecedor = JSON.parse(localStorage.getItem('fornecedor') || '{}');
+type CotacaoTeste = {
+    id: number;
+    funcionario: Funcionario;
+    item: CotacaoItem[];
+    data?: String;
 
+}
+type Todas = {
+    cotacoes: CotacaoTeste[];
+    quantidade: number[];
+}
+type Todas2 = {
+    ordens: OrdemCompra[];
+    quantidade: number[];
+}
 const NavBarFornecedor = () => {
+    const history = useHistory();
+    const [todasordens, setOrdens] = useState<Todas2>({ ordens: [], quantidade: [] })
+    const [todas, setTodasCotacao] = useState<Todas>({ cotacoes: [], quantidade: [] })
+
+    function sair() {
+        localStorage.removeItem("fornecedor");
+        localStorage.removeItem("user");
+
+        history.push("/")
+        window.location.reload();
+    }
+
+    function onSubmit(event: any) {
+        axios.get(`${BASE_URL}/cotacoes/autentica/${fornecedor.id}`)
+            .then(response => {
+
+                const data = response.data as CotacaoTeste[];
+                const meusids = data.map(x => x.id);
+                const meusnomes = data.map(x => x.funcionario.nome);
+                const minhasmarcas = data.map(x => x.item);
+                todas.cotacoes = data;
+                for (let index = 0; index < data.length; index++) {
+                    todas.quantidade.push(index);
+
+                }
+                localStorage.removeItem("cotacoes");
+                localStorage.setItem('cotacoes', JSON.stringify(todas));
+
+                let bemvindo = JSON.parse(localStorage.getItem('cotacoes') || '{}');
+                console.log(bemvindo);
+                history.push("/verificarpedidos");
+                window.location.reload();
+                // setCotacoesTodas({ ids: meusids, descricao: minhasmarcas, nomepro: meusnomes, quantidadepedida: minhasquant });
+
+                console.log(todas);
+            });
+    }
+    function onSubmit2(event: any) {
+        axios.get(`${BASE_URL}/ordemcompras/autentica/${fornecedor.id}`)
+            .then(response => {
+
+                const data = response.data as OrdemCompra[];
+                todasordens.ordens = data;
+                for (let index = 0; index < data.length; index++) {
+                    todasordens.quantidade.push(index);
+
+                }
+                localStorage.removeItem("ordens");
+                localStorage.setItem('ordens', JSON.stringify(todasordens));
+
+                let bemvindo = JSON.parse(localStorage.getItem('ordens') || '{}');
+                console.log(bemvindo);
+                history.push("/verificaordens");
+                window.location.reload();
+
+                console.log(todasordens);
+            });
+    }
+
     return (
         <div className="container py-3">
             <header>
@@ -12,8 +92,9 @@ const NavBarFornecedor = () => {
                     </a>
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificarpedidos">Pedidos</Link>
-                        <Link className="me-3 py-2 text-dark text-decoration-none" to="#">Ordens de Compra</Link>
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificarpedidos"onClick={onSubmit}>Pedidos</Link>
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificaordens"onClick={onSubmit2}>Ordens de Compra</Link>
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificaordens" onClick={sair}>Sair</Link>
                     </nav>
                 </div>
 

@@ -48,7 +48,7 @@ const HomeFornecedor = () => {
             },
         },
     });
-    const [todasordens,setOrdens] = useState<Todas2>({ordens:[],quantidade:[]})
+    const [todasordens, setOrdens] = useState<Todas2>({ ordens: [], quantidade: [] })
     const history = useHistory();
 
     function onSubmit(event: any) {
@@ -66,7 +66,7 @@ const HomeFornecedor = () => {
                 }
                 localStorage.removeItem("cotacoes");
                 localStorage.setItem('cotacoes', JSON.stringify(todas));
-                
+
                 let bemvindo = JSON.parse(localStorage.getItem('cotacoes') || '{}');
                 console.log(bemvindo);
                 history.push("/verificarpedidos");
@@ -89,7 +89,7 @@ const HomeFornecedor = () => {
                 }
                 localStorage.removeItem("ordens");
                 localStorage.setItem('ordens', JSON.stringify(todasordens));
-                
+
                 let bemvindo = JSON.parse(localStorage.getItem('ordens') || '{}');
                 console.log(bemvindo);
                 history.push("/verificaordens");
@@ -104,15 +104,58 @@ const HomeFornecedor = () => {
             <NavBarFornecedor />
             <div className="container">
                 <div className="jumbotron">
-                    <h1 className="display-4">Facebuy</h1>
-                    <p className="lead">Sistema de Gestão de Compras</p>
-                    <p>{fornecedor.nome}</p>
-                    <hr />
-                    <p>Este é o seu sistema para gerir da melhor maneira as suas compras e para atingir cada vez mais clientes</p>
-                    <button type="submit" onClick={onSubmit} className="btn btn-success btn-lg">Visualizar Pedidos</button>
-                    <button type="submit" onClick={onSubmit2} className="mx-3 btn btn-success btn-lg">Visualizar Ordens</button>
+                    <h1 className="display-2 text-center text-primary">Facebuy</h1>
+                    <h3 className="lead text-center">Sistema de Gestão de Compras</h3>
+                    <br />
+                    <h5 className="text-center">Bem-vindo</h5>
+                    <br />
+                    <p className="text-center ">Este software foi desenvolvido para fazer a gestão de compras da empresa InovaTech2021, portanto com ele é possível que a empresa faça cotações e compre produtos de seus fornecedores, já para você, fornecedor, a Facebuy tem como objetivo capacitar a venda para a InovaTech2021 de maneira rápida e prática, adinal com o Facebuy é possível toda a parte de venda em um só lugar, agora que já nos conhece, aproveite das funcionalidades que o nosso site oferece!</p>
+                <br />
+                
                 </div>
             </div>
+            <div className="masthead bg-success text-white text-center">
+                <br />
+                <div className="container d-flex align-items-center flex-column">
+                    <h1 className="masthead-heading text-uppercase mb-0">Visualize e responda as Cotações</h1>
+                    <div className="divider-custom divider-light">
+                        <br />
+                        <div className="divider-custom-line"></div>
+                        <div className=" divider-custom-icon text-center"><h4>Clicando no botão, você poderá visualizar as cotações que foram enviadas</h4></div>
+                        <div className=" divider-custom-icon text-center"><h4>pela InovaTech2021, com isso você verá os produtos que foram pedidos e</h4></div>
+                        <div className=" divider-custom-icon text-center"><h4>a quantidade desejada, após verificação, responda a cotação caso tenha</h4></div>
+                        <div className=" divider-custom-icon text-center"><h4>os produtos pedidos</h4></div>
+                        <div className="divider-custom-line"></div>
+                    </div>
+                    <br />
+                    <div className="py-3">
+                    <button type="submit" onClick={onSubmit} className="btn btn-light btn-lg">Visualizar Pedidos</button>
+                </div>
+                <br />
+                </div>
+                
+            </div>
+            <div className="my-2 masthead text-center">
+                <br />
+                <div className="container d-flex align-items-center flex-column">
+                    <h1 className="masthead-heading text-uppercase mb-0">Visualize e responda as Cotações</h1>
+                    <div className="divider-custom divider-light">
+                        <br />
+                        <div className="divider-custom-line"></div>
+                        <div className=" divider-custom-icon text-center"><h4>O ultimo passo para finalizar o processo de venda é confirmar a ordem de </h4></div>
+                        <div className=" divider-custom-icon text-center"><h4>compra com isso a nota fiscal sera gerada e os produtos ja podem ser enviados </h4></div>
+                        <div className=" divider-custom-icon text-center"><h4>para a InovaTech2021, para ver as ordens de compras, selecione o botão a seguir</h4></div>
+                        <div className="divider-custom-line"></div>
+                    </div>
+                    <br />
+                    <div className="py-3">
+                    <button type="submit" onClick={onSubmit2} className="mx-3 btn-success btn-lg">Visualizar Ordens</button>
+                </div>
+                <br />
+                </div>
+                
+            </div>
+
             <Footer />
         </>
     );

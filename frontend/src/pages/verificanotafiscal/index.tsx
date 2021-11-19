@@ -1,13 +1,12 @@
 import Footer from "components/Footer";
-import VerificaOrdem from '../../components/VerificaOrdem/index';
-import NavBarFornecedor from 'components/NavBar/indexfornecedores';
 import VerificaNotaFiscal from '../../components/VerificaNotaFiscal/index';
+import NavBar from "components/NavBar";
 
 const VerificaNotaFiscalTela = () => {
 
     return (
         <>
-            <NavBarFornecedor />
+            <NavBar />
 
             <div className="container">
                 <VerificaNotaFiscal />

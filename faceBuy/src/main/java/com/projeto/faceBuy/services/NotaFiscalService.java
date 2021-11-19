@@ -15,12 +15,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.projeto.faceBuy.entities.CotacaoCompra;
 import com.projeto.faceBuy.entities.FornecedorCotacaoCompra;
 import com.projeto.faceBuy.entities.NotaFiscal;
 import com.projeto.faceBuy.entities.OrdemCompra;
 import com.projeto.faceBuy.entities.DTO.NotaFiscalDTO;
+import com.projeto.faceBuy.repositories.CotacaoCompraRepository;
 import com.projeto.faceBuy.repositories.FornecedorCotacaoCompraRepository;
-import com.projeto.faceBuy.repositories.FornecedorRepository;
 import com.projeto.faceBuy.repositories.NotaFiscalRepository;
 import com.projeto.faceBuy.repositories.OrdemCompraRepository;
 import com.projeto.faceBuy.services.exceptions.DatabaseException;
@@ -31,7 +32,11 @@ public class NotaFiscalService {
 	@Autowired
 	private NotaFiscalRepository repository;
 	@Autowired
-	private FornecedorCotacaoCompraRepository orrepository;
+	private FornecedorCotacaoCompraRepository forrepository;
+	@Autowired
+	private OrdemCompraRepository orrepository;
+	@Autowired
+	private CotacaoCompraRepository cotrepository;
 
 	public List<NotaFiscal> findAll() {
 		return repository.findAll();
@@ -56,6 +61,27 @@ public class NotaFiscalService {
 
 	public NotaFiscal saveNotaFiscal(NotaFiscal notaFiscal) {
 		Date dataAtual = new Date();
+		List<FornecedorCotacaoCompra> listop = forrepository.findAll();
+		CotacaoCompra cotacaocompra = new CotacaoCompra();
+		for (FornecedorCotacaoCompra fornecedorCotacaoCompra : listop) {
+			if (fornecedorCotacaoCompra.getNum_pedido().equals(notaFiscal.getNum_pedido())) {
+				cotacaocompra = fornecedorCotacaoCompra.getCotacaocompra();
+				cotacaocompra.setStatus("Finalizada");
+				fornecedorCotacaoCompra.setStatus("Comprada");
+				cotrepository.save(cotacaocompra);
+				forrepository.save(fornecedorCotacaoCompra);
+			}
+		}
+		for (FornecedorCotacaoCompra fornco : listop) {
+			if (fornco.getNum_pedido().equals(notaFiscal.getNum_pedido())== false) {
+				if (fornco.getCotacaocompra().getId().equals(cotacaocompra.getId())) {
+					fornco.setStatus("Negado");
+					forrepository.save(fornco);
+				}
+			}
+
+		}
+		
 		SimpleDateFormat horaformat = new SimpleDateFormat("HH:mm");
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String dataFormatada = dateFormat.format(dataAtual);
@@ -91,7 +117,7 @@ public class NotaFiscalService {
 
 		obj.setData(notaFiscal.getData());
 		obj.setFornecedor(notaFiscal.getFornecedor());
-		obj.setPreco(notaFiscal.getPreco());
+		obj.setPrecoTotal(notaFiscal.getPrecoTotal());
 	}
 
 }

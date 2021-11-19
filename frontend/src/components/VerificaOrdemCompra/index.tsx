@@ -50,7 +50,7 @@ const VerificaOrdemCompra = () => {
 
     }, []);
     const history = useHistory()
-    const [notafiscal, setNotaFiscal] = useState<NotaFiscal>({ notaFiscalItem: [], num_pedido: 0, data: "", fornecedor: fornecedorstorage, funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" }, id: 0 }, id: 0, num_nota: 0, preco: 0 })
+    const [notafiscal, setNotaFiscal] = useState<NotaFiscal>({ notaFiscalItem: [], num_pedido: 0, data: "", fornecedor: fornecedorstorage, funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" }, id: 0 }, id: 0, num_nota: 0, precoTotal: 0 })
     const [notafiscalitem, setNotaFiscalItem] = useState<NotaFiscalItem>({ id: 0, notaFiscal: notafiscal, preco: 0, precoitem: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
     function Conclui() {
         axios.post(`${BASE_URL}/ordemcompras/finaliza`, ordemcompra).then(response => {
@@ -58,7 +58,7 @@ const VerificaOrdemCompra = () => {
             notafiscal.funcionario = ordemcompra.funcionario;
             notafiscal.num_nota = Math.random() * (999999 - 100) - 100;
             notafiscal.num_pedido = ordemcompra.num_pedido;
-            notafiscal.preco = ordemcompra.preco;
+            notafiscal.precoTotal = ordemcompra.preco;
             axios.post(`${BASE_URL}/notaFiscais`, notafiscal).then(response => {
                 axios.get(`${BASE_URL}/notaFiscais`).then(response => {
                     const data = response.data as NotaFiscal[];
@@ -80,9 +80,9 @@ const VerificaOrdemCompra = () => {
             })
         }
         )
-        history.push("/homefornecedor");
-        alert("Nota Fiscal gerada")
-        window.location.reload();
+        //history.push("/homefornecedor");
+        //alert("Nota Fiscal gerada")
+        //window.location.reload();
     }
     console.log(ordemcompra)
     return (

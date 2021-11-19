@@ -23,6 +23,17 @@ type Mostra = {
 
 const VerificaRespostas = () => {
     const [todas, setTodasCotacao] = useState<Todas>(todasfornecedorcotacaocompra)
+    let total: any = []
+    let aux: number
+    for (let index = 0; index < todas.fornecedorCotacaoCompra.length; index++) {
+        aux = 0
+        for (let index2 = 0; index2 < todas.fornecedorCotacaoCompra[index].fornecedorcotacaocompraitem.length; index2++) {
+            aux += todas.fornecedorCotacaoCompra[index].fornecedorcotacaocompraitem[index2].preco
+        }
+        aux += todas.fornecedorCotacaoCompra[index].frete
+        total.push(aux)
+        console.log(total);
+    }
 
     const [fornecedorcotacaocompra, setFornecedorCotacaoCompra] = useState<FornecedorCotacaoCompraSelect>({
         id: 0,
@@ -92,6 +103,7 @@ const VerificaRespostas = () => {
                         <th className="text-center text-primary">Fornecedor</th>
                         <th className="text-center text-primary">Email</th>
                         <th className="text-center text-primary">Data</th>
+                        <th className="text-center text-primary">Valor Total</th>
                         <th className="text-center text-primary"></th>
 
                     </tr>
@@ -103,6 +115,7 @@ const VerificaRespostas = () => {
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].fornecedor.nome}</td>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].fornecedor.email}</td>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].data}</td>
+                            <td className="text-center">{total[x]}</td>
                             <td className="text-center"><button type="submit" value={todas.fornecedorCotacaoCompra[x].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver detalhes</button></td>
                         </tr>
                     ))}

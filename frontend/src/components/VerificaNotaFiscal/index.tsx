@@ -133,7 +133,7 @@ const VerificaNotaFiscal = () => {
                             <th className="text-center align-middle">Valor Total:</th>
                             <th ></th>
                             <th></th>
-                            <th className="text-center align-middle">{notafiscal.preco}</th>
+                            <th className="text-center align-middle">{notafiscal.precoTotal}</th>
                         </tr>
                     </thead>
                 </table>

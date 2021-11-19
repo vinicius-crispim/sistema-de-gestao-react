@@ -2,7 +2,6 @@ package com.projeto.faceBuy.config;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -324,7 +323,7 @@ public class TestConfig implements CommandLineRunner {
 		Funcionario func8 = new Funcionario();
 		func8.setEmail("hellenliss@gmail.com");
 		func8.setLogin("hellen");
-		func8.setNome("Helle Julia");
+		func8.setNome("Hellen Julia");
 		func8.setSenha("hellen123");
 		func8.setTelefone("95632-4752");
 		func8.setTipo(tipo);
@@ -349,7 +348,7 @@ public class TestConfig implements CommandLineRunner {
 		nf.setData("10/05/2021");
 		nf.setNum_pedido(4588L);
 		nf.setFornecedor(f);
-		nf.setPreco(600.0);
+		nf.setPrecoTotal(600.0);
 		nf.setNum_nota(23);
 		nf.setFuncionario(func2);
 		nf.setHora("18:02");
@@ -358,7 +357,7 @@ public class TestConfig implements CommandLineRunner {
 		nf2.setHora("15:07");
 		nf2.setNum_pedido(400258L);
 		nf2.setFornecedor(f3);
-		nf2.setPreco(320.0);
+		nf2.setPrecoTotal(320.0);
 		nf2.setNum_nota(12);
 		nf2.setFuncionario(func2);
 		nfrepository.save(nf);
@@ -428,7 +427,7 @@ public class TestConfig implements CommandLineRunner {
 		String datateste3 = "15/11/2021";
 		coco3.setFuncionario(func6);
 		coco3.setData(datateste3);
-		coco3.setStatus("Finalizado");
+		coco3.setStatus("Finalizada");
 		CotacaoCompra coco4 = new CotacaoCompra();
 		String datateste4 = "16/11/2021";
 		coco4.setFuncionario(func4);
@@ -489,10 +488,10 @@ public class TestConfig implements CommandLineRunner {
 		fornecedorcotacao4.setDataEntrega("4 dias úteis");
 		fornecedorCotacaoCompraRepository.saveAll(Arrays.asList(fornecedorcotacao4,fornecedorcotacao5));
 		
-		NotaFiscalItem notafiscalitem = new NotaFiscalItem(4, 4500.0, p, nf);
+		NotaFiscalItem notafiscalitem = new NotaFiscalItem(4,400.0, 100.0, p, nf);
 		nfitemrepository.save(notafiscalitem);
 		
-		NotaFiscalItem notafiscalitem2 = new NotaFiscalItem(2, 2210.0, p2, nf2);
+		NotaFiscalItem notafiscalitem2 = new NotaFiscalItem(2,420.0, 210.0, p2, nf2);
 		nfitemrepository.save(notafiscalitem2);
 		FornecedorCotacaoCompraItem forncotacao = new FornecedorCotacaoCompraItem();
 		forncotacao.setCotacaocompraitem(cotaitens);
@@ -687,7 +686,7 @@ public class TestConfig implements CommandLineRunner {
 		nf3.setData("17/11/2021");
 		nf3.setNum_pedido(45896L);
 		nf3.setFornecedor(f);
-		nf3.setPreco(3226.92);
+		nf3.setPrecoTotal(3226.92);
 		nf3.setNum_nota(23);
 		nf3.setFuncionario(func2);
 		nf3.setHora("09:52");

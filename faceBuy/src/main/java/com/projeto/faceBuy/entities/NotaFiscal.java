@@ -31,7 +31,7 @@ public class NotaFiscal implements Serializable {
 	
 	private String data;
 
-	private Double preco;
+	private Double precototal;
 
 	private String hora;
 	
@@ -53,7 +53,7 @@ public class NotaFiscal implements Serializable {
 		this.id = id;
 		this.num_nota = num_nota;
 		this.data = data;
-		this.preco = valorTotal;
+		this.precototal = valorTotal;
 		this.fornecedor = fornecedor;
 		this.hora = hora;
 		this.num_pedido = num_pedido;
@@ -66,7 +66,7 @@ public class NotaFiscal implements Serializable {
 
 	@Override
 	public String toString() {
-		return "NotaFiscal [id=" + id + ", data=" + data + ", valorTotal=" + preco + ", fornecedor=" + fornecedor
+		return "NotaFiscal [id=" + id + ", data=" + data + ", valorTotal=" + precototal + ", fornecedor=" + fornecedor
 				+ ", notafiscalitem=" + notafiscalitem + "]";
 	}
 
@@ -82,12 +82,12 @@ public class NotaFiscal implements Serializable {
 		this.data = data;
 	}
 
-	public Double getPreco() {
-		return preco;
+	public Double getPrecoTotal() {
+		return precototal;
 	}
 
-	public void setPreco(Double valorTotal) {
-		this.preco = valorTotal;
+	public void setPrecoTotal(Double valorTotal) {
+		this.precototal = valorTotal;
 	}
 
 	public Integer getNum_nota() {
@@ -130,7 +130,7 @@ public class NotaFiscal implements Serializable {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(data, num_nota, fornecedor, id, notafiscalitem, preco);
+		return Objects.hash(data, num_nota, fornecedor, id, notafiscalitem, precototal);
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class NotaFiscal implements Serializable {
 		NotaFiscal other = (NotaFiscal) obj;
 		return Objects.equals(data, other.data) && Objects.equals(fornecedor, other.fornecedor)
 				&& Objects.equals(id, other.id) && Objects.equals(notafiscalitem, other.notafiscalitem)
-				&& Objects.equals(preco, other.preco) && Objects.equals(num_nota, other.num_nota);
+				&& Objects.equals(precototal, other.precototal) && Objects.equals(num_nota, other.num_nota);
 	}
 
 }

@@ -170,13 +170,13 @@ const FornecedorVisualizaProdutos = () => {
         fornecedorcotacaocompra.cotacaocompra.funcionario = cotacaotemp.funcionario;
         fornecedorcotacaocompra.cotacaocompra.id = cotacaotemp.id;
         fornecedorcotacaocompra.fornecedor = fornecedorstorage;
-        fornecedorcotacaocompra.num_pedido = Math.random() * (999999 - 100) - 100
+        fornecedorcotacaocompra.num_pedido = Math.random() * (9999 - 100) - 100
         axios.post(`${BASE_URL}/fornecedorcotacaocompras`, fornecedorcotacaocompra).then(response => {
             console.log("COTACAOCOMPRAFOR");
             console.log(fornecedorcotacaocompra);
             console.log(cotacaocompra);
             for (let index = 0; index < todasrespostas.respostastodas.length; index++) {
-                todasrespostas.respostastodas[index].fornecedorCotacaocompra=fornecedorcotacaocompra
+                todasrespostas.respostastodas[index].fornecedorCotacaocompra = fornecedorcotacaocompra
                 axios.post(`${BASE_URL}/respostafornecedor`, todasrespostas.respostastodas[index]).then(response => {
                     console.log(todasrespostas.respostastodas[index]);
                 });
@@ -248,7 +248,11 @@ const FornecedorVisualizaProdutos = () => {
 
             <form onSubmit={onSubmitFIM}>
                 <div className="d-grid gap-3 col-2 mx-auto">
-                    <button type="submit" className="btn btn-success btn-xx my-4">Enviar</button>
+                    <button type="submit" className="btn btn-success btn-xx my-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-check" viewBox="0 0 16 16">
+                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                        </svg>
+                        Enviar</button>
                 </div>
             </form>
         </>

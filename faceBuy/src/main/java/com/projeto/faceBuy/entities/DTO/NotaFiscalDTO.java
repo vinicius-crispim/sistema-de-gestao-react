@@ -17,7 +17,7 @@ public class NotaFiscalDTO implements Serializable{
 	private Long id;
 	private Integer num_nota;
 	private Long num_pedido;
-	private Double preco;
+	private Double precototal;
 	private Funcionario funcionario;
 	private Fornecedor fornecedor;
 	private String hora;
@@ -29,7 +29,7 @@ public class NotaFiscalDTO implements Serializable{
 	
 	public NotaFiscalDTO(NotaFiscal notafiscal) {
 		this.id = notafiscal.getId();
-		this.preco = notafiscal.getPreco();
+		this.precototal = notafiscal.getPrecoTotal();
 		this.num_nota = notafiscal.getNum_nota();
 		this.funcionario = notafiscal.getFuncionario();
 		this.fornecedor = notafiscal.getFornecedor();
@@ -101,12 +101,12 @@ public class NotaFiscalDTO implements Serializable{
 		this.num_pedido = num_pedido;
 	}
 
-	public Double getPreco() {
-		return preco;
+	public Double getPrecoTotal() {
+		return precototal;
 	}
 
-	public void setPreco(Double preco) {
-		this.preco = preco;
+	public void setPrecoTotal(Double preco) {
+		this.precototal = preco;
 	}
 
 

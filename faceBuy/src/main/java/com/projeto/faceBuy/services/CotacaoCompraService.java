@@ -29,30 +29,44 @@ public class CotacaoCompraService {
 	private CotacaoCompraRepository repository;
 	@Autowired
 	private FornecedorRepository fornrepo;
-	
+
 	SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
 
-	
 	public List<CotacaoCompra> findAll() {
 		List<CotacaoCompra> list = repository.findAll();
-		return list;
+		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
+		for(int x=list.size()-1;x>=0;x--) {
+			listalimpa.add(list.get(x));
+		}
+		return listalimpa;
+				//for(int i = strings.length-1;i>=0;i--){
+				 //   System.out.println(strings[i]);
+				//}
 	}
-	
+
 	public List<CotacaoCompra> findAllPendente() {
+		List<CotacaoCompra> listaocontrario = new ArrayList<CotacaoCompra>();
 		List<CotacaoCompra> list = repository.findAll();
 		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
-		for (CotacaoCompra cotacaoCompra : list) {
+		for(int x=list.size()-1;x>=0;x--) {
+			listaocontrario.add(list.get(x));
+		}
+		for (CotacaoCompra cotacaoCompra : listaocontrario) {
 			if (cotacaoCompra.getStatus() == "Pendente") {
 				listalimpa.add(cotacaoCompra);
 			}
 		}
 		return listalimpa;
 	}
-	
+
 	public List<CotacaoCompra> findAllFinalizada() {
+		List<CotacaoCompra> listaocontrario = new ArrayList<CotacaoCompra>();
 		List<CotacaoCompra> list = repository.findAll();
 		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
-		for (CotacaoCompra cotacaoCompra : list) {
+		for(int x=list.size()-1;x>=0;x--) {
+			listaocontrario.add(list.get(x));
+		}
+		for (CotacaoCompra cotacaoCompra : listaocontrario) {
 			if (cotacaoCompra.getStatus() == "Finalizada") {
 				listalimpa.add(cotacaoCompra);
 			}
@@ -60,16 +74,19 @@ public class CotacaoCompraService {
 		return listalimpa;
 	}
 
-
 	public List<CotacaoCompra> findAllAutentica(Long id) {
 		Integer aux = 0;
 		List<CotacaoCompra> list = repository.findAll();
 		Optional<Fornecedor> fornecedorop = fornrepo.findById(id);
 		List<CotacaoCompra> listalimpa = new ArrayList<CotacaoCompra>();
 		List<CotacaoCompra> list2 = new ArrayList<CotacaoCompra>();
+		List<CotacaoCompra> listaocontrario = new ArrayList<CotacaoCompra>();
+		for(int x=list.size()-1;x>=0;x--) {
+			listaocontrario.add(list.get(x));
+		}
 		Fornecedor fornecedor = fornecedorop.get();
-		for (CotacaoCompra cotacoes : list) {
-			aux =0;
+		for (CotacaoCompra cotacoes : listaocontrario) {
+			aux = 0;
 			for (FornecedorCotacaoCompra forcotacoes : fornecedor.getFornecedorcotacaocompra()) {
 				if (forcotacoes.getCotacaocompra() == cotacoes) {
 					aux++;
@@ -102,10 +119,10 @@ public class CotacaoCompraService {
 	}
 
 	public CotacaoCompra finalizaCotacaoCompra(CotacaoCompra cotacaoCompra) {
-		cotacaoCompra.setStatus("Finalizada");
+		
 		return repository.save(cotacaoCompra);
 	}
-	
+
 	public void deleteCotacaoCompra(Long id) {
 		try {
 			repository.deleteById(id);

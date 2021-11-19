@@ -37,15 +37,26 @@ public class NotaFiscalItem implements Serializable {
 	private Integer quantidade;
 
 	private Double precoitem;
+	
+	private Double preco;
 
 	public NotaFiscalItem() {
 	}
 
-	public NotaFiscalItem(Integer quantidade, Double precoitem, Produto produto, NotaFiscal notafiscal) {
+	public NotaFiscalItem(Integer quantidade, Double preco, Double precoitem, Produto produto, NotaFiscal notafiscal) {
 		this.quantidade = quantidade;
+		this.preco = preco;
 		this.precoitem = precoitem;
 		this.notafiscal = notafiscal;
 		this.produto = produto;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getQuantidade() {
@@ -57,11 +68,11 @@ public class NotaFiscalItem implements Serializable {
 	}
 
 	public Double getPreco() {
-		return precoitem;
+		return preco;
 	}
 
-	public void setPreco(Double precoitem) {
-		this.precoitem = precoitem;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	public Double getPrecoitem() {
@@ -85,6 +96,10 @@ public class NotaFiscalItem implements Serializable {
 	}
 	
 	public void setNotaFiscal(NotaFiscal notafiscal) {
+		this.notafiscal = notafiscal;
+	}
+
+	public void setNotafiscal(NotaFiscal notafiscal) {
 		this.notafiscal = notafiscal;
 	}
 

@@ -180,19 +180,19 @@ const FornecedorVisualizaProdutos = () => {
                             <thead>
                                 <tr>
                                     <th ></th>
-                                    <th className="text-center align-middle">Valor Total:</th>
+                                    <th></th>
+                                    <th>Frete: R${fornecedorCotacaoCompra.frete}</th>
                                     <th></th>
                                     <th></th>
-                                    <th className="text-center align-middle">R${total}</th>
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
                                     <th ></th>
+                                    <th className="text-center align-middle">Valor Total:</th>
                                     <th></th>
-                                    <th>Frete: R${fornecedorCotacaoCompra.frete}</th>
                                     <th></th>
-                                    <th></th>
+                                    <th className="text-center align-middle">R${total + fornecedorCotacaoCompra.frete}</th>
                                 </tr>
                             </thead>
                         </table>
@@ -220,7 +220,7 @@ const FornecedorVisualizaProdutos = () => {
                             <h5>CNPJ: {fornecedorCotacaoCompra.fornecedor.cnpj}</h5>
                         </div>
                         <div className="col">
-                            <h5>cidade: {fornecedorCotacaoCompra.fornecedor.cidade.nome}</h5>
+                            <h5>Cidade: {fornecedorCotacaoCompra.fornecedor.cidade.nome}</h5>
                         </div>
                     </li>
                     <div className="table-responsive my-2">
@@ -246,16 +246,7 @@ const FornecedorVisualizaProdutos = () => {
                                     </tr>
                                 ))}
                             </tbody>
-                            <thead>
-                                <tr>
-                                    <th className="text-center align-middle">Total:</th>
-                                    <th ></th>
 
-                                    <th></th>
-                                    <th></th>
-                                    <th className="text-center align-middle">{total}</th>
-                                </tr>
-                            </thead>
                             <thead>
                                 <tr>
                                     <th className="text-center align-middle">Frete:</th>
@@ -263,6 +254,16 @@ const FornecedorVisualizaProdutos = () => {
                                     <th></th>
                                     <th></th>
                                     <th className="text-center align-middle">{fornecedorCotacaoCompra.frete}</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <th className="text-center align-middle">Total:</th>
+                                    <th ></th>
+
+                                    <th></th>
+                                    <th></th>
+                                    <th className="text-center align-middle">{total+fornecedorCotacaoCompra.frete}</th>
                                 </tr>
                             </thead>
                         </table>
@@ -327,25 +328,25 @@ const FornecedorVisualizaProdutos = () => {
                             <thead>
                                 <tr>
                                     <th ></th>
-                                    <th className="text-center align-middle">Valor Total:</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th className="text-center align-middle">{total}</th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th ></th>
                                     <th></th>
                                     <th>Frete:{fornecedorCotacaoCompra.frete}</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
+                            <thead>
+                                <tr>
+                                    <th ></th>
+                                    <th className="text-center align-middle">Valor Total:</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th className="text-center align-middle">{total+fornecedorCotacaoCompra.frete}</th>
+                                </tr>
+                            </thead>
+                           
                         </table>
 
                     </div>
-                    <h3 className="text-center my-3">Somente o gerente poderá aprovar esta compra</h3>
                     <div className="row ">
                         <div className="col text-center">
                             <button onClick={Abrenota} type="submit" className=" btn btn-primary btn-xx">Visualizar Nota Fiscal</button>
@@ -372,7 +373,7 @@ const FornecedorVisualizaProdutos = () => {
                             <h5>CNPJ: {fornecedorCotacaoCompra.fornecedor.cnpj}</h5>
                         </div>
                         <div className="col">
-                            <h5>cidade: {fornecedorCotacaoCompra.fornecedor.cidade.nome}</h5>
+                            <h5>Cidade: {fornecedorCotacaoCompra.fornecedor.cidade.nome}</h5>
                         </div>
                     </li>
                     <div className="table-responsive my-2">
@@ -400,16 +401,6 @@ const FornecedorVisualizaProdutos = () => {
                             </tbody>
                             <thead>
                                 <tr>
-                                    <th className="text-center align-middle">Total:</th>
-                                    <th ></th>
-
-                                    <th></th>
-                                    <th></th>
-                                    <th className="text-center align-middle">{total}</th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
                                     <th className="text-center align-middle">Frete:</th>
                                     <th></th>
                                     <th></th>
@@ -417,15 +408,17 @@ const FornecedorVisualizaProdutos = () => {
                                     <th className="text-center align-middle">{fornecedorCotacaoCompra.frete}</th>
                                 </tr>
                             </thead>
+                            <thead>
+                                <tr>
+                                    <th className="text-center align-middle">Total:</th>
+                                    <th ></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th className="text-center align-middle">{total+fornecedorCotacaoCompra.frete}</th>
+                                </tr>
+                            </thead>
+                           
                         </table>
-                    </div>
-                    <div className="row">
-                        <div className="col text-center">
-                            <button onClick={Aprova} type="submit" className=" btn btn-success btn-xx my-4">Efetuar Compra</button>
-                        </div>
-                        <div className="col text-center">
-                            <button type="submit" className="btn btn-danger btn-xx my-4">Rejeitar Compra</button>
-                        </div>
                     </div>
                     <div className="row ">
                         <div className="col text-center">

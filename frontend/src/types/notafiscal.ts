@@ -8,7 +8,7 @@ export type NotaFiscal = {
     num_nota:number;
     data:string;
     hora?:string;
-    preco:number;
+    precoTotal:number;
     fornecedor:Fornecedor;
     funcionario:Funcionario;
 }
