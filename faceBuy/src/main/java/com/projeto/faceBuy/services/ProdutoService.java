@@ -1,19 +1,21 @@
 package com.projeto.faceBuy.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.projeto.faceBuy.entities.Produto;
 import com.projeto.faceBuy.repositories.ProdutoRepository;
@@ -27,9 +29,18 @@ public class ProdutoService {
 
 	public Page<Produto> findAll(Pageable pageable) {
 		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
-		Page<Produto> result = repository.findAll(pageable);
+	//	Page<Produto> result = repository.findAll(pageable);
+		Page<Produto> result = repository.FindTeste(pageable);
 		return result;	
 		}
+	
+	public Page<Produto> findAllAA(Pageable pageable) {
+		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
+		Page<Produto> result = repository.FindTeste(pageable);
+		
+		return result;	
+		}
+	
 	
 	public List<Produto> findAllNoPage() {
 		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
@@ -48,6 +59,11 @@ public class ProdutoService {
 		return repository.save(produto);
 	}
 
+	public Produto FinalizaProduto(Produto produto) {
+		produto.setStatus("Invalido");
+		return repository.save(produto);
+	}
+	
 	public void deleteProduto(Long id) {
 		try {
 			repository.deleteById(id);

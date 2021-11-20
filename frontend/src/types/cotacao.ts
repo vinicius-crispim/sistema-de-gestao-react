@@ -44,6 +44,7 @@ export type FornecedorCotacaoCompraItem = {
 export type FornecedorCotacaoCompraSelect = {
     id: number;
     data: String;
+    status?:String;
     fornecedor:Fornecedor;
     fornecedorcotacaocompraitem: FornecedorCotacaoCompraItem[];
     frete:number;

@@ -5,7 +5,7 @@ export type Produto = {
     quantidademin: number,
     estoque: number,
     categoria: Categoria,
-
+    status: string
 }
 
 export type Categoria = {
@@ -13,8 +13,8 @@ export type Categoria = {
     nome: string,
 }
 
-export type ProdutoPage ={
-    content?:Produto[];
+export type ProdutoPage = {
+    content?: Produto[];
     last: boolean;
     totalElements: number;
     totalPages: number;
@@ -23,5 +23,5 @@ export type ProdutoPage ={
     size?: number;
     number: number;
     empty?: boolean;
-    status?:String;
+    status?: String;
 }

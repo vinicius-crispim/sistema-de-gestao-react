@@ -23,7 +23,7 @@ const AlteraProduto = () => {
         categoria: {
             id: 0,
             nome: "",
-        }
+        },status:""
     });
 
     const [categoria, setCategoria] = useState<Categoria>({

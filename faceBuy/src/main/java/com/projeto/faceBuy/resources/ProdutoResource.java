@@ -62,6 +62,18 @@ public class ProdutoResource {
 		return ResponseEntity.created(uri).body(produto);
 	}
 	
+	@PostMapping(value="/invalida")
+	public ResponseEntity<Produto> invalidaProduto(@RequestBody Produto produto){
+		produto = service.FinalizaProduto(produto);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(produto.getId())
+				.toUri();
+		
+		return ResponseEntity.created(uri).body(produto);
+	}
+	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteProduto(@PathVariable Long id){
 		service.deleteProduto(id);		

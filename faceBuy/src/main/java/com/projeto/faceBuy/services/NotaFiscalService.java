@@ -75,7 +75,7 @@ public class NotaFiscalService {
 		for (FornecedorCotacaoCompra fornco : listop) {
 			if (fornco.getNum_pedido().equals(notaFiscal.getNum_pedido())== false) {
 				if (fornco.getCotacaocompra().getId().equals(cotacaocompra.getId())) {
-					fornco.setStatus("Negado");
+					fornco.setStatus("Não Comprado");
 					forrepository.save(fornco);
 				}
 			}

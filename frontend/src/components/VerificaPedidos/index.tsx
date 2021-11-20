@@ -40,7 +40,7 @@ const VerificaPedido = () => {
         id: 0,
         cotacaocompra: {funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" } }, id: 0 },
         produto: {
-            id: 0,
+            id: 0,status:"",
             descrição: "",
             estoque: 0,
             nome: "",

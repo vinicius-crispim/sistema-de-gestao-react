@@ -100,6 +100,7 @@ const VerificaRespostas = () => {
                 <thead>
                     <tr>
                         <th className="text-center text-primary">Numero</th>
+                        <th className="text-center text-primary">Status</th>
                         <th className="text-center text-primary">Fornecedor</th>
                         <th className="text-center text-primary">Email</th>
                         <th className="text-center text-primary">Data</th>
@@ -112,6 +113,7 @@ const VerificaRespostas = () => {
                     {todas.quantidade.map(x => (
                         <tr key={todas.fornecedorCotacaoCompra[x].id}>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].id}</td>
+                            <td className="text-center">{todas.fornecedorCotacaoCompra[x].status}</td>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].fornecedor.nome}</td>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].fornecedor.email}</td>
                             <td className="text-center">{todas.fornecedorCotacaoCompra[x].data}</td>

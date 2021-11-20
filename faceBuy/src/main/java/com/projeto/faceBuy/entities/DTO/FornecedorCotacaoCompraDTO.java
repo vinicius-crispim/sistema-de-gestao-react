@@ -20,6 +20,7 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 	private Double precototal;
 	private String dataentrega;
 	private Double frete;
+	private String status;
 	private Long num_pedido;
 	private List<FornecedorCotacaoCompraItem> fornecedorcotacaocompraitem = new ArrayList<>();
 
@@ -37,6 +38,7 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 		this.data = teste.getData();
 		this.dataentrega = teste.getDataEntrega();
 		this.frete = teste.getFrete();
+		this.status = teste.getStatus();
 	}
 
 	public String getData() {
@@ -97,6 +99,14 @@ public class FornecedorCotacaoCompraDTO implements Serializable {
 
 	public void setNum_pedido(Long num_pedido) {
 		this.num_pedido = num_pedido;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

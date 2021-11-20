@@ -34,7 +34,7 @@ const CotacaoFeita = () => {
         id: 0,
         cotacaocompra: cotacaocompra,
         produto: {
-            id: 0,
+            id: 0,status:"",
             descrição: "",
             estoque: 0,
             nome: "",

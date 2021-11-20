@@ -22,7 +22,6 @@ const EstoqueTable = () => {
     useEffect(() => {
         axios.get(`${BASE_URL}/produtos?page=${activePage}&size=5&sort=estoque,desc`)
             .then(response => {
-
                 setPage(response.data);
             })
     }, [activePage]);
@@ -32,7 +31,7 @@ const EstoqueTable = () => {
     }
 
     const history = useHistory();
-    const [produtotemp, setProdutoTemp] = useState<Produto>({ descrição: "", estoque: 0, nome: "", categoria: { id: 0, nome: "" }, id: 0, quantidademin: 0 })
+    const [produtotemp, setProdutoTemp] = useState<Produto>({ status:"",descrição: "", estoque: 0, nome: "", categoria: { id: 0, nome: "" }, id: 0, quantidademin: 0 })
 
     function onSubmit(event: any) {
         event.preventDefault();
@@ -66,6 +65,7 @@ const EstoqueTable = () => {
                             <th className="text-center font-weight-bold">Quantidade em Estoque</th>
                             <th className="text-center font-weight-bold">Quantidade Mínimia</th>
                             <th className="text-center font-weight-bold">Descrição</th>
+                            <th className="text-center font-weight-bold">Descrição</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -77,6 +77,7 @@ const EstoqueTable = () => {
                                 <td className="text-center">{x.estoque}</td>
                                 <td className="text-center">{x.quantidademin}</td>
                                 <td className="text-center">{x.descrição}</td>
+                                <td className="text-center">{x.status}</td>
                                 <td className="text-center"><button type="submit" value={x.id} onClick={onSubmit} className="btn btn-success btn-lg">Editar</button></td>
                             </tr>
                         ))}

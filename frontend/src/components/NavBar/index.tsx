@@ -2,7 +2,7 @@
 import logoNAVBAR from 'assets/img/logoNAVBAR.png'
 import axios from 'axios';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { CotacaoItem } from 'types/cotacao';
 import { Funcionario } from 'types/funcionario';
 import { BASE_URL } from 'utils/request';
@@ -43,6 +43,15 @@ const NavBar = () => {
             console.log("TODAS");
             console.log(todas);
         });
+        
+    }
+    const history = useHistory();
+    function Sair() {
+        localStorage.removeItem("fornecedor");
+        localStorage.removeItem("user");
+
+        history.push("/")
+        window.location.reload();
     }
     <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' />
     return (
@@ -58,7 +67,7 @@ const NavBar = () => {
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                         <Link onClick={troca} className="me-3 py-2 text-dark text-decoration-none" to="/gerircotacoes">Gerir Cotacoes</Link>
                         <Link  className="me-3 py-2 text-dark text-decoration-none" to="/estoque">Estoque</Link>
-                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Criar Cotação</a>
+                        <Link onClick={Sair} className="me-3 py-2 text-dark text-decoration-none" to="/">Sair</Link>
                     </nav>
 
                 </div>

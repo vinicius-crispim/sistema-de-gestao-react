@@ -77,7 +77,7 @@ const FornecedorVisualizaProdutos = () => {
         ordemcompraitem: []
     });
 
-    const [ordemcompraitem] = useState<OrdemCompraItem>({ preco: 0, precoitem: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
+    const [ordemcompraitem] = useState<OrdemCompraItem>({ preco: 0, precoitem: 0, produto: { status:"",categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
     function Aprova() {
         console.log(fornecedorCotacaoCompra.fornecedorcotacaocompraitem[0].cotacaocompraitem.cotacaocompra)
 

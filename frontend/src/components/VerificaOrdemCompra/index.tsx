@@ -51,7 +51,7 @@ const VerificaOrdemCompra = () => {
     }, []);
     const history = useHistory()
     const [notafiscal, setNotaFiscal] = useState<NotaFiscal>({ notaFiscalItem: [], num_pedido: 0, data: "", fornecedor: fornecedorstorage, funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" }, id: 0 }, id: 0, num_nota: 0, precoTotal: 0 })
-    const [notafiscalitem, setNotaFiscalItem] = useState<NotaFiscalItem>({ id: 0, notaFiscal: notafiscal, preco: 0, precoitem: 0, produto: { categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
+    const [notafiscalitem, setNotaFiscalItem] = useState<NotaFiscalItem>({ id: 0, notaFiscal: notafiscal, preco: 0, precoitem: 0, produto: { status:"",categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
     function Conclui() {
         axios.post(`${BASE_URL}/ordemcompras/finaliza`, ordemcompra).then(response => {
             notafiscal.fornecedor = ordemcompra.fornecedor;

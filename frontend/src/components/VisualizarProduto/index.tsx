@@ -26,7 +26,7 @@ const VisualizarProduto = () => {
         categoria: {
             id: 0,
             nome: "",
-        }
+        },status:""
     });
 
     useEffect(() => {
@@ -59,11 +59,16 @@ const VisualizarProduto = () => {
         console.log({ name, value });
         setProduto({ ...produto, [name]: value });
     }
-    function deletar(event: any) {
-        axios.delete(`${BASE_URL}/produtos/${produto.id}`).then((response) => {
-            history.push("/estoque");
-            alert("PRODUTO DELETADO COM SUCESSO");
-        })
+    function deletar(event: { preventDefault: () => void; }) {
+        event.preventDefault();
+        console.log(produto)
+        axios.post(`${BASE_URL}/produtos/invalida`, produto)
+            .then((response) => {
+                alert("PRODUTO INVALIDADO COM SUCESSO");
+                history.push("/estoque");
+                window.location.reload();
+                console.log(produto)
+            });
     }
 
 

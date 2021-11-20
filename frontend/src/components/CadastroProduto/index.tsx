@@ -23,7 +23,7 @@ const CadastroProduto = () => {
         categoria: {
             id: 0,
             nome: "",
-        }
+        },status:""
     });
 
     const [categoria, setCategoria] = useState<Categoria>({

@@ -56,7 +56,7 @@ const CotacoesFinalizadas = () => {
             categoria: {
                 id: 0,
                 nome: "",
-            },
+            },status:""
         },
         quantidade: 200
     })

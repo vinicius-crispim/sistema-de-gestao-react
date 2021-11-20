@@ -160,7 +160,7 @@ const GerirCotacoes = () => {
         <>
             <h3 className="text-center display-3">Gerencie as Cotações</h3>
             <h6 className="text-center my-2">Verifique as cotações da empresa e clique em ver cotação para visualizar as respostas dos fornecedores, aqui você também pode filtrar a pesquisa, visualizando apenas as cotações já finalizadas e compradas, cotações em andamento e todas as cotações já feitas</h6>
-            <div className="text-center">
+            <div className="">
                 <select className="text-center my-2" onChange={filtro}>
                     <option value="0">Selecione um filtro</option>
                     <option value="1">Todas as Cotações</option>
