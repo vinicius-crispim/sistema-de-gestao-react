@@ -1,10 +1,9 @@
 import Footer from "components/Footer";
-
-import CadastroCategoria from "components/CadastroCategoria";
 import NavBar from "components/NavBar";
 import NavBarGerente from 'components/NavBar/indexgerente';
+import CadastroCidade from '../../components/CadastroCidade/index';
 
-const CadastroCategoriaTela = () => {
+const CadastroCidadeTela = () => {
     let tipo = JSON.parse(localStorage.getItem('tipo') || '{}');
 if (tipo.tipo !== "Gerente") {
     return (
@@ -12,7 +11,7 @@ if (tipo.tipo !== "Gerente") {
             <NavBar />
 
             <div className="container">
-                <CadastroCategoria />
+                <CadastroCidade />
             </div>
             <Footer />
         </>
@@ -23,7 +22,7 @@ if (tipo.tipo !== "Gerente") {
             <NavBarGerente />
 
             <div className="container">
-                <CadastroCategoria />
+                <CadastroCidade />
             </div>
             <Footer />
         </>
@@ -32,4 +31,4 @@ if (tipo.tipo !== "Gerente") {
     
 }
 
-export default CadastroCategoriaTela;
+export default CadastroCidadeTela;

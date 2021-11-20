@@ -1,6 +1,8 @@
 
 import CadastroCategoriaTela from "pages/cadastrocategoria";
+import CadastroCidadeTela from "pages/cadastrocidade";
 import CadastroCotacao from "pages/cadastrocotacao";
+import CadastroEstadoTela from "pages/cadastroestado";
 import CadastroFornecedor from "pages/cadastrofornecedor";
 import CadastrarFuncionario from "pages/cadastrofuncionario";
 import CadastroProduto from "pages/cadastroproduto";
@@ -14,6 +16,8 @@ import Login from "pages/login";
 import NotaFiscalteste from "pages/notafiscal";
 import RespostaTela from "pages/respostafornecedor";
 import VerificaNotaFiscalTela from "pages/verificanotafiscal";
+import VerificaNotaFiscalFornecedorTela from "pages/verificanotafiscalfornecedor";
+import VerificaNotaFornecedor from "pages/verificanotafornecedor";
 import VerificaOrdemTela from "pages/verificaordem";
 import VerificaPedidoTela from "pages/verificapedido";
 import VerificaRespostaProdutosTela from "pages/verificarespostaprodutos";
@@ -40,6 +44,12 @@ const Routes = () => {
                 </Route>
                 <Route path="/cadastrocategoria" exact>
                     <CadastroCategoriaTela />
+                </Route>
+                <Route path="/cadastroestado" exact>
+                    <CadastroEstadoTela />
+                </Route>
+                <Route path="/cadastrocidade" exact>
+                    <CadastroCidadeTela />
                 </Route>
                 <Route path="/cotacao" exact>
                     <CadastroCotacao />
@@ -89,8 +99,14 @@ const Routes = () => {
                 <Route path="/notafiscal">
                     <VerificaNotaFiscalTela />
                 </Route>
+                <Route path="/notafiscalfornecedor">
+                    <VerificaNotaFiscalFornecedorTela />
+                </Route>
                 <Route path="/cotacoesfinalizadas">
                     <CotacoesFinalizadastela />
+                </Route>
+                <Route path="/verificanotasfornecedor">
+                    <VerificaNotaFornecedor />
                 </Route>
             </Switch>
         </BrowserRouter>

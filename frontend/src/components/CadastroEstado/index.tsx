@@ -1,15 +1,15 @@
 import axios from "axios";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Categoria, Produto } from "types/produto";
+import { Estado } from "types/cidade";
 import { BASE_URL } from "utils/request";
 
 
 
-const CadastroCategoria = () => {
+const CadastroEstado = () => {
 
-    const [categoria, setCategoria] = useState<Categoria>({
+    const [estado, setEstado] = useState<Estado>({
         id: 0,
         nome: "",
     });
@@ -20,14 +20,14 @@ const CadastroCategoria = () => {
         const { name, value } = event.target;
 
         console.log({ name, value });
-        setCategoria({ ...categoria, [name]: value });
+        setEstado({ ...estado, [name]: value });
     }
 
 
     function onSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
 
-        axios.post(`${BASE_URL}/categorias`, categoria)
+        axios.post(`${BASE_URL}/estados`, estado)
             .then((response) => {
                 history.push('/home');
                 window.location.reload();
@@ -42,7 +42,7 @@ const CadastroCategoria = () => {
                     <div className="row py-1">
                         <div className="col">
                             <div className="promotion-form__group">
-                                <label htmlFor="nome">Nome da Categoria:</label>
+                                <label htmlFor="nome">Nome do Estado:</label>
                                 <input className="form-control" type="text" id="nome" name="nome" onChange={onChange} required />
                             </div>
                         </div>
@@ -56,4 +56,4 @@ const CadastroCategoria = () => {
     );
 }
 
-export default CadastroCategoria;
+export default CadastroEstado;

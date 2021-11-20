@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,12 +17,14 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.projeto.faceBuy.entities.CotacaoCompra;
+import com.projeto.faceBuy.entities.Fornecedor;
 import com.projeto.faceBuy.entities.FornecedorCotacaoCompra;
 import com.projeto.faceBuy.entities.NotaFiscal;
 import com.projeto.faceBuy.entities.OrdemCompra;
 import com.projeto.faceBuy.entities.DTO.NotaFiscalDTO;
 import com.projeto.faceBuy.repositories.CotacaoCompraRepository;
 import com.projeto.faceBuy.repositories.FornecedorCotacaoCompraRepository;
+import com.projeto.faceBuy.repositories.FornecedorRepository;
 import com.projeto.faceBuy.repositories.NotaFiscalRepository;
 import com.projeto.faceBuy.repositories.OrdemCompraRepository;
 import com.projeto.faceBuy.services.exceptions.DatabaseException;
@@ -35,6 +38,8 @@ public class NotaFiscalService {
 	private FornecedorCotacaoCompraRepository forrepository;
 	@Autowired
 	private OrdemCompraRepository orrepository;
+	@Autowired
+	private FornecedorRepository fornecrepository;
 	@Autowired
 	private CotacaoCompraRepository cotrepository;
 
@@ -54,6 +59,22 @@ public class NotaFiscalService {
 		return listlimpa;
 	}
 
+	public List<NotaFiscalDTO> findByFornecedor(Long id) {
+		List<NotaFiscal> list = repository.findAll();
+		Fornecedor fonr = fornecrepository.findById(id).get();
+		List<NotaFiscalDTO> listDTO = list.stream().map(x -> new NotaFiscalDTO(x)).collect(Collectors.toList());
+		List<NotaFiscalDTO> listlimpa = new ArrayList<NotaFiscalDTO>();
+			for(int x=0;x<fonr.getNotasfiscais().size();x++) {
+				for (NotaFiscalDTO notaFiscal : listDTO) {
+					if (notaFiscal.getId().equals(fonr.getNotasfiscais().get(x).getId())) {
+						listlimpa.add(notaFiscal);
+					}
+				}
+			}
+		
+		return listlimpa;
+	}
+	
 	public NotaFiscal findById(Long id) {
 		Optional<NotaFiscal> op = repository.findById(id);
 		return op.orElseThrow(() -> new ResourceNotFoundException(id));

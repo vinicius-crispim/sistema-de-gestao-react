@@ -48,6 +48,14 @@ public class NotaFiscalResource {
 		//List<NotaFiscalDTO> listDTO = u.stream().map(x -> new NotaFiscalDTO(x)).collect(Collectors.toList());		
 		return ResponseEntity.ok().body(u);
 	}
+	
+	@GetMapping(value="/notafiscalfornecedor/{id}")
+	public ResponseEntity<List<NotaFiscalDTO>> findByfornecedor(@PathVariable Long id){
+		List<NotaFiscalDTO> u = service.findByFornecedor(id);
+		//List<NotaFiscalDTO> listDTO = u.stream().map(x -> new NotaFiscalDTO(x)).collect(Collectors.toList());		
+		return ResponseEntity.ok().body(u);
+	}
+	
 	//Post para inserir no banco
 	//RequestBody para informar que o objeto vai chegar no modo Json
 	@PostMapping

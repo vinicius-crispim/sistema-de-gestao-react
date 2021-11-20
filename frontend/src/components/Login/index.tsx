@@ -177,6 +177,8 @@ const LoginUser = () => {
             localStorage.removeItem("fornecedor");
             localStorage.removeItem("user");
             localStorage.setItem('user', JSON.stringify(temp));
+            localStorage.removeItem("tipo");
+            localStorage.setItem('tipo', JSON.stringify(temp.tipo));
             
             let bemvindo = JSON.parse(localStorage.getItem('user') || '{}');
             alert(`BEM VINDO ${bemvindo.nome}`);

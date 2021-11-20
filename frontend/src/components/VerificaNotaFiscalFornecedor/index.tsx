@@ -21,7 +21,7 @@ type Mostrar = {
 
 let notafiscalstorage = JSON.parse(localStorage.getItem('notafiscal') || '{}');
 
-const VerificaNotaFiscal = () => {
+const VerificaNotaFiscalFornecedor = () => {
     const [notafiscal, setNotaFiscal] = useState<NotaFiscal>(notafiscalstorage);
     const [mostrar, setMostrar] = useState<Mostrar>({ produtospreco: [], produtosprecoitem: [], produtosnome: [], produtosquantidade: [], quantia: [] })
     let p = 0;
@@ -141,4 +141,4 @@ const VerificaNotaFiscal = () => {
         </>
     );
 }
-export default VerificaNotaFiscal;
+export default VerificaNotaFiscalFornecedor;

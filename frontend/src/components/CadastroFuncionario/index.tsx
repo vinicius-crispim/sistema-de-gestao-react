@@ -78,7 +78,7 @@ const CadastrarFuncionario = () => {
 
         axios.post(`${BASE_URL}/funcionarios`, values)
             .then((response) => {
-                history.push('/');
+                history.push('/home');
                 window.location.reload();
             });
     }

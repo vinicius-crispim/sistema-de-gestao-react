@@ -7,6 +7,7 @@ import { CotacaoItem } from 'types/cotacao';
 import { Funcionario } from 'types/funcionario';
 import { OrdemCompra } from 'types/ordemcompra';
 import { BASE_URL } from 'utils/request';
+import { NotaFiscal } from '../../types/notafiscal';
 let fornecedor = JSON.parse(localStorage.getItem('fornecedor') || '{}');
 type CotacaoTeste = {
     id: number;
@@ -19,6 +20,10 @@ type Todas = {
     cotacoes: CotacaoTeste[];
     quantidade: number[];
 }
+type TodasNotas = {
+    notas: NotaFiscal[];
+    quantidade: number[];
+}
 type Todas2 = {
     ordens: OrdemCompra[];
     quantidade: number[];
@@ -27,13 +32,13 @@ const NavBarFornecedor = () => {
     const history = useHistory();
     const [todasordens, setOrdens] = useState<Todas2>({ ordens: [], quantidade: [] })
     const [todas, setTodasCotacao] = useState<Todas>({ cotacoes: [], quantidade: [] })
+    const [todasnotas, setTodasNotas] = useState<TodasNotas>({ notas: [], quantidade: [] })
 
     function sair() {
         localStorage.removeItem("fornecedor");
         localStorage.removeItem("user");
 
         history.push("/")
-        window.location.reload();
     }
 
     function onSubmit(event: any) {
@@ -55,6 +60,29 @@ const NavBarFornecedor = () => {
                 let bemvindo = JSON.parse(localStorage.getItem('cotacoes') || '{}');
                 console.log(bemvindo);
                 history.push("/verificarpedidos");
+                window.location.reload();
+                // setCotacoesTodas({ ids: meusids, descricao: minhasmarcas, nomepro: meusnomes, quantidadepedida: minhasquant });
+
+                console.log(todas);
+            });
+    }
+    function onSubmit3(event: any) {
+        axios.get(`${BASE_URL}/notaFiscais/notafiscalfornecedor/${fornecedor.id}`)
+            .then(response => {
+
+                const data = response.data as NotaFiscal[];
+
+                todasnotas.notas = data;
+                for (let index = 0; index < data.length; index++) {
+                    todasnotas.quantidade.push(index);
+
+                }
+                localStorage.removeItem("notas");
+                localStorage.setItem('notas', JSON.stringify(todasnotas));
+
+                let bemvindo = JSON.parse(localStorage.getItem('notas') || '{}');
+                console.log(bemvindo);
+                history.push("/verificanotasfornecedor");
                 window.location.reload();
                 // setCotacoesTodas({ ids: meusids, descricao: minhasmarcas, nomepro: meusnomes, quantidadepedida: minhasquant });
 
@@ -92,9 +120,10 @@ const NavBarFornecedor = () => {
                     </a>
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificanotasfornecedor"onClick={onSubmit3}>Notas Fiscais</Link>
                         <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificarpedidos"onClick={onSubmit}>Pedidos</Link>
                         <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificaordens"onClick={onSubmit2}>Ordens de Compra</Link>
-                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/verificaordens" onClick={sair}>Sair</Link>
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/" onClick={sair}>Sair</Link>
                     </nav>
                 </div>
 

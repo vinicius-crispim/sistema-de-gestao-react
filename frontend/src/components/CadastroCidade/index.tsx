@@ -12,7 +12,7 @@ type TodosEstados = {
 }
 
 
-const CadastroCategoria = () => {
+const CadastroCidade = () => {
     const [todosEstados, setTodosEstados] = useState<TodosEstados>({ ids: [], nomes: [] });
 
     const [cidade, setCidade] = useState<Cidade>({
@@ -102,4 +102,4 @@ const CadastroCategoria = () => {
     );
 }
 
-export default CadastroCategoria;
+export default CadastroCidade;

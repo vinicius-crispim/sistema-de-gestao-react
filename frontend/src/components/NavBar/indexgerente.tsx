@@ -19,7 +19,7 @@ type CotacaoTeste = {
     data?: String;
 
 }
-const NavBar = () => {
+const NavBarGerente = () => {
     const [todas, setTodasCotacao] = useState<Todas>({ cotacoes: [], quantidade: [] })
 
     function troca() {
@@ -64,6 +64,7 @@ const NavBar = () => {
                     </a>
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/cadastrofuncionario">Cadastrar Funcionário</Link>
                         <Link onClick={troca} className="me-3 py-2 text-dark text-decoration-none" to="/gerircotacoes">Gerir Cotacoes</Link>
                         <Link  className="me-3 py-2 text-dark text-decoration-none" to="/estoque">Estoque</Link>
                         <Link onClick={Sair} className="me-3 py-2 text-dark text-decoration-none" to="/">Sair</Link>
@@ -77,5 +78,5 @@ const NavBar = () => {
     );
 }
 
-export default NavBar;
+export default NavBarGerente;
 
