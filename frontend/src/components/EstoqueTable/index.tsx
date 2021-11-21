@@ -24,8 +24,39 @@ const EstoqueTable = () => {
             .then(response => {
                 setPage(response.data);
             })
+            
     }, [activePage]);
-
+    function filtro(event:any) {
+        const {name,value} = event.target;
+        if(value === '2'){
+            axios.get(`${BASE_URL}/produtos/inativos?page=${activePage}&size=5&sort=estoque,desc`)
+            .then(response => {
+                setPage(response.data);
+            console.log(page)
+            })      
+        }
+        if(value === '1'){
+            axios.get(`${BASE_URL}/produtos?page=${activePage}&size=5&sort=estoque,desc`)
+            .then(response => {
+                setPage(response.data);
+            console.log(page)
+            })      
+        }
+        if(value === '3'){
+            axios.get(`${BASE_URL}/produtos/emfalta?page=${activePage}&size=5&sort=estoque,desc`)
+            .then(response => {
+                setPage(response.data);
+            console.log(page)
+            })      
+        }
+        if(value === '4'){
+            axios.get(`${BASE_URL}/produtos/todos?page=${activePage}&size=5&sort=estoque,desc`)
+            .then(response => {
+                setPage(response.data);
+            console.log(page)
+            })      
+        }
+    }
     const changePage = (index: number) => {
         setActivePage(index);
     }
@@ -56,7 +87,15 @@ const EstoqueTable = () => {
         <>
 
             <div className="table-responsive">
+            <select className="text-center my-2" onChange={filtro}>
+                    <option value="0">Selecione um filtro</option>
+                    <option value="1">Produtos Válidos</option>
+                    <option value="2">Produtos Inválidos</option>
+                    <option value="3">Produtos em Falta</option>
+                    <option value="4">Todos os Produtos</option>
+                </select>
                 <table className="table table table-light table-md table-hover align-middle caption-top">
+                
                     <caption className="text-primary">Lista de Produtos</caption>
                     <thead>
                         <tr>
@@ -65,7 +104,7 @@ const EstoqueTable = () => {
                             <th className="text-center font-weight-bold">Quantidade em Estoque</th>
                             <th className="text-center font-weight-bold">Quantidade Mínimia</th>
                             <th className="text-center font-weight-bold">Descrição</th>
-                            <th className="text-center font-weight-bold">Descrição</th>
+                            <th className="text-center font-weight-bold">Status</th>
                             <th></th>
                         </tr>
                     </thead>

@@ -33,10 +33,25 @@ public class ProdutoResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping(value="/noPage")
-	public ResponseEntity<List<Produto>> findAllNoPage(){
+	@GetMapping(value="/inativos")
+	public ResponseEntity<Page<Produto>> findAllInativos(Pageable pageable){
 
-		List<Produto> list = service.findAllNoPage();
+		Page<Produto> list = service.findAllInativos(pageable);
+		
+		return ResponseEntity.ok().body(list);
+	}
+	@GetMapping(value="/emfalta")
+	public ResponseEntity<Page<Produto>> findAllEmFalta(Pageable pageable){
+
+		Page<Produto> list = service.findAllEmFalta(pageable);
+		
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value="/todos")
+	public ResponseEntity<Page<Produto>> findAllTodos(Pageable pageable){
+
+		Page<Produto> list = service.findAllNoPage(pageable);
 		return ResponseEntity.ok().body(list);
 	}
 	

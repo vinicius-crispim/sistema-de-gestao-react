@@ -33,6 +33,18 @@ public class ProdutoService {
 		Page<Produto> result = repository.FindTeste(pageable);
 		return result;	
 		}
+	public Page<Produto> findAllInativos(Pageable pageable) {
+		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
+	//	Page<Produto> result = repository.findAll(pageable);
+		Page<Produto> result = repository.FindInativos(pageable);
+		return result;	
+		}
+	public Page<Produto> findAllEmFalta(Pageable pageable) {
+		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
+	//	Page<Produto> result = repository.findAll(pageable);
+		Page<Produto> result = repository.FindEmFalta(pageable);
+		return result;	
+		}
 	
 	public Page<Produto> findAllAA(Pageable pageable) {
 		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
@@ -42,9 +54,9 @@ public class ProdutoService {
 		}
 	
 	
-	public List<Produto> findAllNoPage() {
+	public Page<Produto> findAllNoPage(Pageable pageable) {
 		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
-		List<Produto> result = repository.findAll();
+		Page<Produto> result = repository.findAll(pageable);
 		return result;
 		}
 	
