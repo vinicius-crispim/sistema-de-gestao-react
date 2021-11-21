@@ -117,7 +117,8 @@ const FornecedorVisualizaProdutos = () => {
     function onSubmit(event: any) {
         event.preventDefault();
         const { name, value } = event.target
-        axios.get(`${BASE_URL}/cotacaoitens/${value}`).then(response => {
+        let id = parseInt(value)
+        axios.get(`${BASE_URL}/cotacaoitens/${id}`).then(response => {
             const data = response.data as CotacaoItem;
             console.log("FOI");
             console.log(data);
@@ -214,7 +215,9 @@ const FornecedorVisualizaProdutos = () => {
                         <input placeholder="Preço de uma unidade" className="form-control-sm my-2" type="number" step="0.01" id="precoitem" name="precoitem" onChange={onChange} />
                     </div>
                     <div className="col">
-                        <button type="submit" value={mostrar.produtosids[x - 1]} onClick={onSubmit} className="btn btn-success btn my-2 mx-5">Responder</button>
+                        <button type="submit" value={mostrar.produtosids[x - 1]} onClick={onSubmit} className="btn text-dark text-black  btn-success btn my-2 mx-4"><svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>Adicionar</button>
                     </div>
                 </li>
             ))}
@@ -248,7 +251,7 @@ const FornecedorVisualizaProdutos = () => {
 
             <form onSubmit={onSubmitFIM}>
                 <div className="d-grid gap-3 col-2 mx-auto">
-                    <button type="submit" className="btn btn-success btn-xx my-4">
+                    <button type="submit" className="btn btn-success btn-xx my-4 text-dark text-black">
                         <svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-check" viewBox="0 0 16 16">
                             <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
                         </svg>

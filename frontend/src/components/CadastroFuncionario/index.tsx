@@ -138,7 +138,7 @@ const CadastrarFuncionario = () => {
                         </div>
                     </div>
                     <div className="d-grid gap-3 col-2 mx-auto">
-                        <button type="submit" className="btn btn-success btn-lg my-4">Cadastrar</button>
+                        <button type="submit" className="btn btn-success btn-lg my-4 text-dark text-black ">Cadastrar</button>
                     </div>
                 </form>
             </div>

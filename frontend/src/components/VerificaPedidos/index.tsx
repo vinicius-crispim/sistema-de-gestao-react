@@ -16,7 +16,7 @@ type CotacaoTeste = {
 
 type Todas = {
     cotacoes: CotacaoTeste[];
-    quantidade:number[];
+    quantidade: number[];
 }
 
 let fornecedor = JSON.parse(localStorage.getItem('fornecedor') || '{}');
@@ -38,9 +38,9 @@ type Mostra = {
 const VerificaPedido = () => {
     const [cotacoes, setCotacoes] = useState<CotacaoItem>({
         id: 0,
-        cotacaocompra: {funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" } }, id: 0 },
+        cotacaocompra: { funcionario: { email: "", login: "", nome: "", senha: "", telefone: "", tipo: { id: 0, tipo: "" } }, id: 0 },
         produto: {
-            id: 0,status:"",
+            id: 0, status: "",
             descrição: "",
             estoque: 0,
             nome: "",
@@ -88,7 +88,7 @@ const VerificaPedido = () => {
 
         });
     }*/
-let teste:number;
+    let teste: number;
     const [todas, setTodasCotacao] = useState<Todas>(todascotacoes)
     let das;
     const [cotacao, setCotacao] = useState<CotacaoTeste>({
@@ -106,28 +106,32 @@ let teste:number;
         }
     });
     console.log("AA")
-console.log(todas);
+    console.log(todas);
     return (
         <div className="table-responsive">
             <h3 className="text-center display-4">Pedidos Pendentes</h3>
-            
+
             <table className="table table-striped table-md">
                 <thead>
                     <tr>
-                        <th className="text-center text-primary"></th>
+                        <th className="text-center text-primary">Número</th>
+
                         <th className="text-center text-primary">Autor</th>
                         <th className="text-center text-primary">Email</th>
                         <th className="text-center text-primary">Data</th>
+                        <th className="text-center text-primary"></th>
+
                     </tr>
                 </thead>
                 <tbody>
                     {todas.quantidade.map(x => (
                         <tr key={todas.cotacoes[x].id}>
-                            <td className="text-center"><button type="submit" value={todas.cotacoes[x].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver Pedido</button></td>
+                            <td className="text-center">{todas.cotacoes[x].id}</td>
                             <td className="text-center">{todas.cotacoes[x].funcionario.nome}</td>
                             <td className="text-center">{todas.cotacoes[x].funcionario.email}</td>
                             <td className="text-center">{todas.cotacoes[x].data}</td>
-                            
+                            <td className="text-center"><button type="submit" value={todas.cotacoes[x].id} onClick={onSubmit} className="btn text-dark text-black btn-success btn-lg">Ver Pedido</button></td>
+
                         </tr>
                     ))}
                 </tbody>

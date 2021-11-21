@@ -282,7 +282,7 @@ const [usuario] = useState<Funcionario>(user)
                             <div className="divider-custom-line"></div>
                         </div>
                         <div className="py-3">
-                            <button type="submit" onClick={gerenciarcotações} className="btn btn-light btn-lg">Gerenciar Cotações</button>
+                            <button type="submit" onClick={gerenciarcotações} className="btn  text-dark text-black btn-light btn-lg">Gerenciar Cotações</button>
                         </div>
                         <br />
                     </div>
@@ -303,7 +303,7 @@ const [usuario] = useState<Funcionario>(user)
                             <div className="divider-custom-line"></div>
                         </div>
                         <div className="py-3">
-                            <Link className="btn btn-success btn-lg" to="/estoque"> Estoque</Link>
+                            <Link className="btn btn-success btn-lg text-dark text-black " to="/estoque"> Estoque</Link>
                         </div>
                         <br />
                     </div>

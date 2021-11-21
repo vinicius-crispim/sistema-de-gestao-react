@@ -139,7 +139,7 @@ console.log(todas.cotacoes);
                 <tbody>
                     {todas.quantidade.map(x => (
                         <tr key={todas.cotacoes[x].id}>
-                            <td className="text-center"><button type="submit" value={todas.cotacoes[x].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver Pedido</button></td>
+                            <td className="text-center"><button type="submit" value={todas.cotacoes[x].id} onClick={onSubmit} className="btn btn-success btn-lg  text-dark text-black ">Ver Pedido</button></td>
                             <td className="text-center">{todas.cotacoes[x].funcionario.nome}</td>
                             <td className="text-center">{todas.cotacoes[x].funcionario.email}</td>
                             <td className="text-center">{todas.cotacoes[x].data}</td>

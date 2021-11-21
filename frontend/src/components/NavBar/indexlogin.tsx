@@ -12,7 +12,6 @@ const NavBarLogin = () => {
                     </a>
 
                     <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <Link className="me-3 py-2 text-dark text-decoration-none" to="/cadastrofuncionario">Cadastrar Funcionário</Link>
                         <Link className="me-3 py-2 text-dark text-decoration-none" to="/cadastrofornecedor">Cadastrar Fornecedor</Link>
                         <Link className="me-3 py-2 text-dark text-decoration-none" to="#">Ajuda</Link>
 

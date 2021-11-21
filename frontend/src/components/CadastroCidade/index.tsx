@@ -94,7 +94,7 @@ const CadastroCidade = () => {
                         </div>
                     </div>
                     <div className="d-grid gap-3 col-2 mx-auto">
-                        <button type="submit" className="btn btn-success btn-lg my-4">Salvar</button>
+                        <button type="submit" className="btn btn-success btn-lg my-4 text-dark text-black ">Salvar</button>
                     </div>
                 </form>
             </div>

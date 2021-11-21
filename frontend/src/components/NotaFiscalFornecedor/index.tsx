@@ -96,24 +96,24 @@ console.log(todas);
             <table className="table table-striped table-md align-middle">
                 <thead>
                     <tr>
-                        <th className="text-center text-primary"></th>
                         <th className="text-center text-primary">Número</th>
                         <th className="text-center text-primary">Autor</th>
                         <th className="text-center text-primary">Email</th>
                         <th className="text-center text-primary">Data</th>
                         <th className="text-center text-primary">Valor</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {todas.quantidade.map(x => (
                         <tr key={todas.notas[x].id}>
-                            <td className="text-center"><button type="submit" value={todas.notas[x].id} onClick={onSubmit} className="btn btn-success btn-lg">Ver Nota</button></td>
                             <td className="text-center">{todas.notas[x].num_nota}</td>
                             <td className="text-center">{todas.notas[x].funcionario.nome}</td>
                             <td className="text-center">{todas.notas[x].funcionario.email}</td>
                             <td className="text-center">{todas.notas[x].data}</td>
                             <td className="text-center">{todas.notas[x].precoTotal}</td>
-                            
+                            <td className="text-center"><button type="submit" value={todas.notas[x].id} onClick={onSubmit} className="btn text-dark text-black btn-success btn-lg">Ver Nota</button></td>
+
                         </tr>
                     ))}
                 </tbody>

@@ -78,7 +78,7 @@ const EstoqueTable = () => {
                                 <td className="text-center">{x.quantidademin}</td>
                                 <td className="text-center">{x.descrição}</td>
                                 <td className="text-center">{x.status}</td>
-                                <td className="text-center"><button type="submit" value={x.id} onClick={onSubmit} className="btn btn-success btn-lg">Editar</button></td>
+                                <td className="text-center"><button type="submit" value={x.id} onClick={onSubmit} className="btn text-dark text-black  btn-success btn-lg">Editar</button></td>
                             </tr>
                         ))}
                     </tbody>
@@ -87,7 +87,9 @@ const EstoqueTable = () => {
             </div>
             <div className="text-center my-3" >
                 <p className="lead">Adicione um novo produto</p>
-                <button type="submit" onClick={onSubmitAdd} className="btn btn-success btn-lg mx-5 px-5">Adicionar</button>
+                <button type="submit" onClick={onSubmitAdd} className="btn btn-success  text-dark text-black  btn-lg mx-5 px-5"><svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>Adicionar</button>
             </div>
         </>
     );

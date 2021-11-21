@@ -109,7 +109,7 @@ const VerificaNotaFiscal = () => {
 
             <div className="table-responsive my-2">
                 <table className="table table-striped table-light table-md table-hover align-middle caption-top">
-                    <caption className="text-primary text-center">Detalhes da Ordem de Compra</caption>
+                    <caption className="text-primary text-center">Detalhes da Nota</caption>
                     <thead>
                         <tr>
                             <th className="text-center align-middle">Produto</th>

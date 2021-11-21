@@ -236,11 +236,12 @@ const LoginUser = () => {
                     </div>
                     <div>
                         <h6 className="text-secondary">Caso não tenha conta </h6>
-                        <Link className="my-2 text-decoration-none" to="/cadastrofuncionario">Clique aqui para cadastrar-se como funcionário</Link> <br />
-                        <Link className="my-2 text-decoration-none" to="/cadastrofornecedor"> Clique aqui para cadastrar-se como fornecedor</Link>
+                        <Link className="text-decoration-none" to="/cadastrofornecedor"> Clique aqui para cadastrar-se como fornecedor</Link>
+                        <p className="text-muted">Se for funcionário entre em contato com um gerente para receber sua conta</p>
+
                     </div>
                     <div className="d-grid gap-3 col-2 mx-auto">
-                        <button type="submit" className="px-9 btn btn-success btn-lg my-4">Entrar</button>
+                        <button type="submit" className="px-9 btn btn-success btn-lg my-4 text-dark text-black ">Entrar</button>
                     </div>
                 </form>
             </div>

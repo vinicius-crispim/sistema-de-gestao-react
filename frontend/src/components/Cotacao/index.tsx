@@ -167,7 +167,9 @@ const CotacaoFeita = () => {
                     </div>
                 </div>
                 <div className="d-grid gap-3 col-2 mx-auto">
-                    <button type="submit" className="btn btn-success btn-lg my-4" >Adicionar</button>
+                    <button type="submit" className="btn btn-success btn-lg my-3 px-2  text-dark text-black " ><svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>Adicionar</button>
                 </div>
             </form>
             <hr />
@@ -193,7 +195,9 @@ const CotacaoFeita = () => {
             </div>
             <form onSubmit={onSubmitFIM}>
                 <div className="d-grid gap-3 col-3 mx-auto">
-                    <button type="submit" className="btn btn-success btn-xx my-4">Enviar cotação</button>
+                    <button type="submit" className="btn btn-success btn-xx my-4 text-dark text-black "><svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-check" viewBox="0 0 16 16">
+                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                        </svg>Enviar cotação</button>
                 </div>
             </form>
         </>
