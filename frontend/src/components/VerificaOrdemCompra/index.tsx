@@ -88,7 +88,7 @@ const VerificaOrdemCompra = () => {
     console.log(ordemcompra)
     return (
         <>
-            <h3 className="text-center">Veja os detalhes do pedido:</h3>
+            <h3 className="text-center">Veja os detalhes da Ordem de Compra:</h3>
             <li className="d-flex justify-content-between lh-sm list-group-item">
                 <div className="col">
                     <h5>Aprovador: {ordemcompra.funcionario.nome}</h5>
@@ -118,7 +118,7 @@ const VerificaOrdemCompra = () => {
             </li>
             <div className="table-responsive my-2">
                 <table className="table table-striped table-light table-md table-hover align-middle caption-top">
-                    <caption className="text-primary text-center">Detalhes da Ordem de Compra</caption>
+                    <caption className="text-primary text-center">Produtos da Ordem de Compra</caption>
                     <thead>
                         <tr>
                             <th className="text-center align-middle">Produto</th>

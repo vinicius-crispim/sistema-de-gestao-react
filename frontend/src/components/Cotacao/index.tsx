@@ -49,7 +49,7 @@ const CotacaoFeita = () => {
     const [itensTodos, setItensTodos] = useState<TodosItens>({ itenstodos: [] })
     const [todosProdutos, setTodosProdutos] = useState<TodosProdutos>({ ids: [], nomes: [] });
 
-
+let numeros : number[] = []
     useEffect(() => {
         axios.get(`${BASE_URL}/produtos/noPage`)
             .then(response => {
@@ -58,6 +58,10 @@ const CotacaoFeita = () => {
                 const meusids = data.map(x => x.id);
                 const meusnomes = data.map(x => x.nome);
                 setTodosProdutos({ ids: meusids, nomes: meusnomes });
+                for (let index = 0; index < todosProdutos.ids.length; index++) {
+                    numeros.push(index);
+                    
+                }
                 console.log(data);
                 console.log(todosProdutos);
                 console.log("rodouu");
@@ -141,6 +145,7 @@ const CotacaoFeita = () => {
         alert("Cotação enviada com sucesso");
         window.location.reload();
     }
+    
 
     return (
         <>
@@ -161,7 +166,7 @@ const CotacaoFeita = () => {
                         <select name="produto" className="form-select" aria-label="Default select example" onChange={acha}>
                             <option>Selecione</option>
                             {todosProdutos.ids.map(x => (
-                                <option key={"produto" + x} value={x}>{todosProdutos.nomes[x - 1]}</option>
+                                <option key={"produto" + x} value={x}>{todosProdutos.nomes[x-1]}</option>
                             ))}
                         </select>
                     </div>
@@ -179,6 +184,7 @@ const CotacaoFeita = () => {
                         <tr>
                             <th className="text-center text-primary">Nome</th>
                             <th className="text-center text-primary">Categoria</th>
+                            <th className="text-center text-primary">Descrição</th>
                             <th className="text-center text-primary">Quantidade</th>
                         </tr>
                     </thead>
@@ -187,6 +193,7 @@ const CotacaoFeita = () => {
                             <tr key={x.produto.id}>
                                 <td className="text-center">{x.produto.nome}</td>
                                 <td className="text-center">{x.produto.categoria.nome}</td>
+                                <td className="text-center">{x.produto.descrição}</td>
                                 <td className="text-center">{x.quantidade}</td>
                             </tr>
                         ))}

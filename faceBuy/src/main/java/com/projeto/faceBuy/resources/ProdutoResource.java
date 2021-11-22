@@ -47,6 +47,13 @@ public class ProdutoResource {
 		
 		return ResponseEntity.ok().body(list);
 	}
+	@GetMapping(value="/noPage")
+	public ResponseEntity<List<Produto>> findAllNoPage(){
+
+		List<Produto> list = service.findAllList();
+		
+		return ResponseEntity.ok().body(list);
+	}
 	
 	@GetMapping(value="/todos")
 	public ResponseEntity<Page<Produto>> findAllTodos(Pageable pageable){
@@ -80,6 +87,18 @@ public class ProdutoResource {
 	@PostMapping(value="/invalida")
 	public ResponseEntity<Produto> invalidaProduto(@RequestBody Produto produto){
 		produto = service.FinalizaProduto(produto);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(produto.getId())
+				.toUri();
+		
+		return ResponseEntity.created(uri).body(produto);
+	}
+	
+	@PostMapping(value="/valida")
+	public ResponseEntity<Produto> validadaProduto(@RequestBody Produto produto){
+		produto = service.ValidaProduto(produto);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}")

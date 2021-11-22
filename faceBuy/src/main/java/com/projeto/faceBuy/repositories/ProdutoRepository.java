@@ -10,13 +10,13 @@ import com.projeto.faceBuy.entities.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
-	@Query("select u from Produto u where u.status = 'Valido'")
+	@Query("select u from Produto u where u.status = 'Válido'")
 	Page<Produto> FindTeste(Pageable pageable);
 	
-	@Query("select u from Produto u where u.status = 'Invalido'")
+	@Query("select u from Produto u where u.status = 'Inválido'")
 	Page<Produto> FindInativos(Pageable pageable);
 
-	@Query("select u from Produto u where u.estoque < u.quantidademin and u.status = 'Valido'")
+	@Query("select u from Produto u where u.estoque < u.quantidademin and u.status = 'Válido'")
 	Page<Produto> FindEmFalta(Pageable pageable);
 
 }

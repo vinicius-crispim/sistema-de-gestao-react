@@ -1,9 +1,9 @@
 import axios from "axios";
-
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Categoria, Produto } from "types/produto";
 import { BASE_URL } from "utils/request";
+
 
 
 type TodasCategoria = {
@@ -23,7 +23,7 @@ const CadastroProduto = () => {
         categoria: {
             id: 0,
             nome: "",
-        },status:""
+        }, status: ""
     });
 
     const [categoria, setCategoria] = useState<Categoria>({
@@ -44,7 +44,6 @@ const CadastroProduto = () => {
 
     function onSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
-        
         axios.post(`${BASE_URL}/produtos`, values)
             .then((response) => {
                 history.push('/estoque');
@@ -70,6 +69,7 @@ const CadastroProduto = () => {
     }, []);
 
     function acha(event: { preventDefault: () => void; target: { name: any; value: any; }; }) {
+        
         event.preventDefault();
         const { name, value } = event.target;
         console.log({ name, value });
@@ -85,8 +85,9 @@ const CadastroProduto = () => {
 
     return (
         <>
+            
             <div className="container" >
-               
+
                 <form onSubmit={onSubmit} >
                     <div className="row py-1">
                         <div className="col">

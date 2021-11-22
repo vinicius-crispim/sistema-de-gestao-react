@@ -71,6 +71,17 @@ const VisualizarProduto = () => {
             });
     }
 
+    function validar(event: { preventDefault: () => void; }) {
+        event.preventDefault();
+        console.log(produto)
+        axios.post(`${BASE_URL}/produtos/valida`, produto)
+            .then((response) => {
+                alert("PRODUTO INVALIDADO COM SUCESSO");
+                history.push("/estoque");
+                window.location.reload();
+                console.log(produto)
+            });
+    }
 
     function onSubmitAltera(event: { preventDefault: () => void; }) {
         event.preventDefault();
@@ -118,7 +129,7 @@ const VisualizarProduto = () => {
     }
 
     
-
+    if(produto.status === "Válido"){
     return (
         <>
 
@@ -163,7 +174,7 @@ const VisualizarProduto = () => {
                 </li>
                 <li className="d-flex justify-content-between lh-sm list-group-item py-3 text-center">
                         <div className="col">
-                            <button type="button" className="btn btn-warning" onClick={onSubmitAltera}>
+                            <button type="button" className="btn btn-warning text-dark text-black " onClick={onSubmitAltera}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-exclamation" viewBox="0 0 16 16">
                                     <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0L7.1 4.995z" />
                                 </svg>
@@ -171,11 +182,11 @@ const VisualizarProduto = () => {
                             </button>
                         </div>
                         <div className="col">
-                            <button type="submit" onClick={onSubmit} className="btn btn-success btn-lg">Voltar</button>
+                            <button type="submit" onClick={onSubmit} className="btn text-dark text-black btn-info btn-lg">Voltar</button>
 
                         </div>
                         <div className="col">
-                            <button type="submit" onClick={deletar} className="btn btn-danger btn-lg">
+                            <button type="submit" onClick={deletar} className="btn btn-danger text-dark text-black btn-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                                 </svg>
@@ -186,7 +197,74 @@ const VisualizarProduto = () => {
 
             </div>
         </>
-    );
+    );}else{return (
+        <>
+
+            <h3 className="text-center">Veja os detalhes do produto</h3>
+            <div className="card">
+                <li className="d-flex justify-content-between lh-sm list-group-item py-3">
+                    <div className="col text-center ">
+                        <h5>ID: {prod.id}</h5>
+                    </div>
+                </li>
+                <li className="d-flex justify-content-between lh-sm list-group-item py-3">
+                    <div className="col">
+                        <h5>Nome:</h5>
+                        <input placeholder={prod.nome} className="form-control" type="text" id="nome" name="nome" onChange={onChange}></input>
+                    </div>
+                    <div className="col">
+                        <h5>Categoria:</h5>
+                        <select name="categoria" className="form-select mx-2" aria-label="Default select example" onChange={acha}>
+                            <option >Selecione</option>
+                            {todasCategorias.ids.map(x => (
+                                <option key={"categoria" + x} value={x}>{todasCategorias.nomes[x - 1]}</option>
+                            ))}
+                        </select>
+                    </div>
+                </li>
+                <li className="d-flex justify-content-between lh-sm list-group-item py-3">
+                    <div className="col">
+                        <h5>Quantidade Minima: </h5>
+                        <input placeholder={produto.quantidademin.toString()} className="form-control" type="number" id="quantidademin" name="quantidademin" onChange={onChange} />
+                    </div>
+                    <div className="col">
+                        <h5>Quantidade em Estoque:</h5>
+                        <input placeholder={produto.estoque.toString()} className="form-control mx-2" type="number" id="estoque" name="estoque" onChange={onChange} />
+                    </div>
+
+                </li>
+                <li className="d-flex justify-content-between lh-sm list-group-item py-3">
+                    <div className="col">
+                        <h5>Descrição: </h5>
+                        <input placeholder={produto.descrição} className="form-control" type="text" id="descrição" name="descrição" onChange={onChange} />
+                    </div>
+                </li>
+                <li className="d-flex justify-content-between lh-sm list-group-item py-3 text-center">
+                        <div className="col">
+                            <button type="button" className="btn btn-warning text-dark text-black " onClick={onSubmitAltera}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-exclamation" viewBox="0 0 16 16">
+                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.553.553 0 0 1-1.1 0L7.1 4.995z" />
+                                </svg>
+                                Alterar
+                            </button>
+                        </div>
+                        <div className="col">
+                            <button type="submit" onClick={onSubmit} className="btn btn-info btn-lg text-dark text-black ">Voltar</button>
+
+                        </div>
+                        <div className="col">
+                            <button type="submit" onClick={validar} className="btn btn-success text-dark text-black btn-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                                Validar
+                            </button>
+                        </div>
+                    </li>
+
+            </div>
+        </>
+    )}
 }
 
 export default VisualizarProduto;

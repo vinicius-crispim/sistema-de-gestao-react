@@ -60,6 +60,18 @@ public class ProdutoService {
 		return result;
 		}
 	
+	public List<Produto> findAllList() {
+		repository.findAll();//traz para a memoria para nao repetir o select no banco, funciona pois nao tem mtos vebdedores
+		List<Produto> result = repository.findAll();
+		List<Produto> limpa = new ArrayList<Produto>();
+		for (Produto produto : result) {
+			if(produto.getStatus().equals("Válido")) {
+				limpa.add(produto);
+			}
+		}
+		return result;
+		}
+	
 	@Transactional(readOnly = true)//garante que toda a operaÃ§Ã£o com banco seja resolvida aqui e ReadOnly nao faz lock no banco pois Ã© so select, nao muda nd no banco
 	public Produto findById(Long id) {
 		Optional<Produto> op = repository.findById(id);
@@ -67,12 +79,17 @@ public class ProdutoService {
 	}
 
 	public Produto saveProduto(Produto produto) {
-		produto.setStatus("Valido");
+		produto.setStatus("Válido");
 		return repository.save(produto);
 	}
 
 	public Produto FinalizaProduto(Produto produto) {
-		produto.setStatus("Invalido");
+		produto.setStatus("Inválido");
+		return repository.save(produto);
+	}
+	
+	public Produto ValidaProduto(Produto produto) {
+		produto.setStatus("Válido");
 		return repository.save(produto);
 	}
 	
