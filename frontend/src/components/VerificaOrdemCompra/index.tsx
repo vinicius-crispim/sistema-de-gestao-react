@@ -139,7 +139,7 @@ const VerificaOrdemCompra = () => {
                     </tbody>
                     <thead>
                         <tr>
-                            <th className="text-center align-middle">Valor Total:</th>
+                            <th className="text-center align-middle">Valor Total (com frete):</th>
                             <th ></th>
                             <th></th>
                             <th className="text-center align-middle"> R${ordemcompra.preco}</th>

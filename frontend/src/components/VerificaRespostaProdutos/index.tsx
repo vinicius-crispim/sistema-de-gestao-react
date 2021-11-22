@@ -77,7 +77,7 @@ const FornecedorVisualizaProdutos = () => {
         ordemcompraitem: []
     });
 
-    const [ordemcompraitem] = useState<OrdemCompraItem>({ preco: 0, precoitem: 0, produto: { status:"",categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
+    const [ordemcompraitem] = useState<OrdemCompraItem>({ preco: 0, precoitem: 0, produto: { status: "", categoria: { id: 0, nome: "" }, descrição: "", estoque: 0, id: 0, nome: "", quantidademin: 0 }, quantidade: 0 })
     function Aprova() {
         console.log(fornecedorCotacaoCompra.fornecedorcotacaocompraitem[0].cotacaocompraitem.cotacaocompra)
 
@@ -154,6 +154,11 @@ const FornecedorVisualizaProdutos = () => {
                             <h5>Cidade: {fornecedorCotacaoCompra.fornecedor.cidade.nome}</h5>
                         </div>
                     </li>
+                    <li className="d-flex justify-content-between lh-sm list-group-item">
+                        <div className="col">
+                            <h5>Previsão de Entrega: {fornecedorCotacaoCompra.dataentrega}</h5>
+                        </div>
+                    </li>
                     <div className="table-responsive my-2">
                         <table className="table table-striped table-light table-md table-hover align-middle caption-top">
                             <caption className="text-primary text-center">Detalhes da resposta</caption>
@@ -178,18 +183,17 @@ const FornecedorVisualizaProdutos = () => {
                                 ))}
                             </tbody>
                             <thead>
-                                <tr>
-                                    <th ></th>
-                                    <th></th>
-                                    <th>Frete: R${fornecedorCotacaoCompra.frete}</th>
+                                <tr className="text-center">
+                                    <th >Frete:</th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
+                                    <th>{fornecedorCotacaoCompra.frete}</th>
                                 </tr>
                             </thead>
                             <thead>
-                                <tr>
+                                <tr><th className="text-center align-middle">Total:</th>
                                     <th ></th>
-                                    <th className="text-center align-middle">Valor Total:</th>
                                     <th></th>
                                     <th></th>
                                     <th className="text-center align-middle">R${total + fornecedorCotacaoCompra.frete}</th>
@@ -206,7 +210,7 @@ const FornecedorVisualizaProdutos = () => {
         else {
             return (
                 <>
-                    <h3 className="text-center">Veja os detalhes do pedido:</h3>
+                    <h3 className="text-center">Veja os detalhes da resposta:</h3>
                     <li className="d-flex justify-content-between lh-sm list-group-item">
                         <div className="col">
                             <h5>Autor: {fornecedorCotacaoCompra.fornecedor.nome}</h5>
@@ -221,6 +225,12 @@ const FornecedorVisualizaProdutos = () => {
                         </div>
                         <div className="col">
                             <h5>Cidade: {fornecedorCotacaoCompra.fornecedor.cidade.nome}</h5>
+                        </div>
+
+                    </li>
+                    <li className="d-flex justify-content-between lh-sm list-group-item">
+                        <div className="col">
+                            <h5>Previsão de Entrega: {fornecedorCotacaoCompra.dataentrega}</h5>
                         </div>
                     </li>
                     <div className="table-responsive my-2">
@@ -263,7 +273,7 @@ const FornecedorVisualizaProdutos = () => {
 
                                     <th></th>
                                     <th></th>
-                                    <th className="text-center align-middle">{total+fornecedorCotacaoCompra.frete}</th>
+                                    <th className="text-center align-middle">{total + fornecedorCotacaoCompra.frete}</th>
                                 </tr>
                             </thead>
                         </table>
@@ -271,13 +281,13 @@ const FornecedorVisualizaProdutos = () => {
                     <div className="row py-1">
                         <div className="col text-center">
                             <button onClick={Aprova} type="submit" className=" btn text-dark text-black btn-success btn-xx my-4"><svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-check" viewBox="0 0 16 16">
-                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
-                        </svg>Efetuar Compra</button>
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                            </svg>Enviar Ordem de Compra</button>
                         </div>
                         <div className="col text-center">
                             <button type="submit" className="btn text-dark text-black btn-danger btn-xx my-4"><svg xmlns="http://www.w3.org/2000/svg" width="44" height="35" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
-                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                </svg>Rejeitar Compra</button>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>Rejeitar Compra</button>
                         </div>
                     </div>
                 </>
@@ -306,6 +316,11 @@ const FornecedorVisualizaProdutos = () => {
                             <h5>Cidade: {fornecedorCotacaoCompra.fornecedor.cidade.nome}</h5>
                         </div>
                     </li>
+                    <li className="d-flex justify-content-between lh-sm list-group-item">
+                        <div className="col">
+                            <h5>Previsão de Entrega: {fornecedorCotacaoCompra.dataentrega}</h5>
+                        </div>
+                    </li>
                     <div className="table-responsive my-2">
                         <table className="table table-striped table-light table-md table-hover align-middle caption-top">
                             <caption className="text-primary text-center">Detalhes da resposta</caption>
@@ -330,24 +345,24 @@ const FornecedorVisualizaProdutos = () => {
                                 ))}
                             </tbody>
                             <thead>
-                                <tr>
-                                    <th ></th>
-                                    <th></th>
-                                    <th>Frete:{fornecedorCotacaoCompra.frete}</th>
+                                <tr className="text-center">
+                                    <th >Frete:</th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
+                                    <th>{fornecedorCotacaoCompra.frete}</th>
                                 </tr>
                             </thead>
                             <thead>
-                                <tr>
+                            <tr><th className="text-center align-middle">Total:</th>
                                     <th ></th>
-                                    <th className="text-center align-middle">Valor Total:</th>
+                                    
                                     <th></th>
                                     <th></th>
-                                    <th className="text-center align-middle">{total+fornecedorCotacaoCompra.frete}</th>
+                                    <th className="text-center align-middle">{total + fornecedorCotacaoCompra.frete}</th>
                                 </tr>
                             </thead>
-                           
+
                         </table>
 
                     </div>
@@ -380,6 +395,11 @@ const FornecedorVisualizaProdutos = () => {
                             <h5>Cidade: {fornecedorCotacaoCompra.fornecedor.cidade.nome}</h5>
                         </div>
                     </li>
+                    <li className="d-flex justify-content-between lh-sm list-group-item">
+                        <div className="col">
+                            <h5>Previsão de Entrega: {fornecedorCotacaoCompra.dataentrega}</h5>
+                        </div>
+                    </li>
                     <div className="table-responsive my-2">
                         <table className="table table-striped table-light table-md table-hover align-middle caption-top">
                             <caption className="text-primary text-center">Detalhes da resposta</caption>
@@ -418,10 +438,10 @@ const FornecedorVisualizaProdutos = () => {
                                     <th ></th>
                                     <th></th>
                                     <th></th>
-                                    <th className="text-center align-middle">{total+fornecedorCotacaoCompra.frete}</th>
+                                    <th className="text-center align-middle">{total + fornecedorCotacaoCompra.frete}</th>
                                 </tr>
                             </thead>
-                           
+
                         </table>
                     </div>
                     <div className="row ">

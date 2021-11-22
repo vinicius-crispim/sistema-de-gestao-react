@@ -111,7 +111,7 @@ const VerificaPedido = () => {
         <div className="table-responsive">
             <h3 className="text-center display-4">Pedidos Pendentes</h3>
 
-            <table className="table table-striped table-md">
+            <table className="table table-striped table-md align-middle">
                 <thead>
                     <tr>
                         <th className="text-center text-primary">Número</th>

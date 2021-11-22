@@ -159,7 +159,7 @@ const GerirCotacoes = () => {
     return (
         <>
             <h3 className="text-center display-3">Gerencie as Cotações</h3>
-            <h6 className="text-center my-2">Verifique as cotações da empresa e clique em ver cotação para visualizar as respostas dos fornecedores, aqui você também pode filtrar a pesquisa, visualizando apenas as cotações já finalizadas e compradas, cotações em andamento e todas as cotações já feitas</h6>
+            <h6 className="text-center my-2">Verifique as cotações da empresa e clique em ver respostas para visualizar as respostas dos fornecedores, aqui você também pode filtrar a pesquisa, visualizando apenas as cotações já finalizadas e compradas, cotações em andamento ou todas as cotações já feitas</h6>
             <div className="">
                 <select className="text-center my-2" onChange={filtro}>
                     <option value="0">Selecione um filtro</option>
@@ -187,13 +187,13 @@ const GerirCotacoes = () => {
                                 <td className="text-center align-middle">{todasfiltradas.cotacoes[x].funcionario.nome}</td>
                                 <td className="text-center align-middle">{todasfiltradas.cotacoes[x].funcionario.email}</td>
                                 <td className="text-center align-middle">{todasfiltradas.cotacoes[x].data}</td>
-                                <td className="text-center align-middle"><button type="submit" value={todasfiltradas.cotacoes[x].id} onClick={onSubmit} className="btn btn-success text-dark btn-lg text-black">
+                                <td className="text-center align-middle"><button type="submit" value={todasfiltradas.cotacoes[x].id} onClick={onSubmit} className="btn btn-success text-dark  text-black">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="currentColor" className="bi bi-zoom-in" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
                                         <path d="M10.344 11.742c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1 6.538 6.538 0 0 1-1.398 1.4z" />
                                         <path fill-rule="evenodd" d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5z" />
                                     </svg>
-                                    Ver Cotação</button></td>
+                                    Ver Respostas</button></td>
 
                             </tr>
                         ))}

@@ -163,7 +163,7 @@ const [usuario] = useState<Funcionario>(user)
                             <div className=" divider-custom-icon text-center"><h4>Clicando no botão, você poderá fazer toda a parte de gestão das cotações</h4></div>
                             <div className=" divider-custom-icon text-center"><h4>da InovaTech2021,será possível ver as cotações em andamento, as respostas</h4></div>
                             <div className=" divider-custom-icon text-center"><h4>que foram dadas pelos fornecedores e caso alguma agradade o gerente poderá</h4></div>
-                            <div className=" divider-custom-icon text-center"><h4>enviar a ordem de compra, també será possível ver as cotações ja finalizadas</h4></div>
+                            <div className=" divider-custom-icon text-center"><h4>enviar a ordem de compra, também será possível ver as cotações ja finalizadas</h4></div>
                             <div className=" divider-custom-icon text-center"><h4>e suas notas fiscais</h4></div>
                             <div className="divider-custom-line"></div>
                         </div>
@@ -203,7 +203,7 @@ const [usuario] = useState<Funcionario>(user)
                             <br />
                             <div className="divider-custom-line"></div>
                             <div className=" divider-custom-icon text-center"><h4>Nosso software permite que você <Link to="/cadastroproduto" className="text-decoration-none">cadastre mais produtos</Link> para por no estoque e</h4></div>
-                            <div className=" divider-custom-icon text-center"><h4>outros dados úteis como cadastro de <Link className="text-decoration-none" to="/cadastrocidade">novas cidades</Link> ou <Link className="text-decoration-none" to="/cadastro estado">cadastrar estados</Link>, cada</h4></div>
+                            <div className=" divider-custom-icon text-center"><h4>outros dados úteis como cadastro de <Link className="text-decoration-none" to="/cadastrocidade">novas cidades</Link> ou <Link className="text-decoration-none" to="/cadastroestado">cadastrar estados</Link>, cada</h4></div>
                             <div className=" divider-custom-icon text-center"><h4>cada produto deve ter uma categoria por isso, é possível <Link className="text-decoration-none" to="/cadastrocategoria">cadastrar categoria</Link></h4></div>
                             <div className=" divider-custom-icon text-center"><h4>desta maneira as informações de utilidade para empresa sempre podem se manter atualizadas</h4></div>
                             <br />
@@ -230,22 +230,6 @@ const [usuario] = useState<Funcionario>(user)
                         <br />
                     </div>
 
-                </div>
-                <div className="container">
-                    <div className="jumbotron">
-
-                        <h1 className="display-4 text-center text-primary">Facebuy</h1>
-                        <p className="lead text-center">Sistema de Gestão de Compras</p>
-                        <p>{user.nome}</p>
-                        <hr />
-                        <p>Este é o seu sistema para gerir da melhor maneira as suas compras e para atingir cada vez mais clientes</p>
-                        <button type="submit" onClick={onSubmit} className="btn btn-success btn-lg">Visualizar Respostas</button>
-                        <button type="submit" onClick={achaFinalizada} className="btn btn-success btn-lg mx-2">Visualizar Cotacoes Finalizadas</button>
-                        <Link className="btn btn-success btn-lg mx-3" to="/cadastrofuncionario"> Cadastrar Funcionário</Link>
-                        <Link className="btn btn-success btn-lg mx-5" to="/cadastroproduto"> Cadastrar Produto</Link>
-                        <Link className="btn btn-success btn-lg mx-5 my-4" to="/nota"> Nota Fiscal</Link>
-                        <Link className="btn btn-success btn-lg mx-5 my-4" to="/cotacao"> Cotacao</Link>
-                    </div>
                 </div>
                 <Footer />
             </>
@@ -344,22 +328,6 @@ const [usuario] = useState<Funcionario>(user)
                         <br />
                     </div>
 
-                </div>
-                <div className="container">
-                    <div className="jumbotron">
-
-                        <h1 className="display-4 text-center text-primary">Facebuy</h1>
-                        <p className="lead text-center">Sistema de Gestão de Compras</p>
-                        <p>{user.nome}</p>
-                        <hr />
-                        <p>Este é o seu sistema para gerir da melhor maneira as suas compras e para atingir cada vez mais clientes</p>
-                        <button type="submit" onClick={onSubmit} className="btn btn-success btn-lg">Visualizar Respostas</button>
-                        <button type="submit" onClick={achaFinalizada} className="btn btn-success btn-lg mx-2">Visualizar Cotacoes Finalizadas</button>
-                        <Link className="btn btn-success btn-lg mx-3" to="/cadastrofuncionario"> Cadastrar Funcionário</Link>
-                        <Link className="btn btn-success btn-lg mx-5" to="/cadastroproduto"> Cadastrar Produto</Link>
-                        <Link className="btn btn-success btn-lg mx-5 my-4" to="/nota"> Nota Fiscal</Link>
-                        <Link className="btn btn-success btn-lg mx-5 my-4" to="/cotacao"> Cotacao</Link>
-                    </div>
                 </div>
                 <Footer />
             </>

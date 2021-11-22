@@ -155,7 +155,25 @@ const HomeFornecedor = () => {
                 </div>
                 
             </div>
+            <div className="masthead bg-success text-white text-center">
+                    <br />
+                    <div className="container d-flex align-items-center flex-column">
+                        <h1 className="masthead-heading text-uppercase mb-0">Alguma Duvida ou Problema?</h1>
+                        <h3 className="masthead-heading text-uppercase mb-0">Entre em contato!</h3>
+                        <div className="divider-custom divider-light">
+                            <br />
+                            <div className="divider-custom-line"></div>
+                            <div className=" divider-custom-icon text-center"><h4>E-mail: facebuy@inovatech2021.com</h4></div>
+                            <div className=" divider-custom-icon text-center"><h4>Telefone: (41) 3641-5863</h4></div>
+                            <div className=" divider-custom-icon text-center"><h4>Celular: (41) 99754-8613</h4></div>
+                            <div className=" divider-custom-icon text-center"><h4>WhatsApp: (41) 97865-2314</h4></div>
+                            <div className=" divider-custom-icon text-center"><h4>Comunique o seu problema e nos ajude a fazer uma ferramenta cada vez melhor</h4></div>
+                            <div className="divider-custom-line"></div>
+                        </div>
+                        <br />
+                    </div>
 
+                </div>
             <Footer />
         </>
     );

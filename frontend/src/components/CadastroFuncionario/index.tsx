@@ -87,7 +87,7 @@ const CadastrarFuncionario = () => {
         <>
             <div className="container" >
                 <div className="jumbotron d-grid col-9 mx-auto px-2">
-                    <h1 className="display-4">Cadastre um Funcionario</h1><br />
+                    <h1 className="display-4">Cadastre um Funcionário</h1><br />
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="row py-2">

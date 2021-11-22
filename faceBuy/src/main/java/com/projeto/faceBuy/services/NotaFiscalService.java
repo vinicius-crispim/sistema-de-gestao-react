@@ -62,6 +62,7 @@ public class NotaFiscalService {
 	public List<NotaFiscalDTO> findByFornecedor(Long id) {
 		List<NotaFiscal> list = repository.findAll();
 		Fornecedor fonr = fornecrepository.findById(id).get();
+		List<NotaFiscalDTO>listaaocontrario = new ArrayList<NotaFiscalDTO>();
 		List<NotaFiscalDTO> listDTO = list.stream().map(x -> new NotaFiscalDTO(x)).collect(Collectors.toList());
 		List<NotaFiscalDTO> listlimpa = new ArrayList<NotaFiscalDTO>();
 			for(int x=0;x<fonr.getNotasfiscais().size();x++) {
@@ -71,8 +72,10 @@ public class NotaFiscalService {
 					}
 				}
 			}
-		
-		return listlimpa;
+			for(int x=listlimpa.size()-1;x>=0;x--) {
+				listaaocontrario.add(listDTO.get(x));
+			}		
+		return listaaocontrario;
 	}
 	
 	public NotaFiscal findById(Long id) {

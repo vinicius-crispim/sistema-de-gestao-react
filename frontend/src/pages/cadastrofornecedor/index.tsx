@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 import { Cidade } from "types/cidade";
 import { Fornecedor } from "types/fornecedor";
 import { BASE_URL } from "utils/request";
+import NavBarLogin from '../../components/NavBar/indexlogin';
 /*
 type Cidade = {
     id: number;
@@ -93,7 +94,7 @@ const CadastroFornecedor = () => {
 
     return (
         <>
-            <NavBar />
+            <NavBarLogin />
 
             <div className="container" >
                 <div className="jumbotron d-grid px-5 col-9 mx-auto">
