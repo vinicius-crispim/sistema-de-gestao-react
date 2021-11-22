@@ -73,7 +73,7 @@ public class NotaFiscalService {
 				}
 			}
 			for(int x=listlimpa.size()-1;x>=0;x--) {
-				listaaocontrario.add(listDTO.get(x));
+				listaaocontrario.add(listlimpa.get(x));
 			}		
 		return listaaocontrario;
 	}
